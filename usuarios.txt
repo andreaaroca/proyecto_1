@@ -1,0 +1,8 @@
+null,Usuario1,Password1,Estudiante
+null,usuario1,1111,Estudiante
+null,usu1,2,Estudiante
+prueba4,usu4,00,Estudiante
+prof1,prof1,11,Profesor
+xx,xx1,11,Profesor
+yy,yy1,22,Estudiante
+eee,e1,1,Estudiante

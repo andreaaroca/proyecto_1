@@ -1,6 +1,8 @@
 package LearningPath;
 
 
+import java.util.List;
+
 import co.edu.andes.usuarios.Profesor;
 
 public class LearningPath {
@@ -10,6 +12,11 @@ public class LearningPath {
 	public String descripcion; 
 	public String objetivos;
 	public String dificultad;
+	public String duracion;
+	public List<Actividad> obligatoria;
+	
+	
+	
 	
 	public String getTitulo() {
 		return titulo;

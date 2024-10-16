@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import LearningPath.LearningPath;
-import co.edu.andes.sistema.GestorUsuarios;
+import co.edu.andes.persistencia.GestorUsuarios;
 import co.edu.andes.usuarios.Estudiante;
 import co.edu.andes.usuarios.Profesor;
 import co.edu.andes.usuarios.Usuario;
@@ -79,8 +79,6 @@ public class Main {
         }
     }
     
-    
-
     public static void main(String[] args) {
     	GestorUsuarios sistema = new GestorUsuarios();
         Scanner scanner = new Scanner(System.in);
@@ -110,7 +108,7 @@ public class Main {
                 System.out.println("Opción no válida."); 
         }
     }
-    
+  
         scanner.close();           
 }
 }

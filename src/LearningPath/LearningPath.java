@@ -1,15 +1,18 @@
 package LearningPath;
 
+import java.util.*;
 
+import co.edu.andes.usuarios.Estudiante;
 import co.edu.andes.usuarios.Profesor;
 
 public class LearningPath {
 	
-	public Profesor creador;
-	public String titulo;
-	public String descripcion; 
-	public String objetivos;
-	public String dificultad;
+	private Profesor creador;
+	private String titulo;
+	private String descripcion; 
+	private String objetivos;
+	private String dificultad;
+	
 	
 	public String getTitulo() {
 		return titulo;

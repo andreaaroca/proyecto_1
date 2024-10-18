@@ -6,3 +6,4 @@ prof1,prof1,11,Profesor
 xx,xx1,11,Profesor
 yy,yy1,22,Estudiante
 eee,e1,1,Estudiante
+Andrea,A1,andrea,Profesor

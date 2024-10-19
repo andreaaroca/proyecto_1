@@ -6,6 +6,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
+import Actividades.Actividad;
 import LearningPath.LearningPath;
 
 public class Profesor extends Usuario {
@@ -16,8 +17,8 @@ public class Profesor extends Usuario {
         super(nombre, nombreUsuario, password, "Profesor");
         this.learningPathsCreados = new ArrayList<>();
     }
-    public LearningPath crearLearningPath(String titulo, String descripcion, String objetivos, String dificultad) {
-        LearningPath nuevoLearningPath = new LearningPath(this, titulo, descripcion, objetivos, dificultad);
+    public LearningPath crearLearningPath(String titulo, String descripcion, String objetivos, String dificultad, List<Actividad> obligatorias) {
+        LearningPath nuevoLearningPath = new LearningPath(titulo, descripcion, objetivos, dificultad, dificultad, obligatorias);
         learningPathsCreados.add(nuevoLearningPath);
         return nuevoLearningPath;
         }

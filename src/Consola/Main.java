@@ -94,11 +94,12 @@ public class Main {
 
         gestorUsuarios.registrarUsuario(usuario, tipoUsuario);
         
-        boolean registroExitoso = gestorUsuarios.registrarUsuario(usuario, tipoUsuario);
-        if (registroExitoso) {
-            System.out.println("Usuario registrado exitosamente.");
+        boolean usuarioYaRegistrado = gestorUsuarios.registrarUsuario(usuario, tipoUsuario);
+        if (usuarioYaRegistrado) {
+        	 System.out.println("Error: El nombre de usuario '" + nombreUsuario + "' ya está registrado.");
         } else {
-            System.out.println("Error: El nombre de usuario '" + nombreUsuario + "' ya está registrado.");
+        	System.out.println("Usuario registrado exitosamente.");
+           
         }
     }
 

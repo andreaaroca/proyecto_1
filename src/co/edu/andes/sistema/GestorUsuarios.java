@@ -111,7 +111,14 @@ public class GestorUsuarios {
         }
         return usuarios; 
     }
-    
+    public Usuario obtenerUsuario(String nombreUsuario) {
+        for (Usuario usuario : estudiantesRegistrados) {
+            if (usuario.getNombreUsuario().equals(nombreUsuario)) {
+                return usuario; 
+            }
+        }
+        return null;
     }
+}
 
 

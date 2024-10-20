@@ -16,6 +16,8 @@ import Persistencias.persistenciaLP;
 
 public class Main {
 	
+	private static Usuario usuario;
+	
 
     private static void mostrarMenu() {
         System.out.println("1. Registrar Usuario");
@@ -26,25 +28,27 @@ public class Main {
     }
     
     static persistenciaLP lpControl = new persistenciaLP();
-
-
     
     private static void mostrarMenuEstudiante(Scanner scanner) {
         boolean continuar = true;
+        Estudiante estudiante = (Estudiante) usuario;
         while (continuar) {
             System.out.println("1. Ver learningPaths");
             System.out.println("2. InscribirLearningPath");
-            System.out.println("3. Salir");
+            System.out.println("3. Ver learningpaths inscritos");
+            System.out.println("4. Salir");
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
             scanner.nextLine(); 
 
             if (opcion == 1) {
                 System.out.println("Mostrando LearningPaths...");
+                imprimirLearningPaths();
             } else if (opcion == 2) {
-            	Estudiante.inscribirLearningPath(lpControl, scanner);
-                System.out.println("---");
-            } else if (opcion == 3) {
+            	Estudiante.inscribirLearningPath(lpControl, estudiante, scanner);
+            } else if (opcion == 3) {	
+            	System.out.println("Tus LearningPaths inscritos son: ");
+            } else if (opcion == 4) {
                 continuar = false; 
                 System.out.println("Saliendo del menú de estudiante...");
             } else {
@@ -103,8 +107,6 @@ public class Main {
             return; 
         }
 
-        gestorUsuarios.registrarUsuario(usuario, tipoUsuario);
-        
         boolean usuarioYaRegistrado = gestorUsuarios.registrarUsuario(usuario, tipoUsuario);
         if (usuarioYaRegistrado) {
         	 System.out.println("Error: El nombre de usuario '" + nombreUsuario + "' ya está registrado.");
@@ -117,18 +119,18 @@ public class Main {
     private static void iniciarSesion(GestorUsuarios gestorUsuarios, Scanner scanner) {
         System.out.print("Ingrese nombre de usuario: ");
         String nombreUsuario = scanner.nextLine();
+        
 
         System.out.print("Ingrese contraseña: ");
         String password = scanner.nextLine();
         
         String tipoUsuario = gestorUsuarios.iniciarSesion(nombreUsuario, password);
-        
+       
         if (tipoUsuario != null) {
-            System.out.println("Inicio de sesión exitoso como: " + tipoUsuario);
-          
-           
+            System.out.println("Inicio de sesión exitoso como: " + tipoUsuario);         
             if (tipoUsuario.equals("Estudiante")) {
             	System.out.println("Opciones para estudiante:");
+            	usuario = gestorUsuarios.obtenerUsuario(nombreUsuario);
             	mostrarMenuEstudiante(scanner);
             } else if (tipoUsuario.equals("Profesor")) {
             	System.out.println("Opciones para profesor:");
@@ -201,7 +203,6 @@ public class Main {
     	GestorUsuarios sistema = new GestorUsuarios();
         Scanner scanner = new Scanner(System.in);
         boolean continuar = true; 
-        
         
         sistema.cargarUsuariosDesdeArchivo();
 

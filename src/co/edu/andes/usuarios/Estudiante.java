@@ -49,18 +49,23 @@ public class Estudiante extends Usuario{
 		
 	}
 	
-	 public static void inscribirLearningPath(persistenciaLP lpControl, Scanner scanner) {
+	 public static void inscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, Scanner scanner) {
 	        System.out.print("Ingrese el código del Learning Path que desea inscribir: ");
-	        String codigo = scanner.nextLine();
+	        int idLP = scanner.nextInt();
 
-	        LearningPath lp = lpControl.obtenerLearningPath(codigo);
+	        LearningPath lp = lpControl.obtenerLearningPath(idLP); // Busca el lp en la persistencia
 	        if (lp != null) {
-	            System.out.println("Learning Path inscrito exitosamente: " + lp.getTitulo());
-	            // Aquí puedes agregar la lógica para inscribir al estudiante en el Learning Path
+	            if (estudiante.getLpInscritos().containsKey(idLP)) {
+	                System.out.println("Ya estás inscrito en este Learning Path.");
+	            } else {
+	                estudiante.getLpInscritos().put(idLP, lp);
+	                System.out.println("Learning Path inscrito exitosamente: " + lp.getTitulo());
+	            }
 	        } else {
 	            System.out.println("No se encontró un Learning Path con el código proporcionado.");
 	        }
 	    }
-	
 }
+	
+
 	

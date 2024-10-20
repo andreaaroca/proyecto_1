@@ -9,8 +9,7 @@ public class Encuesta extends Actividad {
 	
 	private List<String> preguntas;
 
-	public Encuesta(int idActividad, String descripcion, String objetivo, String dificultad, String duracion,
-		 List<String> preguntas) {
+	public Encuesta(int idActividad, String descripcion, String objetivo, String dificultad, String duracion) {
 		super(idActividad, descripcion, objetivo, dificultad, duracion);
 		preguntas=new ArrayList<String>();
 		

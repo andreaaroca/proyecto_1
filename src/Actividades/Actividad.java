@@ -35,6 +35,36 @@ public abstract class Actividad {
 		return descripcion;
 	}
 
+	public void setIdActividad(int idActividad) {
+		this.idActividad = idActividad;
+	}
+
+
+
+	public void setDescripcion(String descripcion) {
+		this.descripcion = descripcion;
+	}
+
+
+
+	public void setObjetivo(String objetivo) {
+		this.objetivo = objetivo;
+	}
+
+
+
+	public void setDificultad(String dificultad) {
+		this.dificultad = dificultad;
+	}
+
+
+
+	public void setDuracion(String duracion) {
+		this.duracion = duracion;
+	}
+
+
+
 	public String getObjetivo() {
 		return objetivo;
 	}

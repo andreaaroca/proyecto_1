@@ -62,15 +62,16 @@ public class MonitoreoLearningPath {
 	public float progresoLp(List <MonitoreoActividad> actividadesMonitoreadasEstudiante, LearningPath lp) {
 		int contador=0;
 		for (MonitoreoActividad actividadMon:actividadesMonitoreadasEstudiante) {
-			if (actividadMon.isCompletado()==true && lp.getObligatorias().contains(actividadMon) ) {
+			if (actividadMon.isCompletado()==true && lp.getObligatorias().containsKey(actividadMon.getIdActividad()) ) {
 				contador++;
+				//revisar el obligatorias, hacerlo un mapa
 				
-			}
+			}}
 		float porcentajeCompletadas=(contador/actividadesMonitoreadasEstudiante.size())*100;
 		
 		return porcentajeCompletadas;
 		
-		}
+		
 	}
 	
 	public String calcularTiempoDedicadoLp(Estudiante estudiante, List <MonitoreoActividad> actividadesMonitoreadasEstudiante) {

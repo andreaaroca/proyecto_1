@@ -1,6 +1,7 @@
 package LearningPath;
 
 import co.edu.andes.usuarios.Estudiante;
+
 import co.edu.andes.usuarios.Profesor;
 
 
@@ -50,9 +51,11 @@ public class MonitoreoActividad {
 
 	public void calificacion(Estudiante estudiante, int idActividad) {
 		
-		Profesor.calificarActividad(estudiante,idActividad);
+		Profesor.calificarActividad(estudiante,idActividad, intnota);
 		
 	}
+	//revisar esto con el mapa de estudiantes y la cosas calificadas q se va a crear
+	//esto de pronto no necisita un monitoero os illamar es el mada actividade calificadas
 
 
 

@@ -20,15 +20,18 @@ public class LearningPath implements Serializable {
     private String dificultad;
     private String duracion;
     private Map<Integer, Actividad> actividades;
+    private String idActividad;
+    private String idLP;
 	
-    public LearningPath(String titulo, String descripcion, String objetivos, 
-            String dificultad, String duracion, List<Actividad> obligatorias) {
-    
+    public LearningPath(String idLP, String titulo, String descripcion, String objetivos, 
+            String dificultad, String duracion, Map<Integer, Actividad> actividades) {
+    	this.idLP = idLP;
     	this.titulo = titulo;
     	this.descripcion = descripcion;
     	this.objetivos = objetivos;
     	this.dificultad = dificultad;
     	this.duracion = duracion;
+    	this.actividades = new HashMap<>();
     	
     }
 
@@ -73,24 +76,21 @@ public class LearningPath implements Serializable {
 	public void setDificultad(String dificultad) {
 		this.dificultad = dificultad;
 	}
+	
 
-
-	public List<Actividad> getObligatorias() {
-		return obligatorias;
+	public Map<Integer, Actividad> getActividades() {
+		return actividades;
 	}
 
-
-	public void setObligatorias(List<Actividad> obligatorias) {
-		this.obligatorias = obligatorias;
+	public void setActividades(Map<Integer, Actividad> actividades) {
+		this.actividades = actividades;
 	}
 	
-	public void agregarActividad(Actividad actividad) {
-        this.obligatorias.add(actividad);
-    }
-
-    public void eliminarActividad(Actividad actividad) {
-        this.obligatorias.remove(actividad);
-    }
+	public void agregarActividades(List<Actividad> listaActividades) {
+	    for (Actividad actividad : listaActividades) {
+	        actividades.put(actividad.getIdActividad(), actividad);
+	    }
+	}
 
     public boolean validarLearningPath() {
         return 
@@ -99,15 +99,26 @@ public class LearningPath implements Serializable {
                objetivos != null && !objetivos.isEmpty() &&
                dificultad != null && !dificultad.isEmpty() &&
                duracion != null && !duracion.isEmpty() &&
-               obligatorias != null && !obligatorias.isEmpty();
+               actividades != null && !actividades.isEmpty();
     }
     
-    public List<Actividad> getListaActividades() {
-        return obligatorias;
+    public Map<Integer, Actividad> getListaActividades() {
+        return actividades;
     }
 
-	
+	public String getIdActividad() {
+		return idActividad;
+	}
+
+	public void setIdActividad(String idActividad) {
+		this.idActividad = idActividad;
+	}
+
+	public String getIdLP() {
+		return idLP;
+	}
+
+	public void setIdLP(String idLP) {
+		this.idLP = idLP;
+	}	
 }
-
-
-

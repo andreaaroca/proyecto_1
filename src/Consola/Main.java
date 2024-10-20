@@ -1,7 +1,9 @@
 package Consola;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import Actividades.Actividad;
@@ -10,6 +12,7 @@ import co.edu.andes.sistema.GestorUsuarios;
 import co.edu.andes.usuarios.Estudiante;
 import co.edu.andes.usuarios.Profesor;
 import co.edu.andes.usuarios.Usuario;
+import Persistencias.persistenciaLP;
 
 public class Main {
 	
@@ -21,6 +24,9 @@ public class Main {
         System.out.println("4. Mostrar Usuarios desde Archivo");
         System.out.print("Seleccione una opción: ");   
     }
+    
+    static persistenciaLP lpControl = new persistenciaLP();
+
 
     
     private static void mostrarMenuEstudiante(Scanner scanner) {
@@ -36,6 +42,7 @@ public class Main {
             if (opcion == 1) {
                 System.out.println("Mostrando LearningPaths...");
             } else if (opcion == 2) {
+            	Estudiante.inscribirLearningPath(lpControl, scanner);
                 System.out.println("---");
             } else if (opcion == 3) {
                 continuar = false; 
@@ -52,6 +59,7 @@ public class Main {
             System.out.println("1. Crear Learning Path");
             System.out.println("2. Crear Actividad");
             System.out.println("3. Salir");
+            System.out.println("4. Mostrar archivo Learning paths creados");
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
             scanner.nextLine();
@@ -63,7 +71,10 @@ public class Main {
                 System.out.println("Creando actividad...");
             } else if (opcion == 3) {
                 continuar = false; 
-                System.out.println("Saliendo del menú de profesor...");
+                System.out.println("Saliendo del menú de profesor...");  
+            } else if (opcion == 4) {
+                System.out.println("mostrando learning paths creados...");
+                imprimirLearningPaths();
             } else {
                 System.out.println("Opción no válida. Intente de nuevo.");
             }
@@ -133,7 +144,10 @@ public class Main {
     
     private static LearningPath crearLearningPath(Scanner scanner) {
         
-        System.out.print("Ingrese título del Learning Path: ");
+    	System.out.print("Ingrese codigo del Learning Path: ");
+        String codigo = scanner.nextLine();
+    	
+    	System.out.print("Ingrese título del Learning Path: ");
         String titulo = scanner.nextLine();
 
         System.out.print("Ingrese descripción: ");
@@ -148,10 +162,15 @@ public class Main {
         System.out.print("Ingrese duración: ");
         String duracion = scanner.nextLine();
 
-        List<Actividad> actividades = new ArrayList<>();
-        // código para ingresar actividades 
-
-        LearningPath learningPath = new LearningPath( titulo, descripcion, objetivos, dificultad, duracion, actividades);
+        Map<Integer, Actividad> actividades = new HashMap();
+        // código para ingresar actividades
+       
+        LearningPath learningPath = new LearningPath(codigo, titulo, descripcion, objetivos, dificultad, duracion, actividades);
+        boolean agregadoExitosamente = lpControl.verificarAgregarLearningPath(learningPath);
+        if (!agregadoExitosamente) {
+            System.out.println("Por favor, intente crear el Learning Path con un código diferente.");
+        }
+        lpControl.agregarLearningPath(codigo, learningPath);
         System.out.println("Learning Path creado exitosamente.");
         return learningPath;
     }
@@ -164,10 +183,31 @@ public class Main {
         }
     }
     
+    private static void imprimirLearningPaths() {
+        lpControl.cargarLearningPaths(); 
+        Map<String, LearningPath> learningPaths = lpControl.obtenerLearningPaths();
+
+        if (learningPaths.isEmpty()) {
+            System.out.println("No hay Learning Paths registrados.");
+        } else {
+            System.out.println("Learning Paths registrados:");
+            for (LearningPath lp : learningPaths.values()) {
+                System.out.println("Código: " + lp.getIdLP());
+                System.out.println("Título: " + lp.getTitulo());
+                System.out.println("Descripción: " + lp.getDescripcion());
+                System.out.println("Objetivos: " + lp.getObjetivos());
+                System.out.println("Dificultad: " + lp.getDificultad());
+                System.out.println("Duración: " + lp.getDuracion());
+                System.out.println("------------------------------------");
+            }
+        }
+    }
+    
     public static void main(String[] args) {
     	GestorUsuarios sistema = new GestorUsuarios();
         Scanner scanner = new Scanner(System.in);
         boolean continuar = true; 
+        
         
         sistema.cargarUsuariosDesdeArchivo();
 
@@ -197,6 +237,7 @@ public class Main {
         scanner.close();           
 }
 }
+
 
 
 

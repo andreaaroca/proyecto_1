@@ -26,8 +26,9 @@ public class persistenciaLP {
 	            System.out.println("El código del Learning Path ya existe. Por favor, ingrese un código diferente.");
 	            return false; 
 	        }
-	        guardarLearningPaths();
+	        
 	        learningPathsMap.put(codigo, lp);
+	        guardarLearningPaths();
 	        System.out.println("Learning Path agregado exitosamente.");
 	        return true; 
 	    }

@@ -1,5 +1,6 @@
 package LearningPath;
 
+import java.io.Serializable;
 import java.util.*;
 
 import java.util.List;
@@ -9,14 +10,16 @@ import Actividades.Actividad;
 
 import co.edu.andes.usuarios.Profesor;
 
-public class LearningPath {
+public class LearningPath implements Serializable {
+	
+	private static final long serialVersionUID = 1L; // Para la serialización
 	
     private String titulo;
     private String descripcion; 
     private String objetivos;
     private String dificultad;
     private String duracion;
-    private List<Actividad> obligatorias;
+    private Map<Integer, Actividad> actividades;
 	
     public LearningPath(String titulo, String descripcion, String objetivos, 
             String dificultad, String duracion, List<Actividad> obligatorias) {

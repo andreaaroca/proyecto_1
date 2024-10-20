@@ -25,6 +25,7 @@ public class Estudiante extends Usuario{
 	  
 	//crear en lp una lista o mapa de instancias
 	public LocalDateTime iniciarLp(int idLp) {
+		return null;
 		
 	}
 	    

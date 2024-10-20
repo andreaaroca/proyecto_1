@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 import Actividades.Actividad;
 import LearningPath.LearningPath;
-import co.edu.andes.persistencia.GestorUsuarios;
+import co.edu.andes.sistema.GestorUsuarios;
 import co.edu.andes.usuarios.Estudiante;
 import co.edu.andes.usuarios.Profesor;
 import co.edu.andes.usuarios.Usuario;

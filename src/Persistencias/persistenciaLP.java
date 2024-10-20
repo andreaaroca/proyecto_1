@@ -12,52 +12,50 @@ import LearningPath.LearningPath;
 
 public class persistenciaLP {
 	
-	 private Map<String, LearningPath> learningPaths  = new HashMap<>(); 
+	 private Map<Integer, LearningPath> learningPathsMap  = new HashMap<>(); 
 	 private static final String ARCHIVO_LP = "learningPaths.ser"; // Archivo para la serialización
 	 
 	 public persistenciaLP() {
-	        this.learningPaths = cargarLearningPaths();
+	        this.learningPathsMap= cargarLearningPaths();
 	    }
+	 
+	 public boolean agregarLearningPath(LearningPath lp) {
+	        int codigo = lp.getIdLP();
 
-	    public void agregarLearningPath(String codigo, LearningPath lp) {
-	        learningPaths.put(codigo, lp);
+	        if (learningPathsMap.containsKey(codigo)) {
+	            System.out.println("El código del Learning Path ya existe. Por favor, ingrese un código diferente.");
+	            return false; 
+	        }
 	        guardarLearningPaths();
+	        learningPathsMap.put(codigo, lp);
+	        System.out.println("Learning Path agregado exitosamente.");
+	        return true; 
 	    }
 
 	    // Guardar el mapa de LearningPaths en un archivo
 	    private void guardarLearningPaths() {
 	        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARCHIVO_LP))) {
-	            oos.writeObject(learningPaths);
+	            oos.writeObject(learningPathsMap);
 	        } catch (IOException e) {
 	            e.printStackTrace();
 	        }
 	    }
 
-	    public Map<String, LearningPath> cargarLearningPaths() {
+	    public Map<Integer, LearningPath> cargarLearningPaths() {
 	        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARCHIVO_LP))) {
-	            return (Map<String, LearningPath>) ois.readObject();
+	            return (Map<Integer, LearningPath>) ois.readObject();
 	        } catch (IOException | ClassNotFoundException e) {
 	            e.printStackTrace();
 	            return new HashMap<>();
 	        }
 	    }
 
-	    public LearningPath obtenerLearningPath(String codigo) {
-	        return learningPaths.get(codigo);
+	    public LearningPath obtenerLearningPath(Integer codigo) {
+	        return learningPathsMap.get(codigo);
 	    }
 	    
-	    public Map<String, LearningPath> obtenerLearningPaths() {
-	        return learningPaths;
-	    }
-	    
-	    public boolean verificarAgregarLearningPath(LearningPath lp) {
-	        if (learningPaths.containsKey(lp.getIdLP())) {
-	            System.out.println("Error: El código del Learning Path ya está registrado. Debe crear otro código.");
-	            return false; 
-	        }
-	        agregarLearningPath(lp.getIdLP(), lp);
-	        System.out.println("Learning Path agregado exitosamente.");
-	        return true;
+	    public Map<Integer, LearningPath> obtenerLearningPaths() {
+	        return learningPathsMap;
 	    }
 	}
 

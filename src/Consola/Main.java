@@ -164,28 +164,22 @@ public class Main {
 
         Map<Integer, Actividad> actividades = new HashMap();
         // código para ingresar actividades
-       
-        LearningPath learningPath = new LearningPath(codigo, titulo, descripcion, objetivos, dificultad, duracion, actividades);
-        boolean agregadoExitosamente = lpControl.verificarAgregarLearningPath(learningPath);
+        
+        int idLP = Integer.parseInt(codigo);
+        LearningPath learningPath = new LearningPath(idLP, titulo, descripcion, objetivos, dificultad, duracion, actividades);
+        boolean agregadoExitosamente = lpControl.agregarLearningPath(learningPath);
         if (!agregadoExitosamente) {
             System.out.println("Por favor, intente crear el Learning Path con un código diferente.");
         }
-        lpControl.agregarLearningPath(codigo, learningPath);
+        lpControl.agregarLearningPath(learningPath);
         System.out.println("Learning Path creado exitosamente.");
         return learningPath;
     }
    
-    private static void validarLearningPath(LearningPath learningPath) {
-        if (learningPath != null && learningPath.validarLearningPath()) {
-            System.out.println("El Learning Path es válido.");
-        } else {
-            System.out.println("El Learning Path no es válido.");
-        }
-    }
     
     private static void imprimirLearningPaths() {
         lpControl.cargarLearningPaths(); 
-        Map<String, LearningPath> learningPaths = lpControl.obtenerLearningPaths();
+        Map<Integer, LearningPath> learningPaths = lpControl.obtenerLearningPaths();
 
         if (learningPaths.isEmpty()) {
             System.out.println("No hay Learning Paths registrados.");

@@ -21,9 +21,9 @@ public class LearningPath implements Serializable {
     private String duracion;
     private Map<Integer, Actividad> actividades;
     private String idActividad;
-    private String idLP;
+    private int idLP;
 	
-    public LearningPath(String idLP, String titulo, String descripcion, String objetivos, 
+    public LearningPath(int idLP, String titulo, String descripcion, String objetivos, 
             String dificultad, String duracion, Map<Integer, Actividad> actividades) {
     	this.idLP = idLP;
     	this.titulo = titulo;
@@ -114,11 +114,11 @@ public class LearningPath implements Serializable {
 		this.idActividad = idActividad;
 	}
 
-	public String getIdLP() {
+	public int getIdLP() {
 		return idLP;
 	}
 
-	public void setIdLP(String idLP) {
+	public void setIdLP(int idLP) {
 		this.idLP = idLP;
 	}	
 }

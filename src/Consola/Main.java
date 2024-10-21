@@ -48,6 +48,7 @@ public class Main {
             	Estudiante.inscribirLearningPath(lpControl, estudiante, scanner);
             } else if (opcion == 3) {	
             	System.out.println("Tus LearningPaths inscritos son: ");
+            	imprimirLearningPathsInscritos(estudiante);
             } else if (opcion == 4) {
                 continuar = false; 
                 System.out.println("Saliendo del menú de estudiante...");
@@ -177,12 +178,8 @@ public class Main {
         System.out.println("Learning Path creado exitosamente.");
         return learningPath;
     }
-   
     
-    private static void imprimirLearningPaths() {
-        lpControl.cargarLearningPaths(); 
-        Map<Integer, LearningPath> learningPaths = lpControl.obtenerLearningPaths();
-
+    private static void imprimirLearningPaths(Map<Integer, LearningPath> learningPaths) {
         if (learningPaths.isEmpty()) {
             System.out.println("No hay Learning Paths registrados.");
         } else {
@@ -199,6 +196,16 @@ public class Main {
         }
     }
     
+    private static void imprimirLearningPaths() {
+        lpControl.cargarLearningPaths(); 
+        Map<Integer, LearningPath> learningPaths = lpControl.obtenerLearningPaths();
+        imprimirLearningPaths(learningPaths); 
+    }
+    
+    private static void imprimirLearningPathsInscritos(Estudiante estudiante) {
+        Map<Integer, LearningPath> lpInscritos = estudiante.getLpInscritos(); // Asumiendo que tienes un método en Estudiante
+        imprimirLearningPaths(lpInscritos); // Llama al método existente para imprimir
+    }
     public static void main(String[] args) {
     	GestorUsuarios sistema = new GestorUsuarios();
         Scanner scanner = new Scanner(System.in);

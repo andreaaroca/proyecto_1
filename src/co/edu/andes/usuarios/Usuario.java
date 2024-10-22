@@ -9,9 +9,9 @@ public abstract class Usuario implements Serializable{
 	
 	protected String nombre;	
 	protected String nombreUsuario;
-	private String correo;
-	private String password;
-	private String tipoUsuario;
+	protected String correo;
+	protected String password;
+	protected String tipoUsuario;
 
 	
 	public Usuario(String nombre, String nombreUsuario, String password, String tipoUsuario) {

@@ -60,8 +60,8 @@ public class Profesor extends Usuario implements Serializable {
     	//crear parametro obligatorio
     	actividadesCreadas.add(nuevaTarea);
 
-    	for (LearningPath lp:learningPathsCreados) {
-    		if (lp.getIdLp()==idLp) {
+    	if (learningPathsCreados.containsKey(idLp)) {
+			LearningPath lp=learningPathsCreados.get(idLp);
     			lp.anadirActividad(nuevaTarea);
     			
     			
@@ -71,15 +71,16 @@ public class Profesor extends Usuario implements Serializable {
     		}
     	
     	
-        }
+        
  
     public void crearEncuesta(int idActividad, String descripcion, String objetivo, String dificultad, String duracion, int idLp) {
     	
     	Encuesta nuevaEncuesta = new Encuesta(idActividad, descripcion, objetivo, dificultad, duracion);
     	actividadesCreadas.add(nuevaEncuesta);
     	//crear parametro obligatorio
-    	for (LearningPath lp:learningPathsCreados) {
-    		if (lp.getIdLp()==idLp) {
+    	
+    		if (learningPathsCreados.containsKey(idLp)) {
+    			LearningPath lp=learningPathsCreados.get(idLp);
     			lp.anadirActividad(nuevaEncuesta);
     			
     			
@@ -88,7 +89,40 @@ public class Profesor extends Usuario implements Serializable {
     			System.out.println("Learning Path inexistente, no se puede añadir actividad");}
     		}
     	
-    }
+    public void crearQuiz(int idActividad, String descripcion, String objetivo, String dificultad, String duracion,
+			Double notaAprovacion, int idLp) {
+    	
+    	Quiz nuevoQuiz = new Quiz(idActividad, descripcion, objetivo, dificultad, duracion, notaAprovacion, idLp );
+    	actividadesCreadas.add(nuevoQuiz);
+    	//crear parametro obligatorio
+    	
+    		if (learningPathsCreados.containsKey(idLp)) {
+    			LearningPath lp=learningPathsCreados.get(idLp);
+    			lp.anadirActividad(nuevoQuiz);
+    			
+    			
+    		} 
+    		else {
+    			System.out.println("Learning Path inexistente, no se puede añadir actividad");}
+    		}
+    
+    public void crearExamen(int idActividad, String descripcion, String objetivo, String dificultad, String duracion,
+			Double notaAprovacion, int idLp) {
+    	
+    	Examen nuevoExamen = new Examen(idActividad, descripcion, objetivo, dificultad, duracion, notaAprovacion, idLp );
+    	actividadesCreadas.add(nuevoExamen);
+    	//crear parametro obligatorio
+    	
+    		if (learningPathsCreados.containsKey(idLp)) {
+    			LearningPath lp=learningPathsCreados.get(idLp);
+    			lp.anadirActividad(nuevoExamen);
+    			
+    			
+    		} 
+    		else {
+    			System.out.println("Learning Path inexistente, no se puede añadir actividad");}
+    		}
+    
     
     public void crearRevisarRecurso(int idActividad, String descripcion, String objetivo, String dificultad, String duracion
 			, String recursoLink, int idLp) {
@@ -96,8 +130,8 @@ public class Profesor extends Usuario implements Serializable {
     	RevisarRecurso nuevoRevisarRecurso = new RevisarRecurso(idActividad, descripcion, objetivo, dificultad, duracion, recursoLink);
     	actividadesCreadas.add(nuevoRevisarRecurso);
     	//crear parametro obligatorio
-    	for (LearningPath lp:learningPathsCreados) {
-    		if (lp.getIdLp()==idLp) {
+    	if (learningPathsCreados.containsKey(idLp)) {
+			LearningPath lp=learningPathsCreados.get(idLp);
     			lp.anadirActividad(nuevoRevisarRecurso);
     			
     			
@@ -105,31 +139,16 @@ public class Profesor extends Usuario implements Serializable {
     		else {
     			System.out.println("Learning Path inexistente, no se puede añadir actividad");}
     		}
-    }
     
-    public void editarActividad(int idLp, int idActividad, String paramEditar, String edicion) {
-    	for (LearningPath lp:learningPathsCreados) {
-    		if (lp.getIdLp()==idLp) {
-    			if(().containsKey(idActividad)) {
-    				lp.getMapaActividades().get(idActividad);	
-    			
-    				if (paramEditar=="descripcion"){
-    					edicion=edicion.toString();
-    					Actividad.setDescripcion(edicion);
-    				}
-    					
-    				}
-    		}
-    		}
-    			
-   
-    }
     
+  
     public void calificarActividad (Estudiante estudiante, int idActividad, float nota) {
+    	
     	for (Actividad actividad:actividadesCreadas) {
-    		if ((actividad.getIdActividad()==idActividad) && (estudiante.getActividadesEnviadas().contains(idActividad))) {
-    			if(actividad instanceof Evaluacion) {
+    		if ((actividad.getIdActividad()==idActividad) && (estudiante.getActividadesEnviadas().containsKey(idActividad))) {
+    			if((actividad instanceof Quiz)||(actividad instanceof Evaluacion)) {
     				estudiante.anadirMapaCalificadas(idActividad,nota);
+    				MonitoreoActividad.setCompletado();
     			}
     			else {
     				System.out.println("no es una actividad calificable"); } }
@@ -143,8 +162,8 @@ public class Profesor extends Usuario implements Serializable {
   	
     public void eliminarLearningPath(int idLp) {
     	
-    	for (LearningPath lp: learningPathsCreados) {
-    		if (lp.getIdLp()==idLp) {
+    	if (learningPathsCreados.containsKey(idLp)) {
+			LearningPath lp=learningPathsCreados.get(idLp);
     			learningPathsCreados.remove(lp);
     			lp=null; }
     		else { System.out.println("No se encontro el learning path a eliminar"); }
@@ -152,13 +171,13 @@ public class Profesor extends Usuario implements Serializable {
 
     	}
     	
-    }
+    
     
     public void eliminarActividad (int idLp, int idActividad) {
-    	for (LearningPath lp: learningPathsCreados) {
-    		if (lp.getIdLp()==idLp) {
-    			if(lp.getMapaActividades().containsKey(idActividad)){
-    				Actividad actividadElim=lp.getMapaActividades().get(idActividad);
+    	
+    		if (LearningPath.containsKey()==idLp) {
+    			if(LearningPath.getMapaActividades().containsKey(idActividad)){
+    				Actividad actividadElim=LearningPath.getMapaActividades().get(idActividad);
     				lp.getMapaActividades().remove(idActividad);
     				actividadesCreadas.remove(actividadElim);
     				actividadElim=null;}
@@ -170,7 +189,7 @@ public class Profesor extends Usuario implements Serializable {
     				
     			}
     			
-    }}
+    }
     	
     
     	//no hay que recorrer la lista porque si la actividad esta en un learning path preado por un profesor tambien va a estar en la lista de actividades

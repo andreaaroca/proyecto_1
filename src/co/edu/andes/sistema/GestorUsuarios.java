@@ -117,8 +117,15 @@ public class GestorUsuarios {
                 return usuario; 
             }
         }
+        for (Usuario usuario : profesoresRegistrados) {
+            if (usuario.getNombreUsuario().equals(nombreUsuario)) {
+                return usuario; 
+            }
+        }
+        
         return null;
     }
+
 }
 
 

@@ -17,7 +17,8 @@ import Persistencias.persistenciaLP;
 public class Main {
 	
 	private static Usuario usuario;
-	
+	private static Map<Integer, LearningPath> learningPaths = new HashMap<>();
+	static persistenciaLP lpControl = new persistenciaLP();
 
     private static void mostrarMenu() {
         System.out.println("1. Registrar Usuario");
@@ -27,7 +28,7 @@ public class Main {
         System.out.print("Seleccione una opción: ");   
     }
     
-    static persistenciaLP lpControl = new persistenciaLP();
+    
     
     private static void mostrarMenuEstudiante(Scanner scanner) {
         boolean continuar = true;
@@ -43,7 +44,7 @@ public class Main {
 
             if (opcion == 1) {
                 System.out.println("Mostrando LearningPaths...");
-                imprimirLearningPaths();
+                lpControl.mostrarLearningPathsDesdeArchivo();
             } else if (opcion == 2) {
             	Estudiante.inscribirLearningPath(lpControl, estudiante, scanner);
             } else if (opcion == 3) {	
@@ -57,9 +58,12 @@ public class Main {
             }
         }
     }
+    
+  
 
-    private static void mostrarMenuProfesor(Scanner scanner) {
+    private static void mostrarMenuProfesor(Scanner scanner, Profesor profesorCreador, persistenciaLP lpControl) {
         boolean continuar = true;
+
         while (continuar) {
             System.out.println("1. Crear Learning Path");
             System.out.println("2. Crear Actividad");
@@ -70,8 +74,33 @@ public class Main {
             scanner.nextLine();
 
             if (opcion == 1) {
-                System.out.println("Creando Learning Path...");
-                crearLearningPath(scanner);
+                System.out.println("Para crear el Learning Path...");
+                
+                System.out.print("Ingrese código del Learning Path: ");
+                int codigo = scanner.nextInt();
+                scanner.nextLine(); 
+
+                System.out.print("Ingrese título del Learning Path: ");
+                String titulo = scanner.nextLine();
+
+                System.out.print("Ingrese descripción: ");
+                String descripcion = scanner.nextLine();
+
+                System.out.print("Ingrese objetivos: ");
+                String objetivos = scanner.nextLine();
+
+                System.out.print("Ingrese dificultad: ");
+                String dificultad = scanner.nextLine();
+
+                System.out.print("Ingrese duración: ");
+                String duracion = scanner.nextLine();
+                
+             //  agregar la lógica para pedir al usuario que ingrese actividades
+
+                Map<String, Actividad> actividades = new HashMap<>(); //eso no va ahi pero es mientras acabamos lo de actividades
+                profesorCreador.crearLearningPath(codigo, titulo, descripcion, objetivos, dificultad, duracion, actividades, profesorCreador);
+        
+                
             } else if (opcion == 2) {
                 System.out.println("Creando actividad...");
             } else if (opcion == 3) {
@@ -79,7 +108,8 @@ public class Main {
                 System.out.println("Saliendo del menú de profesor...");  
             } else if (opcion == 4) {
                 System.out.println("mostrando learning paths creados...");
-                imprimirLearningPaths();
+                profesorCreador.mostrarLearningPathsDesdeArchivo();
+               
             } else {
                 System.out.println("Opción no válida. Intente de nuevo.");
             }
@@ -121,70 +151,40 @@ public class Main {
         System.out.print("Ingrese nombre de usuario: ");
         String nombreUsuario = scanner.nextLine();
         
-
         System.out.print("Ingrese contraseña: ");
         String password = scanner.nextLine();
         
         String tipoUsuario = gestorUsuarios.iniciarSesion(nombreUsuario, password);
-       
+        
         if (tipoUsuario != null) {
-            System.out.println("Inicio de sesión exitoso como: " + tipoUsuario);         
-            if (tipoUsuario.equals("Estudiante")) {
-            	System.out.println("Opciones para estudiante:");
-            	usuario = gestorUsuarios.obtenerUsuario(nombreUsuario);
-            	mostrarMenuEstudiante(scanner);
-            } else if (tipoUsuario.equals("Profesor")) {
-            	System.out.println("Opciones para profesor:");
-            	mostrarMenuProfesor(scanner);
+            System.out.println("Inicio de sesión exitoso como: " + tipoUsuario);
             
+            Object usuario = gestorUsuarios.obtenerUsuario(nombreUsuario);
+            
+            if (tipoUsuario.equals("Estudiante") && usuario instanceof Estudiante) {
+                System.out.println("Opciones para estudiante:");
+                mostrarMenuEstudiante(scanner);
+            } else if (tipoUsuario.equals("Profesor") && usuario instanceof Profesor) {
+                System.out.println("Opciones para profesor:");
+                Profesor profesorCreador = (Profesor) usuario; 
+                mostrarMenuProfesor(scanner, profesorCreador, lpControl);
+            } else {
+                System.out.println("Error: el tipo de usuario no coincide con " + tipoUsuario + ".");
             }
-         
         } else {
             System.out.println("Credenciales incorrectas. Inténtalo de nuevo.");
-          
         }
     }
-    
-    private static LearningPath crearLearningPath(Scanner scanner) {
-        
-    	System.out.print("Ingrese codigo del Learning Path: ");
-        String codigo = scanner.nextLine();
-    	
-    	System.out.print("Ingrese título del Learning Path: ");
-        String titulo = scanner.nextLine();
-
-        System.out.print("Ingrese descripción: ");
-        String descripcion = scanner.nextLine();
-
-        System.out.print("Ingrese objetivos: ");
-        String objetivos = scanner.nextLine();
-
-        System.out.print("Ingrese dificultad: ");
-        String dificultad = scanner.nextLine();
-
-        System.out.print("Ingrese duración: ");
-        String duracion = scanner.nextLine();
-
-        Map<Integer, Actividad> actividades = new HashMap();
-        // código para ingresar actividades
-        
-        int idLP = Integer.parseInt(codigo);
-        LearningPath learningPath = new LearningPath(idLP, titulo, descripcion, objetivos, dificultad, duracion, actividades);
-        boolean agregadoExitosamente = lpControl.agregarLearningPath(learningPath);
-        if (!agregadoExitosamente) {
-            System.out.println("Por favor, intente crear el Learning Path con un código diferente.");
-        }
-        lpControl.agregarLearningPath(learningPath);
-        System.out.println("Learning Path creado exitosamente.");
-        return learningPath;
-    }
+   
     
     private static void imprimirLearningPaths(Map<Integer, LearningPath> learningPaths) {
+    	lpControl.obtenerLearningPaths();
         if (learningPaths.isEmpty()) {
             System.out.println("No hay Learning Paths registrados.");
         } else {
             System.out.println("Learning Paths registrados:");
             for (LearningPath lp : learningPaths.values()) {
+            	System.out.println("Profesor Creador: " +  lp.getProfesorCreador().getNombre());
                 System.out.println("Código: " + lp.getIdLP());
                 System.out.println("Título: " + lp.getTitulo());
                 System.out.println("Descripción: " + lp.getDescripcion());
@@ -196,15 +196,9 @@ public class Main {
         }
     }
     
-    private static void imprimirLearningPaths() {
-        lpControl.cargarLearningPaths(); 
-        Map<Integer, LearningPath> learningPaths = lpControl.obtenerLearningPaths();
-        imprimirLearningPaths(learningPaths); 
-    }
-    
     private static void imprimirLearningPathsInscritos(Estudiante estudiante) {
-        Map<Integer, LearningPath> lpInscritos = estudiante.getLpInscritos(); // Asumiendo que tienes un método en Estudiante
-        imprimirLearningPaths(lpInscritos); // Llama al método existente para imprimir
+        Map<Integer, LearningPath> lpInscritos = estudiante.getLpInscritos(); 
+        imprimirLearningPaths(lpInscritos);
     }
     public static void main(String[] args) {
     	GestorUsuarios sistema = new GestorUsuarios();

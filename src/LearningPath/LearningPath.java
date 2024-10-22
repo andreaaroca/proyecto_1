@@ -3,17 +3,16 @@ package LearningPath;
 import java.io.Serializable;
 import java.util.*;
 
-import java.util.List;
-
 import Actividades.Actividad;
 
 
 import co.edu.andes.usuarios.Profesor;
+import co.edu.andes.usuarios.Usuario;
 
 public class LearningPath implements Serializable {
 	
-	private static final long serialVersionUID = 1L; // Para la serialización
-	
+	private static final long serialVersionUID = 1L;// Para la serialización
+	private Usuario profesorCreador;
     private String titulo;
     private String descripcion; 
     private String objetivos;
@@ -23,8 +22,8 @@ public class LearningPath implements Serializable {
     private String idActividad;
     private int idLP;
 	
-    public LearningPath(int idLP, String titulo, String descripcion, String objetivos, 
-            String dificultad, String duracion, Map<Integer, Actividad> actividades) {
+    public LearningPath(Integer idLP, String titulo, String objetivos, String descripcion, String dificultad, 
+            String duracion, Map<String, Actividad> actividades, Usuario profesorCreador) {
     	this.idLP = idLP;
     	this.titulo = titulo;
     	this.descripcion = descripcion;
@@ -32,9 +31,15 @@ public class LearningPath implements Serializable {
     	this.dificultad = dificultad;
     	this.duracion = duracion;
     	this.actividades = new HashMap<>();
+    	this.profesorCreador = profesorCreador;
+    
     	
     }
-
+    
+    public Usuario getProfesorCreador() {
+        return profesorCreador;
+    }
+    
 	public String getDuracion() {
 		return duracion;
 	}
@@ -120,5 +125,21 @@ public class LearningPath implements Serializable {
 
 	public void setIdLP(int idLP) {
 		this.idLP = idLP;
-	}	
+	}
+	
+	@Override
+	public String toString() {
+	    return "LearningPath{" +
+	            "codigo=" + idLP +
+	            ", titulo='" + titulo + '\'' +
+	            ", descripcion='" + descripcion + '\'' +
+	            ", objetivos='" + objetivos + '\'' +
+	            ", dificultad='" + dificultad + '\'' +
+	            ", duracion='" + duracion + '\'' +
+	            ", creador=" + profesorCreador + 
+	            '}';
+	}
+	
+
+	
 }

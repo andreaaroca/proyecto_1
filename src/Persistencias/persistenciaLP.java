@@ -1,62 +1,85 @@
 package Persistencias;
 
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
 import LearningPath.LearningPath;
 
-public class persistenciaLP {
+public class persistenciaLP implements Serializable {
 	
-	 private Map<Integer, LearningPath> learningPathsMap  = new HashMap<>(); 
-	 private static final String ARCHIVO_LP = "learningPaths.ser"; // Archivo para la serialización
+	private static final long serialVersionUID = 1L;
+	private static final String ARCHIVO_LP = "learningPaths.ser"; 
 	 
+	 private Map<Integer, LearningPath> learningPathsCreados;
 	 public persistenciaLP() {
-	        this.learningPathsMap= cargarLearningPaths();
+	        this.learningPathsCreados= cargarLearningPaths();
 	    }
+	 @SuppressWarnings("unchecked")
+	 public Map<Integer, LearningPath> cargarLearningPaths() {
+		
+		 File archivo = new File(ARCHIVO_LP);
+	     if (archivo.exists()) { 
+	         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
+	             return (Map<Integer, LearningPath>) ois.readObject(); 
+	         } catch (IOException | ClassNotFoundException e) {
+	             e.printStackTrace();
+	         }
+	     }
+	     return new HashMap<>(); 
+	 }
 	 
-	 public boolean agregarLearningPath(LearningPath lp) {
-	        int codigo = lp.getIdLP();
+	 public void guardarLearningPaths(Map<Integer, LearningPath> nuevosLearningPaths) {
+		    
+		    Map<Integer, LearningPath> learningPathsExistentes = cargarLearningPaths();
 
-	        if (learningPathsMap.containsKey(codigo)) {
-	            System.out.println("El código del Learning Path ya existe. Por favor, ingrese un código diferente.");
-	            return false; 
+		    learningPathsExistentes.putAll(nuevosLearningPaths); 
+		    File archivo = new File(ARCHIVO_LP);
+
+		    try {
+		        if (!archivo.exists()) {
+		            archivo.createNewFile(); 
+		        }
+		
+		        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(archivo))) {
+		            oos.writeObject(learningPathsExistentes); 
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		}
+	    
+	    public void mostrarLearningPathsDesdeArchivo() {
+	        Map<Integer, LearningPath> learningPaths = cargarLearningPaths(); 
+	        if (learningPaths.isEmpty()) {
+	            System.out.println("No hay Learning Paths registrados en el archivo.");
+	        } else {
+	            System.out.println("Learning Paths registrados:");
+	            for (LearningPath lp : learningPaths.values()) {
+	                System.out.println("Profesor Creador: " + lp.getProfesorCreador().getNombre());
+	                System.out.println("Código: " + lp.getIdLP());
+	                System.out.println("Título: " + lp.getTitulo());
+	                System.out.println("Descripción: " + lp.getDescripcion());
+	                System.out.println("Objetivos: " + lp.getObjetivos());
+	                System.out.println("Dificultad: " + lp.getDificultad());
+	                System.out.println("Duración: " + lp.getDuracion());
+	                System.out.println("------------------------------------");
+	            }
 	        }
-	        
-	        learningPathsMap.put(codigo, lp);
-	        guardarLearningPaths();
-	        System.out.println("Learning Path agregado exitosamente.");
-	        return true; 
-	    }
-
-	    // Guardar el mapa de LearningPaths en un archivo
-	    private void guardarLearningPaths() {
-	        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARCHIVO_LP))) {
-	            oos.writeObject(learningPathsMap);
-	        } catch (IOException e) {
-	            e.printStackTrace();
-	        }
-	    }
-
-	    public Map<Integer, LearningPath> cargarLearningPaths() {
-	        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(ARCHIVO_LP))) {
-	            return (Map<Integer, LearningPath>) ois.readObject();
-	        } catch (IOException | ClassNotFoundException e) {
-	            e.printStackTrace();
-	            return new HashMap<>();
-	        }
-	    }
-
-	    public LearningPath obtenerLearningPath(Integer codigo) {
-	        return learningPathsMap.get(codigo);
 	    }
 	    
 	    public Map<Integer, LearningPath> obtenerLearningPaths() {
-	        return learningPathsMap;
+	        return learningPathsCreados;
+	    }
+
+	    public LearningPath obtenerLearningPath(Integer codigo) {
+	        return learningPathsCreados.get(codigo);
 	    }
 	}
 

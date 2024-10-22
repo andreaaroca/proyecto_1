@@ -12,6 +12,7 @@ import co.edu.andes.sistema.GestorUsuarios;
 import co.edu.andes.usuarios.Estudiante;
 import co.edu.andes.usuarios.Profesor;
 import co.edu.andes.usuarios.Usuario;
+import Persistencias.persistenciaEstudiante;
 import Persistencias.persistenciaLP;
 
 public class Main {
@@ -30,9 +31,8 @@ public class Main {
     
     
     
-    private static void mostrarMenuEstudiante(Scanner scanner) {
+    private static void mostrarMenuEstudiante(Scanner scanner, Estudiante estudiante) {
         boolean continuar = true;
-        Estudiante estudiante = (Estudiante) usuario;
         while (continuar) {
             System.out.println("1. Ver learningPaths");
             System.out.println("2. InscribirLearningPath");
@@ -41,6 +41,7 @@ public class Main {
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
             scanner.nextLine(); 
+            
 
             if (opcion == 1) {
                 System.out.println("Mostrando LearningPaths...");
@@ -50,6 +51,8 @@ public class Main {
             } else if (opcion == 3) {	
             	System.out.println("Tus LearningPaths inscritos son: ");
             	imprimirLearningPathsInscritos(estudiante);
+           
+         
             } else if (opcion == 4) {
                 continuar = false; 
                 System.out.println("Saliendo del menú de estudiante...");
@@ -59,7 +62,7 @@ public class Main {
         }
     }
     
-  
+ 
 
     private static void mostrarMenuProfesor(Scanner scanner, Profesor profesorCreador, persistenciaLP lpControl) {
         boolean continuar = true;
@@ -163,7 +166,8 @@ public class Main {
             
             if (tipoUsuario.equals("Estudiante") && usuario instanceof Estudiante) {
                 System.out.println("Opciones para estudiante:");
-                mostrarMenuEstudiante(scanner);
+                Estudiante estudiante = (Estudiante) usuario; 
+                mostrarMenuEstudiante(scanner, estudiante);
             } else if (tipoUsuario.equals("Profesor") && usuario instanceof Profesor) {
                 System.out.println("Opciones para profesor:");
                 Profesor profesorCreador = (Profesor) usuario; 

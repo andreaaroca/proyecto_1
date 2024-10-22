@@ -2,63 +2,80 @@ package Persistencias;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Scanner;
 
 import LearningPath.LearningPath;
 import co.edu.andes.usuarios.Estudiante;
 
-public class persistenciaEstudiante {
+public class persistenciaEstudiante implements Serializable {
 	
-	private static final String ARCHIVO_ESTUDIANTES = "estudiantes_inscritos.txt";
-	persistenciaLP lpControl = new persistenciaLP();
-	Scanner scanner = new Scanner(System.in);
+	private static final long serialVersionUID = 1L;
+	private static final String ARCHIVO_ESTUDIANTES = "estudiantes_inscritos.ser";
 	
-    public void guardarInscripciones(Estudiante estudiante) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(ARCHIVO_ESTUDIANTES, true))) {
-            writer.write(estudiante.getNombreUsuario() + "\n"); 
-            for (LearningPath lp : estudiante.getLpInscritos().values()) {
-                writer.write(lp.getIdLP() + "\n"); 
-            }
-            writer.write("---\n"); 
-        } catch (IOException e) {
-            System.err.println("Error al guardar inscripciones: " + e.getMessage());
-        }
-    }
+	private Map<Integer, LearningPath> lpInscritos;
+	public persistenciaEstudiante() {
+        this.lpInscritos = cargarInscripciones();
+	}
+	
+        @SuppressWarnings("unchecked")
+   	 public Map<Integer, LearningPath> cargarInscripciones() {
+   		
+   		 File archivo = new File(ARCHIVO_ESTUDIANTES);
+   	     if (archivo.exists()) { 
+   	         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
+   	             return (Map<Integer, LearningPath>) ois.readObject(); 
+   	         } catch (IOException | ClassNotFoundException e) {
+   	             e.printStackTrace();
+   	         }
+   	     }
+   	     return new HashMap<>(); 
+   	 }
 
-    public void cargarInscripciones(List<Estudiante> estudiantes) {
-        try (BufferedReader reader = new BufferedReader(new FileReader(ARCHIVO_ESTUDIANTES))) {
-            String linea;
-            Estudiante estudianteActual = null;
+        public void guardarLpInscritos(Estudiante estudiante) {
+            HashMap<Integer, LearningPath> lpInscritos = estudiante.getLpInscritos();
+   		    Map<Integer, LearningPath> inscripcionesExistentes = cargarInscripciones();
 
-            while ((linea = reader.readLine()) != null) {
-                if (linea.equals("---")) {
-                    
-                    estudianteActual = null;
-                } else if (estudianteActual == null) {
-                    estudianteActual = buscarEstudiantePorNombre(linea, estudiantes);
-                } else {
-                    int codigoLP = Integer.parseInt(linea);
-                    if (estudianteActual != null) {
-                    	Estudiante.inscribirLearningPath(lpControl, estudianteActual, scanner); 
+   		    inscripcionesExistentes.putAll(lpInscritos); 
+   		    File archivo = new File(ARCHIVO_ESTUDIANTES);
+
+   		    try {
+   		        if (!archivo.exists()) {
+   		            archivo.createNewFile(); 
+   		        }
+   		
+   		        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(archivo))) {
+   		            oos.writeObject(inscripcionesExistentes); 
+   		        }
+   		    } catch (IOException e) {
+   		        e.printStackTrace();
+   		    }
+   		}
+        
+        public void mostrarLpInscritosDesdeArchivo(List<Estudiante> estudiantes) {
+            Map<Integer, LearningPath> inscripciones = cargarInscripciones();
+            
+            for (Estudiante estudiante : estudiantes) {
+                System.out.println("Inscripciones para " + estudiante.getNombre() + ":");
+                for (Map.Entry<Integer, LearningPath> entry : inscripciones.entrySet()) {
+                    LearningPath lp = entry.getValue();
+                    if (lp != null) {
+                        System.out.println("- " + lp.getTitulo() + " (ID: " + lp.getIdLP() + ")");
                     }
                 }
-            }
-        } catch (IOException e) {
-            System.err.println("Error al cargar inscripciones: " + e.getMessage());
-        }
-    }
-
-    private Estudiante buscarEstudiantePorNombre(String nombreUsuario, List<Estudiante> estudiantes) {
-        for (Estudiante estudiante : estudiantes) {
-            if (estudiante.getNombreUsuario().equals(nombreUsuario)) {
-                return estudiante;
+                System.out.println("---");
             }
         }
-        return null; 
-    }
 	
 }

@@ -49,6 +49,8 @@ public abstract class Actividad
 	public String getDificultad() 
 	{
 		return dificultad;
+		
+		
 	}
 
 	public String getDuracion() 

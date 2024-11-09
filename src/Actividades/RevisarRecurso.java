@@ -1,25 +1,20 @@
 package Actividades;
 
-public class RevisarRecurso extends Actividad {
+public class RevisarRecurso extends Actividad 
+{
 	
 	private String recursoLink;
 	//private File recursoArchivo;
 
 	public RevisarRecurso(int idActividad, String descripcion, String objetivo, String dificultad, String duracion
-			, String recursoLink) {
-		super(idActividad, descripcion, objetivo, dificultad, duracion);
-		this.recursoLink=recursoLink;
-		
+			, String recursoLink, String tipo) {
+		super(idActividad, descripcion, objetivo, dificultad, duracion, tipo);
+		this.recursoLink=recursoLink;	
 	}
 
-	public String getRecursoLink() {
+	public String getRecursoLink() 
+	{
 		return recursoLink;
 	}
 	
-	
-	
-	
-
-	
-
 }

@@ -2,7 +2,8 @@ package Actividades;
 
 import java.util.*;
 import LearningPath.*;
-public abstract class Actividad {
+public abstract class Actividad 
+{
 
 	protected int idActividad;
 	protected String descripcion;
@@ -11,9 +12,11 @@ public abstract class Actividad {
 	protected String duracion;
 	protected List <Resena> resenas;
 	protected boolean enviado;
+	protected String tipo;
 	
 	
-	public Actividad(int idActividad, String descripcion, String objetivo, String dificultad, String duracion) {
+	public Actividad(int idActividad, String descripcion, String objetivo, String dificultad, String duracion, String tipo) 
+	{
 		
 		this.idActividad= idActividad;
 		this.descripcion = descripcion;
@@ -22,76 +25,65 @@ public abstract class Actividad {
 		this.duracion = duracion;
 		this.resenas = new ArrayList<Resena>();
 		this.enviado=false;
+		this.tipo=tipo;
 		
 	}
 
 	
 	
-	public int getIdActividad() {
+	public int getIdActividad() 
+	{
 		return idActividad;
 	}
 
-	public String getDescripcion() {
+	public String getDescripcion() 
+	{
 		return descripcion;
 	}
 
-	public void setIdActividad(int idActividad) {
-		this.idActividad = idActividad;
-	}
-
-
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-
-
-
-	public void setObjetivo(String objetivo) {
-		this.objetivo = objetivo;
-	}
-
-
-
-	public void setDificultad(String dificultad) {
-		this.dificultad = dificultad;
-	}
-
-
-
-	public void setDuracion(String duracion) {
-		this.duracion = duracion;
-	}
-
-
-
-	public String getObjetivo() {
+	public String getObjetivo() 
+	{
 		return objetivo;
 	}
 
-	public String getDificultad() {
+	public String getDificultad() 
+	{
 		return dificultad;
 	}
 
-	public String getDuracion() {
+	public String getDuracion() 
+	{
 		return duracion;
 	}
 
-	public List<Resena> getResenas() {
+	public List<Resena> getResenas() 
+	{
 		return resenas;
 	}
 
-	public boolean isEnviado() {
+	public boolean isEnviado() 
+	{
 		return enviado;
 	}
 
-	public void setEnviado(boolean enviado) {
+	public void setEnviado(boolean enviado) 
+	{
 		this.enviado = enviado;
 	}
 
-	public void agregarResena(Resena r) {
+	public void agregarResena(Resena r) 
+	{
 		resenas.add(r); 
+	}
+
+	public String getTipo() 
+	{
+		return tipo;
+	}
+
+	public void setTipo(String tipo) 
+	{
+		this.tipo = tipo;
 	}
 	
 }
-	

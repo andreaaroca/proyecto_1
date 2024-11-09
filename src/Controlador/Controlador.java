@@ -22,7 +22,8 @@ public class Controlador {
 			profesorCreador.crearEncuesta(idActividad, descripcion, objetivo, dificultad, duracion, idLp); }
 			
 			else if (tipo=="Revisar Recurso") {
-				profesorCreador.crearRevisarRecurso(idActividad, descripcion, objetivo, dificultad, duracion, idLp);}
+				profesorCreador.crearRevisarRecurso(idActividad, descripcion, objetivo, dificultad, duracion
+						, recursoLink, idLp);}
 			
 		
 			else if (tipo=="Quiz") {

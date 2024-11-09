@@ -91,11 +91,12 @@ public class LearningPath implements Serializable {
 		this.actividades = actividades;
 	}
 	
-	public void agregarActividades(List<Actividad> listaActividades) {
-	    for (Actividad actividad : listaActividades) {
-	        actividades.put(actividad.getIdActividad(), actividad);
+	public void agregarActividades(Actividad actividad) {
+	    int id=actividad.getIdActividad();
+	    actividades.put(id, actividad);
+	    
 	    }
-	}
+	
 
     public boolean validarLearningPath() {
         return 

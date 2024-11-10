@@ -9,7 +9,7 @@ import Actividades.*;
 import java.time.*;
 
 
-public class Estudiante extends Usuario{
+public class Estudiante extends Usuario {
 	
 	private HashMap<Integer, LearningPath> lpInscritos;
 	private HashMap<Integer, Actividad> actividadesEnviadas;
@@ -65,11 +65,25 @@ public class Estudiante extends Usuario{
 	                persistenciaEstudiante persistenciaEstudiante = new persistenciaEstudiante();
 	                persistenciaEstudiante.guardarLpInscritos(estudiante);
 	                System.out.println("Learning Path inscrito exitosamente: " + lp.getTitulo());
+	                
 	            }
 	        } else {
 	            System.out.println("No se encontró un Learning Path con el código proporcionado.");
 	        }
 	    }
+	 
+	 public void crearReseñaLearningPath(int idLp, String opinionActividad, int rating, int idActividad) {
+		    LearningPath lp = lpInscritos.get(idLp);
+		    if (lp != null) {
+		        lp.agregarReseña( opinionActividad, rating, idActividad);  
+		        
+		       
+		        persistenciaLP persistencia = new persistenciaLP();
+		        persistencia.actualizarRating(idLp, lp.getPromedioCalificaciones());
+		    } else {
+		        System.out.println("LearningPath no encontrado en los inscritos.");
+		    }
+		}
 	 @Override
 	    public String toString() {
 	        return nombre; 
@@ -80,5 +94,6 @@ public class Estudiante extends Usuario{
 	    }
 }
 	
+
 
 	

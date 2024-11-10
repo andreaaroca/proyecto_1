@@ -21,8 +21,14 @@ public class LearningPath implements Serializable {
     private Map<Integer, Actividad> actividades;
     private String idActividad;
     private int idLP;
+    private Map<Integer, String> reseñas;
+    List<Integer> calificaciones; // Almacena cada calificación
+    private double promedioCalificaciones; // Promedio de calificaciones
+    
+    
 	
-    public LearningPath(Integer idLP, String titulo, String objetivos, String descripcion, String dificultad, 
+   
+	public LearningPath(Integer idLP, String titulo, String objetivos, String descripcion, String dificultad, 
             String duracion, Map<String, Actividad> actividades, Usuario profesorCreador) {
     	this.idLP = idLP;
     	this.titulo = titulo;
@@ -31,7 +37,11 @@ public class LearningPath implements Serializable {
     	this.dificultad = dificultad;
     	this.duracion = duracion;
     	this.actividades = new HashMap<>();
+    	this.calificaciones = new ArrayList<>();
+        this.promedioCalificaciones = 0.0;
+        this.reseñas = new HashMap<>();
     	this.profesorCreador = profesorCreador;
+    	
     
     	
     }
@@ -127,6 +137,53 @@ public class LearningPath implements Serializable {
 		this.idLP = idLP;
 	}
 	
+	 public double getPromedioCalificaciones() { 
+	        return promedioCalificaciones;
+	        
+	    }
+
+	   
+	 public void setPromedioCalificaciones(double promedioCalificaciones) {
+		this.promedioCalificaciones = promedioCalificaciones;
+	}
+
+	public void agregarReseña(String reseña, int calificacion, int idActividad) {
+		    if (this.reseñas == null) {
+		        this.reseñas = new HashMap<>();
+		    }
+		    if (this.calificaciones == null) {
+		        this.calificaciones = new ArrayList<>();
+		    }
+
+		    reseñas.put(idActividad, reseña);
+		    calificaciones.add(calificacion);
+
+		    actualizarPromedioCalificaciones();
+		}
+
+   
+     private void actualizarPromedioCalificaciones() {
+        int suma = 0;
+        for (int calificacion : calificaciones) {
+            suma += calificacion;
+        }
+        promedioCalificaciones = suma / (double) calificaciones.size();
+    }
+
+	    public void mostrarRatings() {
+	        System.out.println("Reseñas del Learning Path " + titulo + ":");
+	        if (reseñas.isEmpty()) {
+	            System.out.println("No hay reseñas para este Learning Path.");
+	        } else {
+	            for (Integer reseña : reseñas.keySet()) {
+	                System.out.println("- " + reseña);
+	            }
+	            System.out.println("Promedio de Calificaciones: " + promedioCalificaciones);
+	        }
+	    }
+	
+
+
 	@Override
 	public String toString() {
 	    return "LearningPath{" +
@@ -136,6 +193,7 @@ public class LearningPath implements Serializable {
 	            ", objetivos='" + objetivos + '\'' +
 	            ", dificultad='" + dificultad + '\'' +
 	            ", duracion='" + duracion + '\'' +
+	            ", rating='" + promedioCalificaciones + '\'' +
 	            ", creador=" + profesorCreador + 
 	            '}';
 	}

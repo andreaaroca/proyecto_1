@@ -4,9 +4,11 @@ import co.edu.andes.usuarios.Usuario;
 
 public class Resena {
 
+	public int idLP;
+	public int idActividad;
 	private String valoracion;
 	private int  rating;
-	private Usuario  user;	
+	private Usuario  user;
 	
 	
 
@@ -28,10 +30,27 @@ public class Resena {
 		this.rating = rating;
 	}
 	
+	public int getIdLP() {
+		return idLP;
+	}
+	public void setIdLP(int idLP) {
+		this.idLP = idLP;
+	}
+	public int getIdActividad() {
+		return idActividad;
+	}
+	public void setIdActividad(int idActividad) {
+		this.idActividad = idActividad;
+	}
 	public Usuario getUser() {
 		return user;
 	}
 	public void setUser(Usuario user) {
 		this.user = user;
 	}
+	
+	 @Override
+	    public String toString() {
+	        return "ID Actividad: " + idActividad + ", Rating: " + rating + ", Opinión: " + valoracion;
+	    }
 }

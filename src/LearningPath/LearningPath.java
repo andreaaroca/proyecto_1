@@ -34,6 +34,8 @@ public class LearningPath implements Serializable {
     	this.dificultad = dificultad;
     	this.duracion = duracion;
     	this.actividades = new HashMap<>();
+    	this.promedioCalificaciones = 0.0;
+        this.reseñas = new HashMap<>();
     	this.profesorCreador = profesorCreador;
     
     	

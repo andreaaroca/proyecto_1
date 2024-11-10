@@ -22,8 +22,8 @@ public class LearningPath implements Serializable {
     private String idActividad;
     private int idLP;
     private Map<Integer, String> reseñas;
-    List<Integer> calificaciones; // Almacena cada calificación
-    private double promedioCalificaciones; // Promedio de calificaciones
+    List<Integer> calificaciones; 
+    private double promedioCalificaciones; 
     
     
 	

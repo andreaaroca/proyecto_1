@@ -20,6 +20,7 @@ public class Main {
 	private static Usuario usuario;
 	private static Map<Integer, LearningPath> learningPaths = new HashMap<>();
 	static persistenciaLP lpControl = new persistenciaLP();
+	private static persistenciaEstudiante persistencia = new persistenciaEstudiante();
 
     private static void mostrarMenu() {
         System.out.println("1. Registrar Usuario");
@@ -204,29 +205,12 @@ public class Main {
     }
    
     
-    private static void imprimirLearningPaths(Map<Integer, LearningPath> learningPaths) {
-    	lpControl.obtenerLearningPaths();
-        if (learningPaths.isEmpty()) {
-            System.out.println("No hay Learning Paths registrados.");
-        } else {
-            System.out.println("Learning Paths registrados:");
-            for (LearningPath lp : learningPaths.values()) {
-            	System.out.println("Profesor Creador: " +  lp.getProfesorCreador().getNombre());
-                System.out.println("Código: " + lp.getIdLP());
-                System.out.println("Título: " + lp.getTitulo());
-                System.out.println("Descripción: " + lp.getDescripcion());
-                System.out.println("Objetivos: " + lp.getObjetivos());
-                System.out.println("Dificultad: " + lp.getDificultad());
-                System.out.println("Duración: " + lp.getDuracion());
-                System.out.println("------------------------------------");
-            }
-        }
+    private static void imprimirLearningPathsInscritos(persistenciaEstudiante persistencia, Estudiante estudiante) {
+    	persistencia.guardarLpInscritos(estudiante);
+    	persistencia.mostrarLpInscritos(estudiante);
+       
     }
     
-    private static void imprimirLearningPathsInscritos(Estudiante estudiante) {
-        Map<Integer, LearningPath> lpInscritos = estudiante.getLpInscritos(); 
-        imprimirLearningPaths(lpInscritos);
-    }
     public static void main(String[] args) {
     	GestorUsuarios sistema = new GestorUsuarios();
         Scanner scanner = new Scanner(System.in);

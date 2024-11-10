@@ -1,81 +1,97 @@
 package Persistencias;
-
-import java.io.BufferedReader;
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
-
-import LearningPath.LearningPath;
-import co.edu.andes.usuarios.Estudiante;
-
-public class persistenciaEstudiante implements Serializable {
 	
-	private static final long serialVersionUID = 1L;
-	private static final String ARCHIVO_ESTUDIANTES = "estudiantes_inscritos.ser";
+	import java.io.BufferedReader;
+	import java.io.BufferedWriter;
+	import java.io.File;
+	import java.io.FileInputStream;
+	import java.io.FileOutputStream;
+	import java.io.FileReader;
+	import java.io.FileWriter;
+	import java.io.IOException;
+	import java.io.ObjectInputStream;
+	import java.io.ObjectOutputStream;
+	import java.io.Serializable;
+	import java.util.HashMap;
+	import java.util.List;
+	import java.util.Map;
+	import java.util.Scanner;
 	
-	private Map<Integer, LearningPath> lpInscritos;
+	import LearningPath.LearningPath;
+	import co.edu.andes.usuarios.Estudiante;
+	
+	public class persistenciaEstudiante implements Serializable {
+		
+	private static final String ARCHIVO_ESTUDIANTES = "estudiantes.ser"; 
+	private HashMap<String, HashMap<Integer, LearningPath>> mapaEstudiantes;
+	private HashMap<Integer, List<LearningPath>> lpInscritos;
+	
 	public persistenciaEstudiante() {
-        this.lpInscritos = cargarInscripciones();
+	   
+	    mapaEstudiantes = new HashMap<>();
+	    cargarLpInscritos(); 
 	}
 	
-        @SuppressWarnings("unchecked")
-   	 public Map<Integer, LearningPath> cargarInscripciones() {
-   		
-   		 File archivo = new File(ARCHIVO_ESTUDIANTES);
-   	     if (archivo.exists()) { 
-   	         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
-   	             return (Map<Integer, LearningPath>) ois.readObject(); 
-   	         } catch (IOException | ClassNotFoundException e) {
-   	             e.printStackTrace();
-   	         }
-   	     }
-   	     return new HashMap<>(); 
-   	 }
+	 public void cargarLpInscritos() {
+	        File archivo = new File(ARCHIVO_ESTUDIANTES);
+	        if (!archivo.exists()) {
+	            mapaEstudiantes = new HashMap<>(); 
+	            return;
+	        }
+	        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
+	            @SuppressWarnings("unchecked")
+	            HashMap<String, HashMap<Integer, LearningPath>> mapa = (HashMap<String, HashMap<Integer, LearningPath>>) ois.readObject();
+	            mapaEstudiantes = mapa;
+	        } catch (IOException | ClassNotFoundException e) {
+	            e.printStackTrace();
+	            mapaEstudiantes = new HashMap<>(); 
+	        }
+	    }
 
-        public void guardarLpInscritos(Estudiante estudiante) {
-            HashMap<Integer, LearningPath> lpInscritos = estudiante.getLpInscritos();
-   		    Map<Integer, LearningPath> inscripcionesExistentes = cargarInscripciones();
 
-   		    inscripcionesExistentes.putAll(lpInscritos); 
-   		    File archivo = new File(ARCHIVO_ESTUDIANTES);
+    public void guardarLpInscritos(Estudiante estudiante) {
+       
+        String nombreUsuario = estudiante.getNombreUsuario();
+        HashMap<Integer, LearningPath> learningPathsInscritos = estudiante.getLpInscritos();
 
-   		    try {
-   		        if (!archivo.exists()) {
-   		            archivo.createNewFile(); 
-   		        }
-   		
-   		        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(archivo))) {
-   		            oos.writeObject(inscripcionesExistentes); 
-   		        }
-   		    } catch (IOException e) {
-   		        e.printStackTrace();
-   		    }
-   		}
+       
+        mapaEstudiantes.put(nombreUsuario, learningPathsInscritos);
         
-        public void mostrarLpInscritosDesdeArchivo(List<Estudiante> estudiantes) {
-            Map<Integer, LearningPath> inscripciones = cargarInscripciones();
-            
-            for (Estudiante estudiante : estudiantes) {
-                System.out.println("Inscripciones para " + estudiante.getNombre() + ":");
-                for (Map.Entry<Integer, LearningPath> entry : inscripciones.entrySet()) {
-                    LearningPath lp = entry.getValue();
-                    if (lp != null) {
-                        System.out.println("- " + lp.getTitulo() + " (ID: " + lp.getIdLP() + ")");
-                    }
-                }
-                System.out.println("---");
+        File archivo = new File(ARCHIVO_ESTUDIANTES);
+        if (!archivo.exists()) {
+            try {
+                archivo.createNewFile();  
+            } catch (IOException e) {
+                e.printStackTrace();
             }
         }
+
+        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARCHIVO_ESTUDIANTES))) {
+            oos.writeObject(mapaEstudiantes);
+            System.out.println("Datos guardados correctamente en " + ARCHIVO_ESTUDIANTES);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+    
+    public void mostrarLpInscritos(Estudiante estudiante) {
+        String nombreUsuario = estudiante.getNombreUsuario();
+        
+        cargarLpInscritos();
+
+            if (mapaEstudiantes.containsKey(nombreUsuario)) {
+                HashMap<Integer, LearningPath> learningPathsInscritos = mapaEstudiantes.get(nombreUsuario);
+              
+
+                System.out.println("Learning Paths inscritos para " + nombreUsuario + ":");
+                for (LearningPath lp : learningPathsInscritos.values()) {
+                    System.out.println(" - " + lp.getTitulo()); 
+                }
+            } else {
+                System.out.println("No se encontraron Learning Paths inscritos para el estudiante " + nombreUsuario);
+            }
+
+        
+        }
+    }
+
 	
-}

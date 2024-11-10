@@ -42,6 +42,7 @@ public class Profesor extends Usuario implements Serializable {
     		learningPathsCreados.put(codigo, nuevoLearningPath);
     		persistenciaLP.guardarLearningPaths(learningPathsCreados); 
     		System.out.println("Learning Path creado exitosamente: " + titulo);
+    		
     }
 
     public Map<Integer, LearningPath> getLearningPathsMap() {
@@ -62,7 +63,7 @@ public class Profesor extends Usuario implements Serializable {
     	actividadesCreadas.add(nuevaTarea);
     	if(learningPathsCreados.containsKey(idLp)){
     		LearningPath lp=learningPathsCreados.get(idLp);
-    		lp.agregarActividades(nuevaTarea);
+    		lp.getActividades().put(idActividad,nuevaTarea);
     		System.out.println("Tarea creada y agregada exitosamente a Learning Path");	
     			
     		} 

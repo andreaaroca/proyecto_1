@@ -152,7 +152,7 @@ public class Main {
                 else if (opcionAct==3) {
                 	System.out.print("Ingrese el recurso a revisar (link): ");
                     recursoLink = scanner.nextLine();
-                    Controlador.crearActividad(idActividad, descripcion, objetivos, dificultad, duracion, "RevisarRecurso", 
+                    Controlador.crearActividad(idActividad, descripcion, objetivos, dificultad, duracion, "Revisar Recurso", 
                 			notaAprobacion,  recursoLink, ejercisio, idLp, profesorCreador);}
                 else if (opcionAct==4) {
                 	System.out.print("Ingrese la nota minima aprobatoria: ");

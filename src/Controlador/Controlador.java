@@ -1,7 +1,12 @@
 package Controlador;
 
 import co.edu.andes.usuarios.*;
+
+import java.util.Map;
+
 import LearningPath.*;
+
+import Persistencias.*;
 
 public class Controlador {
 
@@ -15,9 +20,9 @@ public class Controlador {
 	public static void crearActividad(int idActividad, String descripcion, String objetivo, String dificultad, String duracion, String tipo, 
 			Double notaAprovacion,  String recursoLink, String ejercicio, int idLp, Profesor profesorCreador){
 		
-			
-				if(profesorCreador.getLearningPathsMap().containsKey(idLp)) {
-					LearningPath lp=profesorCreador.getLearningPathsMap().get(idLp);
+				Map<Integer, LearningPath> mapaProfesorLp=profesorCreador.getLearningPathsMap();
+				if(mapaProfesorLp.containsKey(idLp)) {
+					LearningPath lp=mapaProfesorLp.get(idLp);
 					if (!(lp.getActividades().containsKey(idActividad))) {
 						if (tipo=="Tarea") {
 							profesorCreador.crearTarea(idActividad, descripcion, objetivo, dificultad, duracion,
@@ -43,8 +48,8 @@ public class Controlador {
 						}
 				} 
 					
-				else {
-					System.out.println("Ya existe esta actividade en el Learning Path");}
+					else {
+						System.out.println("Ya existe esta actividade en el Learning Path");}
 					
 					
 				}

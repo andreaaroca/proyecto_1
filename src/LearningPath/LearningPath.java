@@ -93,7 +93,8 @@ public class LearningPath implements Serializable {
 	
 	public void agregarActividades(Actividad actividad) {
 	    int id=actividad.getIdActividad();
-	    actividades.put(id, actividad);
+	    Map<Integer, Actividad> mapaActividades=getActividades();
+	    mapaActividades.put(id, actividad);
 	    
 	}
 

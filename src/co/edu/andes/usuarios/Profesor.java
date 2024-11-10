@@ -42,6 +42,7 @@ public class Profesor extends Usuario implements Serializable {
     		learningPathsCreados.put(codigo, nuevoLearningPath);
     		persistenciaLP.guardarLearningPaths(learningPathsCreados); 
     		System.out.println("Learning Path creado exitosamente: " + titulo);
+    		
     }
 
     public Map<Integer, LearningPath> getLearningPathsMap() {
@@ -62,12 +63,12 @@ public class Profesor extends Usuario implements Serializable {
     	actividadesCreadas.add(nuevaTarea);
     	if(learningPathsCreados.containsKey(idLp)){
     		LearningPath lp=learningPathsCreados.get(idLp);
-    		lp.agregarActividades(nuevaTarea);
-    			
+    		lp.getActividades().put(idActividad,nuevaTarea);
+    		System.out.println("Tarea creada y agregada exitosamente a Learning Path");	
     			
     		} 
     		else {
-    			System.out.println("Learning Path inexistente, no se puede añadir actividad");}
+    			System.out.println("Learning Path inexistente o creado por otro profesor, no se puede añadir actividad");}
     		}
     	
     	
@@ -81,11 +82,11 @@ public class Profesor extends Usuario implements Serializable {
     	if(learningPathsCreados.containsKey(idLp)){
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.agregarActividades(nuevaEncuesta);
-    			
+    		System.out.println("Encuesta creada y agregada exitosamente a Learning Path");	
     			
     		} 
     		else {
-    			System.out.println("Learning Path inexistente, no se puede añadir actividad");}
+    			System.out.println("Learning Path inexistente o creado por otro profesor, no se puede añadir actividad");}
     		}
     	
     
@@ -99,11 +100,11 @@ public class Profesor extends Usuario implements Serializable {
     	if(learningPathsCreados.containsKey(idLp)){
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.agregarActividades(nuevoRevisarRecurso);
-    			
+    		System.out.println("Recurso a revisar creado y agregado exitosamente a Learning Path");	
     			
     		} 
     		else {
-    			System.out.println("Learning Path inexistente, no se puede añadir actividad");}
+    			System.out.println("Learning Path inexistente o creado por otro profesor, no se puede añadir actividad");}
     		}
     
     public void crearQuiz(int idActividad, String descripcion, String objetivo, String dificultad, String duracion,
@@ -115,11 +116,12 @@ public class Profesor extends Usuario implements Serializable {
     	if(learningPathsCreados.containsKey(idLp)){
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.agregarActividades(nuevoQuiz);
+    		System.out.println("Quiz creado y agregado exitosamente a Learning Path");
     			
     			
     		} 
     		else {
-    			System.out.println("Learning Path inexistente, no se puede añadir actividad");}
+    			System.out.println("Learning Path inexistente o creado por otro profesor, no se puede añadir actividad");}
     		}
     
     public void crearExamen(int idActividad, String descripcion, String objetivo, String dificultad, String duracion,
@@ -131,11 +133,11 @@ public class Profesor extends Usuario implements Serializable {
     	if(learningPathsCreados.containsKey(idLp)){
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.agregarActividades(nuevoExamen);
-    			
+    		System.out.println("Examen creado y agregado exitosamente a Learning Path");	
     			
     		} 
     		else {
-    			System.out.println("Learning Path inexistente, no se puede añadir actividad");}
+    			System.out.println("Learning Path inexistente o creado por otro profesor, no se puede añadir actividad");}
     		}
     
     
@@ -176,6 +178,7 @@ public class Profesor extends Usuario implements Serializable {
     public void eliminarLearningPath(int idLp) {
     		if (learningPathsCreados.containsKey(idLp)) {
     			learningPathsCreados.remove(idLp);
+    			persistenciaLP.guardarLearningPaths(learningPathsCreados);
     			 
     			}
     		else { System.out.println("No se encontro el learning path a eliminar"); }

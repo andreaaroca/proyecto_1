@@ -73,6 +73,7 @@ public class Main {
             System.out.println("2. Crear Actividad");
             System.out.println("3. Salir");
             System.out.println("4. Mostrar archivo Learning paths creados");
+            System.out.println("5. Eliminar Learning Path");
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
             scanner.nextLine();
@@ -183,6 +184,12 @@ public class Main {
             } else if (opcion == 4) {
                 System.out.println("mostrando learning paths creados...");
                 profesorCreador.mostrarLearningPathsDesdeArchivo();
+            } else if (opcion == 5) {
+            	System.out.print("Ingrese código del learningpath a eliminar: ");
+                int codigo = scanner.nextInt();
+                scanner.nextLine();
+                Controlador.eliminarLp(codigo, profesorCreador);
+                
                
             } else {
                 System.out.println("Opción no válida. Intente de nuevo.");
@@ -266,6 +273,7 @@ public class Main {
                 System.out.println("Objetivos: " + lp.getObjetivos());
                 System.out.println("Dificultad: " + lp.getDificultad());
                 System.out.println("Duración: " + lp.getDuracion());
+                System.out.println("Actividades: " + lp.getActividades());
                 System.out.println("------------------------------------");
             }
         }

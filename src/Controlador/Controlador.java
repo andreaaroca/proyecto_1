@@ -58,7 +58,22 @@ public class Controlador {
 					System.out.println("Learning Path inexistente o creado por otro profesor, no se puede añadir actividad");
 				}
 	}
-
+	
+	public static void eliminarLp(int idLp, Profesor profesorCreador) {
+		Map<Integer, LearningPath> mapaProfesorLp=profesorCreador.getLearningPathsMap();
+		if(mapaProfesorLp.containsKey(idLp)) {
+			profesorCreador.eliminarLearningPath(idLp);
+			}
+		else {
+			System.out.println("Learning Path inexistente o creado por otro profesor, no se puede eliminar");
+		}
+		
+	
+		
+		
+	}
+	
+		
 	
 }	
 	

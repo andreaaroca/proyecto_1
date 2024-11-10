@@ -37,7 +37,8 @@ public class Main {
             System.out.println("1. Ver learningPaths");
             System.out.println("2. InscribirLearningPath");
             System.out.println("3. Ver learningpaths inscritos");
-            System.out.println("4. Salir");
+            System.out.println("4. Crear reseña");
+            System.out.println("5. Salir");
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
             scanner.nextLine(); 
@@ -46,14 +47,36 @@ public class Main {
             if (opcion == 1) {
                 System.out.println("Mostrando LearningPaths...");
                 lpControl.mostrarLearningPathsDesdeArchivo();
+                
             } else if (opcion == 2) {
             	Estudiante.inscribirLearningPath(lpControl, estudiante, scanner);
             } else if (opcion == 3) {	
             	System.out.println("Tus LearningPaths inscritos son: ");
-            	imprimirLearningPathsInscritos(estudiante);
-           
-         
+            	imprimirLearningPathsInscritos(persistencia, estudiante);
+            	
             } else if (opcion == 4) {
+                continuar = false; 
+                System.out.println("Para crear la reseña..."); 
+                
+                System.out.print("Ingrese id del Learning Path: ");
+                int idLp = scanner.nextInt();
+                scanner.nextLine(); 
+
+                System.out.print("Ingrese id de la actividad: ");
+                int idActividad = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.print("Ingrese rating del learning path: ");
+                int rating = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.print("Ingrese su opinion de la actividad: ");
+                String opinionActividad= scanner.nextLine();
+         
+                estudiante.crearReseñaLearningPath(idLp, opinionActividad, rating, idActividad);
+
+         
+            } else if (opcion == 5) {
                 continuar = false; 
                 System.out.println("Saliendo del menú de estudiante...");
             } else {

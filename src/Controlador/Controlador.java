@@ -1,6 +1,7 @@
 package Controlador;
 
 import co.edu.andes.usuarios.*;
+import LearningPath.*;
 
 public class Controlador {
 
@@ -11,35 +12,46 @@ public class Controlador {
 
 
 	
-	public void crearActividad(int idActividad, String descripcion, String objetivo, String dificultad, String duracion, String tipo, 
+	public static void crearActividad(int idActividad, String descripcion, String objetivo, String dificultad, String duracion, String tipo, 
 			Double notaAprovacion,  String recursoLink, String ejercicio, int idLp, Profesor profesorCreador){
 		
-			if (tipo=="Tarea") {
-				profesorCreador.crearTarea(idActividad, descripcion, objetivo, dificultad, duracion,
-						 ejercicio, idLp); }
 			
-			else if (tipo=="Encuesta") {
-			profesorCreador.crearEncuesta(idActividad, descripcion, objetivo, dificultad, duracion, idLp); }
-			
-			else if (tipo=="Revisar Recurso") {
-				profesorCreador.crearRevisarRecurso(idActividad, descripcion, objetivo, dificultad, duracion
-						, recursoLink, idLp);}
-			
-		
-			else if (tipo=="Quiz") {
-				profesorCreador.crearQuiz(idActividad, descripcion, objetivo,  dificultad, duracion,
-						 notaAprovacion, idLp);}
-			
-			else if (tipo=="Examen") {
-				profesorCreador.crearExamen(idActividad, descripcion, objetivo,  dificultad, duracion,
-						 notaAprovacion, idLp);}
-			
-			else {
-				System.out.println("No existe ese tipo de actividad o esta mal escrito, no se puede añadir actividad");
-			}
-			
-		
-		
+				if(profesorCreador.getLearningPathsMap().containsKey(idLp)) {
+					LearningPath lp=profesorCreador.getLearningPathsMap().get(idLp);
+					if (!(lp.getActividades().containsKey(idActividad))) {
+						if (tipo=="Tarea") {
+							profesorCreador.crearTarea(idActividad, descripcion, objetivo, dificultad, duracion,
+									 ejercicio, idLp); }
+						else if (tipo=="Encuesta") {
+							profesorCreador.crearEncuesta(idActividad, descripcion, objetivo, dificultad, duracion, idLp); }
+							
+						else if (tipo=="Revisar Recurso") {
+							profesorCreador.crearRevisarRecurso(idActividad, descripcion, objetivo, dificultad, duracion
+									, recursoLink, idLp);}
+						
+					
+						else if (tipo=="Quiz") {
+							profesorCreador.crearQuiz(idActividad, descripcion, objetivo,  dificultad, duracion,
+									 notaAprovacion, idLp);}
+						
+						else if (tipo=="Examen") {
+							profesorCreador.crearExamen(idActividad, descripcion, objetivo,  dificultad, duracion,
+									 notaAprovacion, idLp);}
+						
+						else {
+							System.out.println("No existe ese tipo de actividad o esta mal escrito, no se puede añadir actividad");
+						}
+				} 
+					
+				else {
+					System.out.println("Ya existe esta actividade en el Learning Path");}
+					
+					
+				}
+				
+				else {
+					System.out.println("Learning Path inexistente o creado por otro profesor, no se puede añadir actividad");
+				}
 	}
 
 	

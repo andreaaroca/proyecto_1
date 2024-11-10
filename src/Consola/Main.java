@@ -14,6 +14,7 @@ import co.edu.andes.usuarios.Profesor;
 import co.edu.andes.usuarios.Usuario;
 import Persistencias.persistenciaEstudiante;
 import Persistencias.persistenciaLP;
+import Controlador.Controlador;
 
 public class Main {
 	
@@ -106,6 +107,76 @@ public class Main {
                 
             } else if (opcion == 2) {
                 System.out.println("Creando actividad...");
+                
+                System.out.print("Ingrese código de la actividad: ");
+                int idActividad = scanner.nextInt();
+                scanner.nextLine(); 
+                
+                System.out.print("Ingrese código del learning path en que la actividad sera inscrita: ");
+                int idLp = scanner.nextInt();
+                scanner.nextLine();
+
+                System.out.print("Ingrese descripción: ");
+                String descripcion = scanner.nextLine();
+
+                System.out.print("Ingrese objetivos: ");
+                String objetivos = scanner.nextLine();
+
+                System.out.print("Ingrese dificultad: ");
+                String dificultad = scanner.nextLine();
+
+                System.out.print("Ingrese duración: ");
+                String duracion = scanner.nextLine();
+                
+                System.out.println("Tipos: ");
+                System.out.println("1. Tarea");
+                System.out.println("2. Encuesta");
+                System.out.println("3. Revisar Recurso");
+                System.out.println("4. Quiz");
+                System.out.println("5. Examen");
+                System.out.print("Seleccione una opcion: ");
+                int opcionAct = scanner.nextInt();
+                scanner.nextLine();
+                String ejercisio = null;
+                String recursoLink=null;
+                double notaAprobacion=0.0;
+                
+                if (opcionAct==1) {
+                	System.out.print("Ingrese el ejercisio: ");
+                    ejercisio = scanner.nextLine();
+                    Controlador.crearActividad(idActividad, descripcion, objetivos, dificultad, duracion, "Tarea", 
+                			notaAprobacion,  recursoLink, ejercisio, idLp, profesorCreador);}
+                else if (opcionAct==2) {
+                    Controlador.crearActividad(idActividad, descripcion, objetivos, dificultad, duracion, "Encuesta", 
+                			notaAprobacion,  recursoLink, ejercisio, idLp, profesorCreador);}
+                else if (opcionAct==3) {
+                	System.out.print("Ingrese el recurso a revisar (link): ");
+                    recursoLink = scanner.nextLine();
+                    Controlador.crearActividad(idActividad, descripcion, objetivos, dificultad, duracion, "RevisarRecurso", 
+                			notaAprobacion,  recursoLink, ejercisio, idLp, profesorCreador);}
+                else if (opcionAct==4) {
+                	System.out.print("Ingrese la nota minima aprobatoria: ");
+                    notaAprobacion = scanner.nextDouble();
+                    scanner.nextLine();
+                    Controlador.crearActividad(idActividad, descripcion, objetivos, dificultad, duracion, "Quiz", 
+                			notaAprobacion,  recursoLink, ejercisio, idLp, profesorCreador);}
+                else if (opcionAct==5) {
+                	System.out.print("Ingrese la nota minima aprobatoria: ");
+                    notaAprobacion = scanner.nextDouble();
+                    scanner.nextLine();
+                    Controlador.crearActividad(idActividad, descripcion, objetivos, dificultad, duracion, "Examen", 
+                			notaAprobacion,  recursoLink, ejercisio, idLp, profesorCreador);}
+                
+	                     
+                
+                
+                else {
+                	System.out.print("Vuelva escoger un tipo de actividad");
+                }
+                
+                
+                
+                
             } else if (opcion == 3) {
                 continuar = false; 
                 System.out.println("Saliendo del menú de profesor...");  

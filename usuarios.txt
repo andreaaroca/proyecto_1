@@ -11,3 +11,13 @@ andrea,AA,hola,Estudiante
 rr,rr,hola,Estudiante
 jd,jdc,111,Estudiante
 act,act1,act123,Profesor
+dslk,p1,p12,Estudiante
+ajs,d,slj,Profesor
+dkjd,pp1,pp,Profesor
+pp12,pp,pp,Profesor
+Pfj,PE,PE1,Estudiante
+ljsf,ppp,ppp1,Estudiante
+kjdfsh,pr,pro,Profesor
+fj,prof2,prof23,Estudiante
+jfkd,pro123,pro123,Profesor
+sm,est,est1,Estudiante

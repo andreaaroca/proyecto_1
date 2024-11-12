@@ -74,14 +74,19 @@ public class Estudiante extends Usuario {
 	 
 	 public void crearReseñaLearningPath(int idLp, String opinionActividad, int rating, int idActividad) {
 		    LearningPath lp = lpInscritos.get(idLp);
+		    
 		    if (lp != null) {
 		        lp.agregarReseña( opinionActividad, rating, idActividad);  
+		        Actividad actividad = lp.getActividades().get(idActividad);
 		        
-		       
+		        if (actividad != null) {
+		            actividad.agregarComentarioResena(opinionActividad); 
+		            
 		        persistenciaLP persistencia = new persistenciaLP();
 		        persistencia.actualizarRating(idLp, lp.getPromedioCalificaciones());
 		    } else {
 		        System.out.println("LearningPath no encontrado en los inscritos.");
+		    }
 		    }
 		}
 	 @Override
@@ -93,6 +98,7 @@ public class Estudiante extends Usuario {
 	        return nombreUsuario; 
 	    }
 }
+
 	
 
 

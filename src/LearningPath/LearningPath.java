@@ -132,14 +132,6 @@ public class LearningPath implements Serializable {
 		this.idLP = idLP;
 	}
 	
-	public int getIdLP() {
-		return idLP;
-	}
-
-	public void setIdLP(int idLP) {
-		this.idLP = idLP;
-	}
-	
 	 public double getPromedioCalificaciones() { 
 	        return promedioCalificaciones;
 	        
@@ -149,6 +141,14 @@ public class LearningPath implements Serializable {
 	 public void setPromedioCalificaciones(double promedioCalificaciones) {
 		this.promedioCalificaciones = promedioCalificaciones;
 	}
+	 
+	 public Actividad getActividadPorId(int idActividad) {
+	        return actividades.get(idActividad); 
+	    }
+	    
+	    public void agregarActividad(Actividad actividad) {
+	        actividades.put(actividad.getIdActividad(), actividad);
+	    }
 
 	public void agregarReseña(String reseña, int calificacion, int idActividad) {
 		    if (this.reseñas == null) {
@@ -200,9 +200,5 @@ public class LearningPath implements Serializable {
 	            ", creador=" + profesorCreador + 
 	            '}';
 	}
-	
-	
-	
-
 	
 }

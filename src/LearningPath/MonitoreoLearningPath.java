@@ -30,10 +30,10 @@ public class MonitoreoLearningPath {
 	}
 	
 	public void agregarActividadMonitoreada(MonitoreoActividad actividadMonitoreada, LearningPath lp, Estudiante estudiante) {
-		Estudiante estudianteMonAct=actividadMonitoreada.getEstudiante();
+		
 		int idActMon=actividadMonitoreada.getIdActividad();
 
-		if ((lp.getActividades().containsKey(idActMon))&&(estudiante==estudianteMonAct) ) {
+		if ((lp.getActividades().containsKey(idActMon))&&(actividadMonitoreada.getEstudiante()==estudiante) ) {
 			
 			actividadesMonitoreadasEstudiante.add(actividadMonitoreada);
 			
@@ -90,21 +90,27 @@ public class MonitoreoLearningPath {
 		
 	}
 	
-	public String calcularTiempoDedicadoLp(Estudiante estudiante, List <MonitoreoActividad> actividadesMonitoreadasEstudiante, LearningPath lp) {
-			String tiempoDedicadoHoras="LP sigue en progreso";
-			int id=lp.getIdLP();
-			LocalDateTime tiempoI= estudiante.iniciarLp(id);
-			if (progresoLp(actividadesMonitoreadasEstudiante, lp)==1) {
-				LocalDateTime tiempoF= estudiante.finalizarLp(id);
+	public String calcularTiempoDedicadoLp(Estudiante estudiante, int idLp) {
+			if ((idLp==lp.getIdLP())&&(estudiante.getLpInscritosTiempoI().containsKey(idLp))&&(estudiante.getLpInscritosTiempoI().containsKey(idLp))) {
+				LocalDateTime tiempoI= estudiante.getLpInscritosTiempoI().get(idLp);
+				LocalDateTime tiempoF= estudiante.getLpInscritosTiempoF().get(idLp);
 				Duration tiempoDedicado = Duration.between(tiempoI, tiempoF);
-		       tiempoDedicadoHoras= (tiempoDedicado.toHours()+ " horas");
+		        String tiempoDedicadoHoras= (tiempoDedicado.toHours() + " horas");
+		        return tiempoDedicadoHoras;
+		
+				
 			}
+			else {
+				System.out.println("Lp no inscrito por estudiante o no se ha finalizado aun");
+				return null;}
+				
+				
+}
 			
-			return tiempoDedicadoHoras;
 	        
 	        
 	
-	}
+	
 	
 
 	

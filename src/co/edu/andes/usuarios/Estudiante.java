@@ -12,13 +12,24 @@ import java.time.*;
 public class Estudiante extends Usuario {
 	
 	private HashMap<Integer, LearningPath> lpInscritos;
+	private HashMap<Integer, Actividad> actividadesIniciadas;
+	private HashMap<Integer, LocalDateTime> actividadesIniciadasTiempo;
 	private HashMap<Integer, Actividad> actividadesEnviadas;
+	private HashMap<Integer, LocalDateTime> actividadesEnviadasTiempo;
 	private HashMap<Integer, Actividad> actividadesCompletadas;
+	private HashMap<Integer, Float> actividadesCalificadas;
+	
+
 	private static persistenciaEstudiante persistenciaEstudiante;
 
 	public Estudiante(String nombre, String nombreUsuario, String password, String tipoUsuario) {
         super(nombre, nombreUsuario, password, "Estudiante");
         this.lpInscritos = new HashMap<Integer, LearningPath>();
+        this.actividadesIniciadas = new HashMap<Integer, Actividad>();
+        this.actividadesIniciadasTiempo = new HashMap<Integer, LocalDateTime>();
+        this.actividadesEnviadas = new HashMap<Integer, Actividad>();
+        this.actividadesEnviadasTiempo = new HashMap<Integer, LocalDateTime>();
+        this.actividadesCompletadas= new HashMap<Integer, Actividad>();
         Estudiante.persistenciaEstudiante = new persistenciaEstudiante();
     }
 
@@ -32,27 +43,133 @@ public class Estudiante extends Usuario {
 		
 	}
 	
+	
 	    
 	public LocalDateTime finalizarLp(int idLp) {
 	}
+	
+	
+	
 
-	public LocalDateTime iniciarActividad() {
-		
+	public HashMap<Integer, Float> getActividadesCalificadas() {
+		return actividadesCalificadas;
 	}
 
-	public LocalDateTime enviarActividad() {
+	public void setActividadesCalificadas(HashMap<Integer, Float> actividadesCalificadas) {
+		this.actividadesCalificadas = actividadesCalificadas;
+	}
+
+	public void iniciarActividad(int idLp, int idActividad) {
+		
+		if (lpInscritos.containsKey(idLp)) {
+			LearningPath LpEspecifico=lpInscritos.get(idLp);
+			if (LpEspecifico.getActividades().containsKey(idActividad)) {
+				Actividad actividadIniciar=LpEspecifico.getActividades().get(idActividad);
+				actividadesIniciadas.put(idActividad,actividadIniciar);
+				LocalDateTime tiempo=LocalDateTime.now();
+				actividadesIniciadasTiempo.put(idActividad,tiempo);
+				
+				
+			}
+			else {System.out.println("Actividad ausente en LP");
+		        
+				}
+		}
+		else {System.out.println("LP no inscrito");
+			}
+			
+		}
+
+	public void enviarActividad(int idLp, int idActividad) {
+		if (lpInscritos.containsKey(idLp)) {
+			LearningPath LpEspecifico=lpInscritos.get(idLp);
+			if ((LpEspecifico.getActividades().containsKey(idActividad))&&(actividadesIniciadas.containsKey(idActividad))) {
+				Actividad actividadEnviar=LpEspecifico.getActividades().get(idActividad);
+				actividadesEnviadas.put(idActividad,actividadEnviar);
+				LocalDateTime tiempo=LocalDateTime.now();
+				actividadesEnviadasTiempo.put(idActividad,tiempo);
+				
+				
+			}
+			else {System.out.println("Actividad ausente en LP");
+		        
+				}
+		}
+		else {System.out.println("LP no inscrito");
+			}
+			
+		}
+		
+		
+		
+	
+	
+	public HashMap<Integer, Actividad> getActividadesIniciadas() {
+		return actividadesIniciadas;
+	}
+
+	public void setActividadesIniciadas(HashMap<Integer, Actividad> actividadesIniciadas) {
+		this.actividadesIniciadas = actividadesIniciadas;
+	}
+
+	public HashMap<Integer, LocalDateTime> getActividadesIniciadasTiempo() {
+		return actividadesIniciadasTiempo;
+	}
+
+	public void setActividadesIniciadasTiempo(HashMap<Integer, LocalDateTime> actividadesIniciadasTiempo) {
+		this.actividadesIniciadasTiempo = actividadesIniciadasTiempo;
+	}
+
+	public HashMap<Integer, LocalDateTime> getActividadesEnviadasTiempo() {
+		return actividadesEnviadasTiempo;
+	}
+
+	public void setActividadesEnviadasTiempo(HashMap<Integer, LocalDateTime> actividadesEnviadasTiempo) {
+		this.actividadesEnviadasTiempo = actividadesEnviadasTiempo;
+	}
+
+	public HashMap<Integer, Actividad> getActividadesCompletadas() {
+		return actividadesCompletadas;
+	}
+
+	public void setActividadesCompletadas(HashMap<Integer, Actividad> actividadesCompletadas) {
+		this.actividadesCompletadas = actividadesCompletadas;
+	}
+
+	public void setLpInscritos(HashMap<Integer, LearningPath> lpInscritos) {
+		this.lpInscritos = lpInscritos;
+	}
+
+	public void setActividadesEnviadas(HashMap<Integer, Actividad> actividadesEnviadas) {
+		this.actividadesEnviadas = actividadesEnviadas;
+	}
+
+	public void anadirMapaCompletadas(int idActividad) {
+		
+		if (actividadesEnviadas.containsKey(idActividad)) {
+			Actividad actividadCompleta=actividadesEnviadas.get(idActividad);
+			actividadesCompletadas.put(idActividad,actividadCompleta);
+		}
 		
 	}
 	
-	public void anadirMapaCalificadas(int idActividad,float nota) {
-		
-	}
+	public void anadirMapaCalificadas(int idActividad, float nota) {
+			
+			if (actividadesEnviadas.containsKey(idActividad)) {
+				actividadesCalificadas.put(idActividad,nota);
+				anadirMapaCompletadas(idActividad);
+				
+			}
+			
+		}
 	
-	public void getActividadesEnviadas() {
-		
-	}
+
 	
-	 public static void inscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, Scanner scanner) {
+	 public HashMap<Integer, Actividad> getActividadesEnviadas() {
+		return actividadesEnviadas;
+	}
+
+	public static void inscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, Scanner scanner) {
 	        System.out.print("Ingrese el código del Learning Path que desea inscribir: ");
 	        int idLP = scanner.nextInt();
 

@@ -18,3 +18,6 @@ pro,prof,prof1,Profesor
 odsjf,pro34,pro345,Profesor
 lkd,pro2,pro23,Profesor
 pro2,pro23,sldkam,Profesor
+siuhd,a,a1,Estudiante
+a,a1,dfjlk,Estudiante
+ljd,pr,pro,Profesor

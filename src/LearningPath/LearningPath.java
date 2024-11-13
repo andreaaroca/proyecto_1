@@ -132,13 +132,7 @@ public class LearningPath implements Serializable {
 		this.idLP = idLP;
 	}
 	
-	public int getIdLP() {
-		return idLP;
-	}
-
-	public void setIdLP(int idLP) {
-		this.idLP = idLP;
-	}
+	
 	
 	 public double getPromedioCalificaciones() { 
 	        return promedioCalificaciones;

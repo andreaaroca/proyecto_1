@@ -10,7 +10,7 @@ public abstract class Actividad
 	protected String objetivo;
 	protected String dificultad;
 	protected String duracion;
-	protected List <Resena> resenas;
+	protected List<String> resenas;
 	protected boolean enviado;
 	protected String tipo;
 	
@@ -23,7 +23,7 @@ public abstract class Actividad
 		this.objetivo = objetivo;
 		this.dificultad = dificultad;
 		this.duracion = duracion;
-		this.resenas = new ArrayList<Resena>();
+		this.resenas = new ArrayList<String>();
 		this.enviado=false;
 		this.tipo=tipo;
 		
@@ -58,10 +58,6 @@ public abstract class Actividad
 		return duracion;
 	}
 
-	public List<Resena> getResenas() 
-	{
-		return resenas;
-	}
 
 	public boolean isEnviado() 
 	{
@@ -73,7 +69,7 @@ public abstract class Actividad
 		this.enviado = enviado;
 	}
 
-	public void agregarResena(Resena r) 
+	public void agregarResena(String r) 
 	{
 		resenas.add(r); 
 	}
@@ -87,5 +83,16 @@ public abstract class Actividad
 	{
 		this.tipo = tipo;
 	}
+	public void agregarComentarioResena(String comentario) {
+        resenas.add(comentario); 
+    }
+	
+	public List<String> getResenas() 
+	{
+		return resenas;
+	}
+	
+	
+	
 	
 }

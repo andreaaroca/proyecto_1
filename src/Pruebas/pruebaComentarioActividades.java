@@ -1,15 +1,10 @@
 package Pruebas;
 import static org.junit.jupiter.api.Assertions.*;
-import java.util.HashMap;
 import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import Actividades.Actividad;
-import LearningPath.LearningPath;
-import co.edu.andes.usuarios.Usuario;
-import co.edu.andes.usuarios.Profesor;
+
 
 public class pruebaComentarioActividades {
 	

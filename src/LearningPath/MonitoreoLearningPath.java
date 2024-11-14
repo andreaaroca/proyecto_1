@@ -33,7 +33,7 @@ public class MonitoreoLearningPath {
 		Estudiante estudianteMonAct=actividadMonitoreada.getEstudiante();
 		int idActMon=actividadMonitoreada.getIdActividad();
 
-		if ((lp.getMapaActividades().containsKey(idActMon))&&(estudiante==estudianteMonAct) ) {
+		if ((lp.getActividades().containsKey(idActMon))&&(estudiante==estudianteMonAct) ) {
 			
 			actividadesMonitoreadasEstudiante.add(actividadMonitoreada);
 			
@@ -48,7 +48,7 @@ public class MonitoreoLearningPath {
 		
 		int idActMon=actividadMonitoreada.getIdActividad();
 
-		if ((lp.getMapaActividades().containsKey(idActMon))) {
+		if ((lp.getActividades().containsKey(idActMon))) {
 			
 			actividadesMonitoreadasGeneral.add(actividadMonitoreada);
 			
@@ -59,10 +59,26 @@ public class MonitoreoLearningPath {
 			//posiblemente aqui tiene que ir una excpeción
 		}
 		
+	public List<MonitoreoActividad> getActividadesMonitoreadasEstudiante() {
+		return actividadesMonitoreadasEstudiante;
+	}
+
+	public void setActividadesMonitoreadasEstudiante(List<MonitoreoActividad> actividadesMonitoreadasEstudiante) {
+		this.actividadesMonitoreadasEstudiante = actividadesMonitoreadasEstudiante;
+	}
+
+	public List<MonitoreoActividad> getActividadesMonitoreadasGeneral() {
+		return actividadesMonitoreadasGeneral;
+	}
+
+	public void setActividadesMonitoreadasGeneral(List<MonitoreoActividad> actividadesMonitoreadasGeneral) {
+		this.actividadesMonitoreadasGeneral = actividadesMonitoreadasGeneral;
+	}
+
 	public float progresoLp(List <MonitoreoActividad> actividadesMonitoreadasEstudiante, LearningPath lp) {
 		int contador=0;
 		for (MonitoreoActividad actividadMon:actividadesMonitoreadasEstudiante) {
-			if (actividadMon.isCompletado()==true && lp.getObligatorias().containsKey(actividadMon.getIdActividad()) ) {
+			if (actividadMon.isCompletado()==true && lp.getActividades().containsKey(actividadMon.getIdActividad()) ) {
 				contador++;
 				//revisar el obligatorias, hacerlo un mapa
 				
@@ -74,18 +90,19 @@ public class MonitoreoLearningPath {
 		
 	}
 	
-	public String calcularTiempoDedicadoLp(Estudiante estudiante, List <MonitoreoActividad> actividadesMonitoreadasEstudiante) {
-			
-			LocalDateTime tiempoI= estudiante.iniciarLp();
+	public String calcularTiempoDedicadoLp(Estudiante estudiante, List <MonitoreoActividad> actividadesMonitoreadasEstudiante, LearningPath lp) {
+			String tiempoDedicadoHoras="LP sigue en progreso";
+			int id=lp.getIdLP();
+			LocalDateTime tiempoI= estudiante.iniciarLp(id);
 			if (progresoLp(actividadesMonitoreadasEstudiante, lp)==1) {
-				LocalDateTime tiempoF= estudiante.finalizarLp();
-				}
+				LocalDateTime tiempoF= estudiante.finalizarLp(id);
+				Duration tiempoDedicado = Duration.between(tiempoI, tiempoF);
+		       tiempoDedicadoHoras= (tiempoDedicado.toHours()+ " horas");
+			}
 			
-	        Duration tiempoDedicado = Duration.between(tiempoI, tiempoF);
-	        String tiempoDedicadoHoras= (tiempoDedicado.toHours()+ " horas");
+			return tiempoDedicadoHoras;
 	        
 	        
-	        return tiempoDedicadoHoras;
 	
 	}
 	
@@ -116,14 +133,6 @@ public class MonitoreoLearningPath {
 	
 	
 }
-
-
-
-
-
-
-
-
 
 
 

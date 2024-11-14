@@ -184,6 +184,8 @@ public class LearningPath implements Serializable {
 	            System.out.println("Promedio de Calificaciones: " + promedioCalificaciones);
 	        }
 	    }
+	    
+	    
 	
 
 
@@ -197,6 +199,7 @@ public class LearningPath implements Serializable {
 	            ", dificultad='" + dificultad + '\'' +
 	            ", duracion='" + duracion + '\'' +
 	            ", rating='" + promedioCalificaciones + '\'' +
+	            ", actividades='" + actividades + '\'' +
 	            ", creador=" + profesorCreador + 
 	            '}';
 	}

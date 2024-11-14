@@ -124,13 +124,6 @@ public class LearningPath implements Serializable {
 		this.idActividad = idActividad;
 	}
 
-	public int getIdLP() {
-		return idLP;
-	}
-
-	public void setIdLP(int idLP) {
-		this.idLP = idLP;
-	}
 	
 	public int getIdLP() {
 		return idLP;

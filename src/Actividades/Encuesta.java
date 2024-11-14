@@ -33,13 +33,13 @@ public class Encuesta extends Actividad
 		respuestasEstudiante.put(idEstudiante, respuesta);
 	}
 
-	
+	public Map<String, String> getRespuestasEstudiantes()
+	{
+		return respuestasEstudiante;
+	}
 }
 	
 	
 	
 	
 	
-
-
-

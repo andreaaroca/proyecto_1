@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 import Actividades.Actividad;
-import LearningPath.LearningPath;
+import LearningPath.*;
 import co.edu.andes.sistema.GestorUsuarios;
 import co.edu.andes.usuarios.Estudiante;
 import co.edu.andes.usuarios.Profesor;
@@ -16,7 +16,7 @@ import Persistencias.persistenciaEstudiante;
 import Persistencias.persistenciaLP;
 import Controlador.*;
 
-public class Main {
+public class MainProfesorEvaluador {
 	
 	private static Usuario usuario;
 	private static Map<Integer, LearningPath> learningPaths = new HashMap<>();
@@ -24,92 +24,64 @@ public class Main {
 	private static persistenciaEstudiante persistencia = new persistenciaEstudiante();
 
     private static void mostrarMenu() {
-        System.out.println("1. Registrar Estudiante");
+        System.out.println("1. Registrar Profesor");
         System.out.println("2. Iniciar Sesión");
         System.out.println("3. Salir");
         System.out.println("4. Mostrar Usuarios desde Archivo");
         System.out.print("Seleccione una opción: ");   
     }
-    
-    
-    
-    private static void mostrarMenuEstudiante(Scanner scanner, Estudiante estudiante) {
+
+
+    private static void mostrarMenuProfesorEvaluador(Scanner scanner, Profesor profesorEvaluador, persistenciaLP lpControl, GestorUsuarios gestorUsuarios) {
         boolean continuar = true;
+
         while (continuar) {
-            System.out.println("1. Ver learningPaths");
-            System.out.println("2. InscribirLearningPath");
-            System.out.println("3. Ver learningpaths inscritos");
-            System.out.println("4. Crear reseña");
-            System.out.println("5. Salir");
+            System.out.println("1. Calificar y marcar como completa una Actividad");
+            System.out.println("2. Revisar Progreso Learning Path");
+            System.out.println("3. Ver tiempo que duro el estudiante en completar una actividad");
+            System.out.println("4. Ver tiempo que duro el estudiante en completar un LearningPath");
+            System.out.println("5. Calcular Tasa de exito de una actividad");
+            System.out.println("6. Revisar si una actividad ha sido completada");
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
-            scanner.nextLine(); 
+            scanner.nextLine();
             
-
-            if (opcion == 1) {
-                System.out.println("Mostrando LearningPaths...");
-                
-                Controlador.mostrarLearningPathsDesdeArchivo(lpControl);
-                
-            } else if (opcion == 2) {
-            	Controlador.estudianteInscribirLearningPath(lpControl, estudiante, scanner);
-            	
-            } else if (opcion == 3) {	
-            	System.out.println("Tus LearningPaths inscritos son: ");
-            	Controlador.imprimirLearningPathsInscritos(persistencia, estudiante);
-            	
-            } else if (opcion == 4) {
-                continuar = false; 
-                System.out.println("Para crear la reseña..."); 
-                
-                System.out.print("Ingrese id del Learning Path: ");
-                int idLp = scanner.nextInt();
-                scanner.nextLine(); 
-
-                System.out.print("Ingrese id de la actividad: ");
+            if (opcion==1) {
+            	System.out.print("Ingrese el nombre de usuario del estudiante a calificar: ");
+                String nombreUsuario = scanner.nextLine();
+            	System.out.print("Ingrese código de la actividad: ");
                 int idActividad = scanner.nextInt();
                 scanner.nextLine();
-
-                System.out.print("Ingrese rating del learning path: ");
-                int rating = scanner.nextInt();
+                System.out.print("Ingrese nota (si es una actividad no calificable ingrese 0.0: ");
+                float nota = scanner.nextFloat();
                 scanner.nextLine();
-
-                System.out.print("Ingrese su opinion de la actividad: ");
-                String opinionActividad= scanner.nextLine();
-         
-                Controlador.estudianteCrearResenaLearningPath(idLp, opinionActividad, rating, idActividad, estudiante);
-
-         
-            } else if (opcion == 5) {
-                continuar = false; 
-                System.out.println("Saliendo del menú de estudiante...");
-                MainInicio.main(null);
-            } else {
-                System.out.println("Opción no válida. Intente de nuevo.");
+                Controlador.profesorCalificarActividad(nombreUsuario, idActividad, nota, gestorUsuarios, profesorEvaluador);
+                 }
+            
+        	   
+                
+            	
             }
-        }
-    }
-    
- 
+            
+}
+            
 
-    
+        
     private static void registrarUsuario(GestorUsuarios gestorUsuarios, Scanner scanner) {
         System.out.print("Ingrese nombre: ");
         String nombre = scanner.nextLine();
 
-        System.out.print("Ingrese nombre de usuario: ");
+        System.out.print("Ingrese nombre de usuario de profesor: ");
         String nombreUsuario = scanner.nextLine();
 
         System.out.print("Ingrese contraseña: ");
         String password = scanner.nextLine();
-
-        Controlador.crearEstudiante(nombre, nombreUsuario, password, gestorUsuarios);
-       
         
+        Controlador.crearProfesor(nombre, nombreUsuario, password, gestorUsuarios);
     }
 
     private static void iniciarSesion(GestorUsuarios gestorUsuarios, Scanner scanner) {
-        System.out.print("Ingrese nombre de usuario: ");
+        System.out.print("Ingrese nombre de usuario del profesor: ");
         String nombreUsuario = scanner.nextLine();
         
         System.out.print("Ingrese contraseña: ");
@@ -122,22 +94,20 @@ public class Main {
             
             Object usuario = gestorUsuarios.obtenerUsuario(nombreUsuario);
             
-            if (tipoUsuario.equals("Estudiante") && usuario instanceof Estudiante) {
-                System.out.println("Opciones para estudiante:");
-                Estudiante estudiante = (Estudiante) usuario; 
-                mostrarMenuEstudiante(scanner, estudiante);
+              if (tipoUsuario.equals("Profesor") && usuario instanceof Profesor) {
+                System.out.println("Opciones para profesor:");
+                Profesor profesorEvaluador = (Profesor) usuario; 
+                mostrarMenuProfesorEvaluador(scanner, profesorEvaluador, lpControl, gestorUsuarios);
             } else {
                 System.out.println("Error: el tipo de usuario no coincide con " + tipoUsuario + ".");
             }
         } else {
             System.out.println("Credenciales incorrectas. Inténtalo de nuevo.");
         }
-    }
-   
     
-    
-    
-    public static void mainEstudiante() {
+        
+}
+    public static void mainProfesorEvaluador() {
     	GestorUsuarios sistema = new GestorUsuarios();
         Scanner scanner = new Scanner(System.in);
         boolean continuar = true; 
@@ -169,13 +139,6 @@ public class Main {
   
         scanner.close();           
 }
+    
 }
-
-
-
-
-
-
-
-
-    	   	      	   	
+        

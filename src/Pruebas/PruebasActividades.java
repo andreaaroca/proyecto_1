@@ -12,21 +12,15 @@ public class PruebasActividades
 {
 	
 		
-		 private Actividad actividad;
-		
-	    private class ActividadPrueba extends Actividad 
-	    {
-	        public ActividadPrueba(int idActividad, String descripcion, String objetivo, String dificultad, String duracion, String tipo) 
-	        {
-	            super(idActividad, descripcion, objetivo, dificultad, duracion, tipo);
-	        }
-	    }
+		private Actividad actividad;
+		private Actividad encuesta;
 
 	    @BeforeEach
 	    public void setUp() 
 	    {
 	        
-	        actividad = new ActividadPrueba(1, "Descripción de prueba", "Objetivo de prueba", "Fácil", "1 hora", "Tarea");
+	        actividad = new Tarea(1, "Descripción de prueba", "Objetivo de prueba", "Fácil", "1 hora", "ejercicio","Tarea");
+	        encuesta = new Encuesta(5, "Descripción", "Objetivo", "Intermedio", "40 minutos", "Encuesta");
 	    }
 
 	    @Test
@@ -50,7 +44,29 @@ public class PruebasActividades
 	        assertEquals(comentario2, resenas.get(1), "El segundo comentario no coincide.");
 	        assertEquals(comentario3, resenas.get(2), "El tercer comentario no coincide.");
 	    }
+	    
+	    @Test
+	    public void testAgregarPreguntaEncuesta() 
+	    {
+	        encuesta.agregarPregunta("¿Cuál es tu opinión?");
+	        assertEquals(1, encuesta.getPreguntas().size());
+	        assertEquals("¿Cuál es tu opinión?", encuesta.getPreguntas().get(0));
+	    }
 
-	}
+	    @Test
+	    public void testRecursoLink() 
+	    {
+	        RevisarRecurso recurso = new RevisarRecurso(4, "Descripción", "Objetivo", "Medio", "20 minutos", "https://recurso.com", "Recurso");
+	        assertEquals("https://recurso.com", recurso.getRecursoLink());
+	    }
+
+	    @Test
+	    public void testAgregarRespuestaEncuesta() 
+	    {
+	        
+	        encuesta.agregarRespuesta("12345", "Esta es mi respuesta");
+	        assertEquals("Esta es mi respuesta", encuesta.getRespuestasEstudiante().get("12345"));
+	    }
+
 
 }

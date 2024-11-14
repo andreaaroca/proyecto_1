@@ -17,3 +17,5 @@ p25,p234,oekf,Profesor
 pro,prof,prof1,Profesor
 kdm,a,a1,Estudiante
 ad,fin,final,Profesor
+dsjh,ult,ult1,Estudiante
+pjnd,pult,pult1,Profesor

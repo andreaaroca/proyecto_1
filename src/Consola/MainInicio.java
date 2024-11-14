@@ -14,8 +14,8 @@ public class MainInicio {
 public static void main(String[] args) {
 	Scanner scanner = new Scanner(System.in);
 	System.out.println("1. Estudiante");
-    System.out.println("2. Profesor");
-    System.out.println("3. Salir");
+    System.out.println("2. Profesor Creador");
+    System.out.println("3. Profesor Evaluador");
     System.out.print("Seleccione una opción: ");
     int opcion = scanner.nextInt();
     scanner.nextLine();
@@ -24,7 +24,9 @@ public static void main(String[] args) {
 	else if (opcion==2) {
     	Main_profesor.mainProfesor();}
 	else if (opcion == 3) {
-    System.out.println("Saliendo del sistema...");
+		MainProfesorEvaluador.mainProfesorEvaluador();}
+	else {System.out.println("Opcion invalida");
+	
     
     }
     

@@ -161,15 +161,19 @@ public class Profesor extends Usuario implements Serializable {
     
     public void calificarActividad (Estudiante estudiante, int idActividad, float nota) {
     	for (Actividad actividad:actividadesCreadas) {
-    		if ((actividad.getIdActividad()==idActividad) && (estudiante.getActividadesEnviadas().contains(idActividad))) {
+    		if ((actividad.getIdActividad()==idActividad) && (estudiante.getActividadesEnviadas().containsKey(idActividad))) {
     			if(actividad instanceof Evaluacion) {
     				estudiante.anadirMapaCalificadas(idActividad,nota);
+    				System.out.print("Actividad marcada como completada y evaluada ");
     			}
     			else {
-    				System.out.println("no es una actividad calificable"); } }
+    				estudiante.anadirMapaCompletadas(idActividad);
+    				System.out.print("Actividad marcada como completada y evaluada ");} 
+    			}
     		else { 
     			System.out.println("el estudiante no ha enviado la actividad");
     		}}
+    	System.out.println("No hay actividades creadas por este profesor");
     		}
     		
     		

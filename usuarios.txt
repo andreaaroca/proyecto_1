@@ -15,3 +15,5 @@ fj,p1,p123,Estudiante
 p2,p25,p234,Profesor
 p25,p234,oekf,Profesor
 pro,prof,prof1,Profesor
+kdm,a,a1,Estudiante
+ad,fin,final,Profesor

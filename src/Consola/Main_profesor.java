@@ -16,6 +16,7 @@ import Persistencias.persistenciaEstudiante;
 import Persistencias.persistenciaLP;
 import Controlador.*;
 
+
 public class Main_profesor {
 	
 	private static Usuario usuario;
@@ -40,6 +41,7 @@ public class Main_profesor {
             System.out.println("2. Crear Actividad");
             System.out.println("3. Salir");
             System.out.println("4. Mostrar archivo Learning paths creados");
+            System.out.println("5. Eliminar LP");
             System.out.print("Seleccione una opción: ");
             int opcion = scanner.nextInt();
             scanner.nextLine();
@@ -146,7 +148,8 @@ public class Main_profesor {
                 
             } else if (opcion == 3) {
                 continuar = false; 
-                System.out.println("Saliendo del menú de profesor...");  
+                System.out.println("Saliendo del menú de profesor..."); 
+                MainInicio.main(null);
             } else if (opcion == 4) {
                 System.out.println("mostrando learning paths creados...");
                 profesorCreador.mostrarLearningPathsDesdeArchivo();
@@ -246,4 +249,4 @@ public class Main_profesor {
 
 
 
-   
+      

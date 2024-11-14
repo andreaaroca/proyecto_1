@@ -87,5 +87,8 @@ public abstract class Actividad
 	{
 		this.tipo = tipo;
 	}
+	public void agregarComentarioResena(Resena comentario) {
+        resenas.add(comentario); 
+    }
 	
 }

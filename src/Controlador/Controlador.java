@@ -2,6 +2,7 @@ package Controlador;
 
 import co.edu.andes.usuarios.*;
 
+
 import co.edu.andes.sistema.GestorUsuarios;
 
 import java.util.Map;
@@ -103,10 +104,26 @@ public class Controlador {
 			System.out.println("Learning Path inexistente o creado por otro profesor, no se puede eliminar");
 		}
 		
+	}
 	
+	public static void profesorCalificarActividad(String nombreUsuario, int idActividad, float nota, GestorUsuarios gestorUsuarios, Profesor profesorEvaluador) {
+			Usuario usuario=gestorUsuarios.obtenerUsuario(nombreUsuario);
+			
+		    Estudiante estudiante = (Estudiante) usuario;
+			profesorEvaluador.calificarActividad(estudiante, idActividad, nota);
+			
+		}
 		
+	public static void calcularTiempoActividad(String nombreUsuario, int idActividad, float nota, GestorUsuarios gestorUsuarios, Profesor profesorEvaluador) {
+		Usuario usuario=gestorUsuarios.obtenerUsuario(nombreUsuario);
+		
+	    Estudiante estudiante = (Estudiante) usuario;
+		profesorEvaluador.calificarActividad(estudiante, idActividad, nota);
 		
 	}
+		
+		
+	
 	
 	public static void imprimirLearningPathsInscritos(persistenciaEstudiante persistencia, Estudiante estudiante) {
     	persistencia.guardarLpInscritos(estudiante);

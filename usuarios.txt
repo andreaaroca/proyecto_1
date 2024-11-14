@@ -21,3 +21,5 @@ pro2,pro23,sldkam,Profesor
 siuhd,a,a1,Estudiante
 a,a1,dfjlk,Estudiante
 ljd,pr,pro,Profesor
+jd,juan,jaun123,Profesor
+dkj,profeva,123,Profesor

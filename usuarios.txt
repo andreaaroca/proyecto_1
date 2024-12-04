@@ -23,7 +23,3 @@ sebastian,seb1,123,Estudiante
 ss,seb2,123,Profesor
 seb3,123,12345,Profesor
 Andrea,A1,andrea,Profesor
-Andrea,A1,andrea,Profesor
-Andrea,A1,andrea,Profesor
-lde,prueba,1,Estudiante
-ldkm,pruebaE,1,Profesor

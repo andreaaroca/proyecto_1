@@ -141,7 +141,23 @@ public class Profesor extends Usuario implements Serializable {
     		}
     
     
-    
+    public void editarActividad(int idLp, int idActividad, String paramEditar, String edicion) {
+    	for (LearningPath lp:learningPathsCreados) {
+    		if (lp.getIdLp()==idLp) {
+    			if(().containsKey(idActividad)) {
+    				lp.getMapaActividades().get(idActividad);	
+    			
+    				if (paramEditar=="descripcion"){
+    					edicion=edicion.toString();
+    					Actividad.setDescripcion(edicion);
+    				}
+    					
+    				}
+    		}
+    		}
+    			
+   
+    }
     
     public void calificarActividad (Estudiante estudiante, int idActividad, float nota) {
     	for (Actividad actividad:actividadesCreadas) {

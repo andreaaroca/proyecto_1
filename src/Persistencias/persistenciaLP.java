@@ -86,7 +86,9 @@ public class persistenciaLP implements Serializable {
 	                System.out.println("Dificultad: " + lp.getDificultad());
 	                System.out.println("Duración: " + lp.getDuracion());
 	                System.out.println("Rating: " + lp.getPromedioCalificaciones());
+	                System.out.println("Actividades " + lp.getListaActividades());
 	                System.out.println("------------------------------------");
+	                //Prueba
 	            }
 	        }
 	    }

@@ -3,6 +3,7 @@ import java.util.*;
 
 public class PreguntaQuiz 
 {
+	
 	private String enunciado;
 	private List<String> opciones;
 	private int indiceCorrecto;

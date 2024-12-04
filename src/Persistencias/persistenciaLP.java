@@ -11,6 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import LearningPath.LearningPath;
+import Actividades.*;
 
 public class persistenciaLP implements Serializable {
 	
@@ -69,7 +70,26 @@ public class persistenciaLP implements Serializable {
 		    {
 		        System.out.println("LearningPath con ID " + idLp + " no encontrado en el archivo.");
 		    }
+		
 		}
+	 
+	 public void actualizarActividades(int idLp, int idActividad, Actividad actividad) {
+		    Map<Integer, LearningPath> learningPaths = cargarLearningPaths(); 
+		    if (learningPaths.containsKey(idLp)) 
+		    { 
+		        LearningPath lp = learningPaths.get(idLp);
+		        
+		        lp.agregarActividades(actividad); 
+		        
+		        guardarLearningPaths(learningPaths);
+		    }
+		    else
+		    {
+		        System.out.println("LearningPath con ID " + idLp + " no encontrado en el archivo.");
+		    }
+	 }
+	 
+	 
 	    
 	    public void mostrarLearningPathsDesdeArchivo() {
 	        Map<Integer, LearningPath> learningPaths = cargarLearningPaths(); 
@@ -86,7 +106,7 @@ public class persistenciaLP implements Serializable {
 	                System.out.println("Dificultad: " + lp.getDificultad());
 	                System.out.println("Duración: " + lp.getDuracion());
 	                System.out.println("Rating: " + lp.getPromedioCalificaciones());
-	                System.out.println("Actividades " + lp.getListaActividades());
+	                System.out.println("Actividades: " + lp.getListaActividades().keySet());
 	                System.out.println("------------------------------------");
 	                //Prueba
 	            }

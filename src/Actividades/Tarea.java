@@ -2,7 +2,7 @@ package Actividades;
 
 public class Tarea extends Actividad 
 {
-	
+	private static final long serialVersionUID = 1L;
 	private String ejercicio;
 	private boolean exitosa;
 	private String entregadoPor;

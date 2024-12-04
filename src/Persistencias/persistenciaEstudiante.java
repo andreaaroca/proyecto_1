@@ -18,19 +18,31 @@ package Persistencias;
 	
 	import LearningPath.LearningPath;
 	import co.edu.andes.usuarios.Estudiante;
+	import Actividades.*;
+	import java.time.*;
 	
 	public class persistenciaEstudiante implements Serializable {
-		
+	
+	private static final long serialVersionUID = 1L;
 	private static final String ARCHIVO_ESTUDIANTES = "estudiantes.ser"; 
 	private HashMap<String, HashMap<Integer, LearningPath>> mapaEstudiantes;
+	private HashMap<String,HashMap<Integer, LocalDateTime>> mapaEstudiantesIniciadas;
+	private HashMap<String,HashMap<Integer, LocalDateTime>> mapaEstudiantesFin;
+	
 	private HashMap<Integer, List<LearningPath>> lpInscritos;
+	private static final String ARCHIVO_INICIADASACTIVIDADES = "iniciadasActividades.ser";
+	private static final String ARCHIVO_FINACTIVIDADES = "finActividades.ser";
 	
 	public persistenciaEstudiante() {
 	   
 	    mapaEstudiantes = new HashMap<>();
+	    
+	    this.mapaEstudiantesIniciadas=cargarActIniciadas();
+	    this.mapaEstudiantesFin=cargarActFin();
 	    cargarLpInscritos(); 
+	    
 	}
-	
+	@SuppressWarnings("unchecked")
 	 public void cargarLpInscritos() {
 	        File archivo = new File(ARCHIVO_ESTUDIANTES);
 	        if (!archivo.exists()) {
@@ -38,7 +50,7 @@ package Persistencias;
 	            return;
 	        }
 	        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
-	            @SuppressWarnings("unchecked")
+	            
 	            HashMap<String, HashMap<Integer, LearningPath>> mapa = (HashMap<String, HashMap<Integer, LearningPath>>) ois.readObject();
 	            mapaEstudiantes = mapa;
 	        } catch (IOException | ClassNotFoundException e) {
@@ -46,9 +58,39 @@ package Persistencias;
 	            mapaEstudiantes = new HashMap<>(); 
 	        }
 	    }
+	 
+	@SuppressWarnings("unchecked")
+	 public HashMap<String,HashMap<Integer, LocalDateTime>> cargarActIniciadas() {
+			
+		 File archivo = new File(ARCHIVO_INICIADASACTIVIDADES);
+	     if (archivo.exists()) { 
+	         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
+	             return (HashMap<String,HashMap<Integer, LocalDateTime>>) ois.readObject(); 
+	         } catch (IOException | ClassNotFoundException e) {
+	             e.printStackTrace();
+	         }
+	     }
+	     return new HashMap<>(); 
+	 }
+	
+	@SuppressWarnings("unchecked")
+	public HashMap<String,HashMap<Integer, LocalDateTime>> cargarActFin() {
+		
+		 File archivo = new File(ARCHIVO_FINACTIVIDADES);
+	     if (archivo.exists()) { 
+	         try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
+	             return (HashMap<String,HashMap<Integer, LocalDateTime>>) ois.readObject(); 
+	         } catch (IOException | ClassNotFoundException e) {
+	             e.printStackTrace();
+	         }
+	     }
+	     return new HashMap<>(); 
+	 }
+
 
 
     public void guardarLpInscritos(Estudiante estudiante) {
+    	cargarLpInscritos();
        
         String nombreUsuario = estudiante.getNombreUsuario();
         HashMap<Integer, LearningPath> learningPathsInscritos = estudiante.getLpInscritos();
@@ -73,6 +115,46 @@ package Persistencias;
         }
     }
     
+    public void guardarIniciadosAct(HashMap<String,HashMap<Integer, LocalDateTime>> iniciadasAct) {
+	    
+    	HashMap<String,HashMap<Integer, LocalDateTime>>estudianteIniciadas = cargarActIniciadas();
+
+    	estudianteIniciadas.putAll(iniciadasAct); 
+	    File archivo = new File(ARCHIVO_INICIADASACTIVIDADES);
+
+	    try {
+	        if (!archivo.exists()) {
+	            archivo.createNewFile(); 
+	        }
+	
+	        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(archivo))) {
+	            oos.writeObject(estudianteIniciadas); 
+	        }
+	    } catch (IOException e) {
+	        e.printStackTrace();
+	    }
+	}
+    
+	public void guardarFinAct(HashMap<String,HashMap<Integer, LocalDateTime>> finAct) {
+		    
+	    	HashMap<String,HashMap<Integer, LocalDateTime>>estudianteIniciadas = cargarActFin();
+	
+	    	estudianteIniciadas.putAll(finAct); 
+		    File archivo = new File(ARCHIVO_FINACTIVIDADES);
+	
+		    try {
+		        if (!archivo.exists()) {
+		            archivo.createNewFile(); 
+		        }
+		
+		        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(archivo))) {
+		            oos.writeObject(estudianteIniciadas); 
+		        }
+		    } catch (IOException e) {
+		        e.printStackTrace();
+		    }
+		}
+	    
     public void mostrarLpInscritos(Estudiante estudiante) {
         String nombreUsuario = estudiante.getNombreUsuario();
         
@@ -92,6 +174,65 @@ package Persistencias;
 
         
         }
-    }
+    
+    public void iniciarActividad(Estudiante estudiante, int idLp, int idActividad, LocalDateTime hora) {
+		cargarLpInscritos();
+		
+	    if (mapaEstudiantes.containsKey(estudiante.getNombreUsuario())) {
+	    	HashMap<Integer, LearningPath> learningPathsInscritos=mapaEstudiantes.get(estudiante.getNombreUsuario());
+	    	if (learningPathsInscritos.containsKey(idLp)){
+	    		if((learningPathsInscritos.get(idLp).getActividades().containsKey(idActividad))&&(estudiante.getActividadesIniciadasTiempo().containsKey(idActividad))) {
+	    			estudiante.getActividadesIniciadasTiempo().put(idActividad,hora );
+	    			guardarLpInscritos(estudiante);
+	    			
+	    			
+	    				
+	    			}
+	    			
+	    			
+	    			
+	    		}
+	    		
+	    		
+	    	}
+	    	
+	    else
+	    {
+	        System.out.println("LearningPath con ID " + idLp + " no encontrado en el archivo.");
+	    }
+	
+	}
+	
+	
+	
+	public void finActividad(Estudiante estudiante, int idLp, int idActividad, LocalDateTime hora) {
+		cargarLpInscritos();
+		
+	    if (mapaEstudiantes.containsKey(estudiante.getNombreUsuario())) {
+	    	HashMap<Integer, LearningPath> learningPathsInscritos=mapaEstudiantes.get(estudiante.getNombreUsuario());
+	    	if (learningPathsInscritos.containsKey(idLp)){
+	    		if((learningPathsInscritos.get(idLp).getActividades().containsKey(idActividad))&&(estudiante.getActividadesIniciadasTiempo().containsKey(idActividad))) {
+	    			estudiante.getActividadesIniciadasTiempo().put(idActividad,hora );
+	    			guardarLpInscritos(estudiante);
+	    			
+	    			
+	    				
+	    			}
+	    			
+	    			
+	    			
+	    		}
+	    		
+	    		
+	    	}
+	    	
+	    else
+	    {
+	        System.out.println("LearningPath con ID " + idLp + " no encontrado en el archivo.");
+	    }
+	
+	}
+	
+	}
 
 	

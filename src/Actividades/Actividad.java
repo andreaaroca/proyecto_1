@@ -1,10 +1,15 @@
 package Actividades;
 
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.io.Serializable;
 import java.util.*;
 import LearningPath.*;
-public abstract class Actividad 
+public abstract class Actividad implements Serializable 
 {
-
+	private static final long serialVersionUID = 1L;
 	protected int idActividad;
 	protected String descripcion;
 	protected String objetivo;

@@ -2,6 +2,7 @@ package Actividades;
 
 public abstract class Evaluacion extends Actividad 
 {
+	private static final long serialVersionUID = 1L;
 	protected Double notaAprovacion;
 	
 	public Evaluacion(int idActividad, String descripcion, String objetivo, String dificultad, String duracion,

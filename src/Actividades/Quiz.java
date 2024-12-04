@@ -3,6 +3,7 @@ import java.util.*;
 
 public class Quiz extends Evaluacion 
 {
+	private static final long serialVersionUID = 1L;
 	private Map<String,PreguntaQuiz> preguntas;
 	private PreguntaQuiz pregunta;
 	

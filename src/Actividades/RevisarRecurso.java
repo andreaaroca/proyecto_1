@@ -3,6 +3,7 @@ package Actividades;
 public class RevisarRecurso extends Actividad 
 {
 	
+	private static final long serialVersionUID = 1L;
 	private String recursoLink;
 	//private File recursoArchivo;
 

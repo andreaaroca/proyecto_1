@@ -20,6 +20,8 @@ public class Estudiante extends Usuario {
 	private HashMap<Integer, LocalDateTime> actividadesEnviadasTiempo;
 	private HashMap<Integer, Actividad> actividadesCompletadas;
 	private HashMap<Integer, Float> actividadesCalificadas;
+	private HashMap<String,HashMap<Integer, LocalDateTime>>actIniciadasGuardar;
+	private HashMap<String,HashMap<Integer, LocalDateTime>>actFinGuardar;
 	
 
 	private static persistenciaEstudiante persistenciaEstudiante;
@@ -34,6 +36,8 @@ public class Estudiante extends Usuario {
         this.actividadesEnviadas = new HashMap<Integer, Actividad>();
         this.actividadesEnviadasTiempo = new HashMap<Integer, LocalDateTime>();
         this.actividadesCompletadas= new HashMap<Integer, Actividad>();
+        this.actIniciadasGuardar=new HashMap<String,HashMap<Integer, LocalDateTime>>();
+        this.actFinGuardar=new HashMap<String,HashMap<Integer, LocalDateTime>>();
         Estudiante.persistenciaEstudiante = new persistenciaEstudiante();
     }
 
@@ -74,6 +78,12 @@ public class Estudiante extends Usuario {
 				actividadesIniciadas.put(idActividad,actividadIniciar);
 				LocalDateTime tiempo=LocalDateTime.now();
 				actividadesIniciadasTiempo.put(idActividad,tiempo);
+				actIniciadasGuardar.put(getNombreUsuario(), actividadesIniciadasTiempo);
+				persistenciaEstudiante.guardarIniciadosAct(actIniciadasGuardar);
+				persistenciaEstudiante.iniciarActividad(this,idLp,idActividad,tiempo);
+				System.out.println("Actividad Iniciada");
+				
+				
 				
 				
 			}
@@ -94,6 +104,10 @@ public class Estudiante extends Usuario {
 				actividadesEnviadas.put(idActividad,actividadEnviar);
 				LocalDateTime tiempo=LocalDateTime.now();
 				actividadesEnviadasTiempo.put(idActividad,tiempo);
+				actFinGuardar.put(getNombreUsuario(), actividadesEnviadasTiempo);
+				persistenciaEstudiante.guardarFinAct(actFinGuardar);
+				persistenciaEstudiante.finActividad(this,idLp,idActividad,tiempo);
+				System.out.println("Actividad Finalizada");
 				
 				
 			}

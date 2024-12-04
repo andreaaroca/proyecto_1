@@ -15,6 +15,7 @@ public class Examen extends Evaluacion
 		this.respuestasEstudiante = new HashMap <String,String>();
 		this.calificado = false;
 		
+		
 	}
 
 }

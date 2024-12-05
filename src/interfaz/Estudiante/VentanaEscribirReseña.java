@@ -26,7 +26,6 @@ public class VentanaEscribirReseña extends JFrame implements ActionListener {
 	private JTextField txtOpinionActividad;
     private JButton btnCrearReseña;
 	
-	private persistenciaLP lpControl;
     private Estudiante estudiante;
     
 public VentanaEscribirReseña(persistenciaLP lpControl, Estudiante estudiante)
@@ -72,9 +71,6 @@ public VentanaEscribirReseña(persistenciaLP lpControl, Estudiante estudiante)
 
 	}
 
-	public persistenciaLP getLpControl() {
-	    return lpControl; 
-	}
 	
 	public Estudiante getEstudiante() {
 	    return estudiante;

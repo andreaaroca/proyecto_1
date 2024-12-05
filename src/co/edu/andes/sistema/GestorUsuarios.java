@@ -125,6 +125,30 @@ public class GestorUsuarios {
         
         return null;
     }
+    
+    /*public String obtenerUsuariosComoTexto() {
+        StringBuilder sb = new StringBuilder();
+        List<String> usuarios = mostrarUsuariosDesdeArchivo(); 
+
+        if (usuarios.isEmpty()) {
+            sb.append("No hay Learning Paths registrados en el archivo.\n");
+        } else {
+            sb.append("Usuarios registrados:\n");
+            for (LearningPath lp : learningPaths.values()) {
+                sb.append("Profesor Creador: ").append(lp.getProfesorCreador().getNombre()).append("\n");
+                sb.append("Código: ").append(lp.getIdLP()).append("\n");
+                sb.append("Título: ").append(lp.getTitulo()).append("\n");
+                sb.append("Descripción: ").append(lp.getDescripcion()).append("\n");
+                sb.append("Objetivos: ").append(lp.getObjetivos()).append("\n");
+                sb.append("Dificultad: ").append(lp.getDificultad()).append("\n");
+                sb.append("Duración: ").append(lp.getDuracion()).append("\n");
+                sb.append("Rating: ").append(lp.getPromedioCalificaciones()).append("\n");
+                sb.append("------------------------------------\n");
+            }
+        }
+
+        return sb.toString();
+    }*/
 
 }
 

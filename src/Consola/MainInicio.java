@@ -11,7 +11,7 @@ public class MainInicio {
 	}
 
 
-public static void main(String[] args) {
+/*public static void main(String[] args) {
 	Scanner scanner = new Scanner(System.in);
 	System.out.println("1. Estudiante");
     System.out.println("2. Profesor Creador");
@@ -32,5 +32,5 @@ public static void main(String[] args) {
     
    
     
-}
+}*/
 }

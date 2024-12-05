@@ -5,6 +5,7 @@ import co.edu.andes.usuarios.*;
 
 import co.edu.andes.sistema.GestorUsuarios;
 
+import java.util.List;
 import java.util.Map;
 
 import Actividades.*;
@@ -144,8 +145,40 @@ public class Controlador {
 		estudiante.crearReseñaLearningPath(idLp, opinionActividad, rating, idActividad);
 	}
 		
+	public static String mostrarUsuariosDesdeArchivoGrafica(GestorUsuarios sistema) {
+		sistema.cargarUsuariosDesdeArchivo();
+		List<String> usuarios = sistema.mostrarUsuariosDesdeArchivo();
+        StringBuilder stringRta = new StringBuilder();
+        
+        for (String usuario: usuarios) {
+            stringRta.append(usuario);
+            stringRta.append("\n"); }
+
+        return stringRta.toString(); 
 	
-}	
+}
+	/*private static void iniciarSesion(GestorUsuarios gestorUsuarios, String nombreUsuario, String password ) {
+        
+        String tipoUsuario = gestorUsuarios.iniciarSesion(nombreUsuario, password);
+        
+        if (tipoUsuario != null) {
+            System.out.println("Inicio de sesión exitoso como: " + tipoUsuario);
+            
+            Object usuario = gestorUsuarios.obtenerUsuario(nombreUsuario);
+            
+            if (tipoUsuario.equals("Estudiante") && usuario instanceof Estudiante) {
+                System.out.println("Opciones para estudiante:");
+                Estudiante estudiante = (Estudiante) usuario; 
+                mostrarMenuEstudiante(scanner, estudiante);
+            } else {
+                System.out.println("Error: el tipo de usuario no coincide con " + tipoUsuario + ".");
+            }
+        } else {
+            System.out.println("Credenciales incorrectas. Inténtalo de nuevo.");
+        }
+    }*/
+	
+}
 	
 	
 	

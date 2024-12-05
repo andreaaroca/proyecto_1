@@ -7,6 +7,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 import Controlador.Controlador;
+import Persistencias.persistenciaEstudiante;
 import Persistencias.persistenciaLP;
 
 
@@ -57,6 +58,7 @@ public class PanelBotonesMenuEstudiante extends JPanel implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		persistenciaLP lpControl = new persistenciaLP();
+		persistenciaEstudiante persistenciaE = new persistenciaEstudiante();
         String comando = e.getActionCommand( );
      // Lógica para cada botón
         if (comando.equals(VERLEARNINGPATHSDISPONIBLES)) {
@@ -66,8 +68,10 @@ public class PanelBotonesMenuEstudiante extends JPanel implements ActionListener
         	 new VentanaInscribirLp(ventanaPrincipalMenuEstudiante.getLpControl(), ventanaPrincipalMenuEstudiante.getEstudiante());
             System.out.println("Inscribir LearningPath");
         } else if (comando.equals(VERLEARNINGPATHSINSCRITOS)) {
+        	new VentanaLpInscritos(persistenciaE, ventanaPrincipalMenuEstudiante.getEstudiante());
             System.out.println("Ver LearningPaths inscritos");
         } else if (comando.equals(CREARRESEÑA)) {
+        	new VentanaEscribirReseña(ventanaPrincipalMenuEstudiante.getLpControl(), ventanaPrincipalMenuEstudiante.getEstudiante());
             System.out.println("Crear reseña");
         }
     }

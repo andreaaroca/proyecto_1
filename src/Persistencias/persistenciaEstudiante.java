@@ -87,6 +87,23 @@ package Persistencias;
 
         
         }
+    
+    public String obtenerLearningPathsInscritosTexto(Estudiante estudiante) {
+        StringBuilder builder = new StringBuilder();
+        String nombreUsuario = estudiante.getNombreUsuario();
+
+        if (mapaEstudiantes.containsKey(nombreUsuario)) {
+            HashMap<Integer, LearningPath> learningPathsInscritos = mapaEstudiantes.get(nombreUsuario);
+
+            builder.append("Learning Paths inscritos para ").append(nombreUsuario).append(":\n");
+            for (LearningPath lp : learningPathsInscritos.values()) {
+                builder.append(" - ").append(lp.getTitulo()).append("\n");
+            }
+        } else {
+            builder.append("No se encontraron Learning Paths inscritos para ").append(nombreUsuario).append("\n");
+        }
+        return builder.toString();
+    }
     }
 
 	

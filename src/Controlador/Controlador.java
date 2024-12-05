@@ -134,6 +134,10 @@ public class Controlador {
        
     }
 	
+	public static String obtenerLearningPathsInscritosComoTexto(persistenciaEstudiante persistencia, Estudiante estudiante) {
+	    return persistencia.obtenerLearningPathsInscritosTexto(estudiante);
+	}
+	
 	public static String mostrarLearningPathsDesdeArchivo(persistenciaLP lpControl) {
 		return lpControl.obtenerLearningPathsComoTexto();
 		

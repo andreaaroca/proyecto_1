@@ -122,23 +122,24 @@ public class Controlador {
 		
 	}
 		
+	public static void estudianteInscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, int idLp) {
+		Estudiante.inscribirLearningPath(lpControl, estudiante, idLp);
 		
+	}	
 	
 	
 	public static void imprimirLearningPathsInscritos(persistenciaEstudiante persistencia, Estudiante estudiante) {
-    	persistencia.guardarLpInscritos(estudiante);
+		persistencia.guardarLpInscritos(estudiante);
     	persistencia.mostrarLpInscritos(estudiante);
        
     }
 	
-	public static void mostrarLearningPathsDesdeArchivo(persistenciaLP lpControl) {
-		lpControl.mostrarLearningPathsDesdeArchivo();
+	public static String mostrarLearningPathsDesdeArchivo(persistenciaLP lpControl) {
+		return lpControl.obtenerLearningPathsComoTexto();
 		
 	}
 	
-	public static void estudianteInscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, Scanner scanner) {
-		Estudiante.inscribirLearningPath(lpControl, estudiante, scanner);
-	}
+	
 		
 	public static void estudianteCrearResenaLearningPath(int idLp, String opinionActividad, int rating, int idActividad, Estudiante estudiante) {
 		estudiante.crearReseñaLearningPath(idLp, opinionActividad, rating, idActividad);

@@ -52,7 +52,9 @@ public class Main {
                 Controlador.mostrarLearningPathsDesdeArchivo(lpControl);
                 
             } else if (opcion == 2) {
-            	Controlador.estudianteInscribirLearningPath(lpControl, estudiante, scanner);
+            	System.out.println("aaaaaaaaaaaaaaaaaaa");
+            	//Controlador.estudianteInscribirLearningPath(lpControl, estudiante, id);
+            	
             	
             } else if (opcion == 3) {	
             	System.out.println("Tus LearningPaths inscritos son: ");

@@ -6,10 +6,12 @@ import LearningPath.Resena;
 import Persistencias.persistenciaEstudiante;
 import Persistencias.persistenciaLP;
 import Actividades.*;
+
+import java.io.Serializable;
 import java.time.*;
 
 
-public class Estudiante extends Usuario {
+public class Estudiante extends Usuario implements Serializable{
 	
 	private HashMap<Integer, LearningPath> lpInscritos;
 	private HashMap<Integer, Actividad> actividadesIniciadas;
@@ -193,17 +195,14 @@ public class Estudiante extends Usuario {
 		this.lpInscritosTiempoF = lpInscritosTiempoF;
 	}
 
-	public static void inscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, Scanner scanner) {
-	        System.out.print("Ingrese el código del Learning Path que desea inscribir: ");
-	        int idLP = scanner.nextInt();
-
+	public static void inscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, int idLP) {
+	       
 	        LearningPath lp = lpControl.obtenerLearningPath(idLP); 
 	        if (lp != null) {
 	            if (estudiante.getLpInscritos().containsKey(idLP)) {
 	                System.out.println("Ya estás inscrito en este Learning Path.");
 	            } else {
 	                estudiante.getLpInscritos().put(idLP, lp);
-	                persistenciaEstudiante persistenciaEstudiante = new persistenciaEstudiante();
 	                persistenciaEstudiante.guardarLpInscritos(estudiante);
 	                System.out.println("Learning Path inscrito exitosamente: " + lp.getTitulo());
 	                LocalDateTime tiempo=LocalDateTime.now();

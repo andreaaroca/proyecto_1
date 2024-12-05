@@ -23,48 +23,30 @@ package Persistencias;
 		
 	private static final String ARCHIVO_ESTUDIANTES = "estudiantes.ser"; 
 	private HashMap<String, HashMap<Integer, LearningPath>> mapaEstudiantes;
-	private HashMap<Integer, List<LearningPath>> lpInscritos;
+
 	
 	public persistenciaEstudiante() {
 	   
-	    mapaEstudiantes = new HashMap<>();
-	    cargarLpInscritos(); 
+	    mapaEstudiantes = cargarLpInscritos(); 
 	}
 	
-	 public void cargarLpInscritos() {
-	        File archivo = new File(ARCHIVO_ESTUDIANTES);
-	        if (!archivo.exists()) {
-	            mapaEstudiantes = new HashMap<>(); 
-	            return;
-	        }
-	        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
-	            @SuppressWarnings("unchecked")
-	            HashMap<String, HashMap<Integer, LearningPath>> mapa = (HashMap<String, HashMap<Integer, LearningPath>>) ois.readObject();
-	            mapaEstudiantes = mapa;
-	        } catch (IOException | ClassNotFoundException e) {
-	            e.printStackTrace();
-	            mapaEstudiantes = new HashMap<>(); 
-	        }
-	    }
-
-
-    public void guardarLpInscritos(Estudiante estudiante) {
-       
-        String nombreUsuario = estudiante.getNombreUsuario();
-        HashMap<Integer, LearningPath> learningPathsInscritos = estudiante.getLpInscritos();
-
-       
-        mapaEstudiantes.put(nombreUsuario, learningPathsInscritos);
-        
+	@SuppressWarnings("unchecked")
+    private HashMap<String, HashMap<Integer, LearningPath>> cargarLpInscritos() {
         File archivo = new File(ARCHIVO_ESTUDIANTES);
+
         if (!archivo.exists()) {
-            try {
-                archivo.createNewFile();  
-            } catch (IOException e) {
-                e.printStackTrace();
-            }
+            return new HashMap<>(); 
         }
 
+        try (ObjectInputStream ois = new ObjectInputStream(new FileInputStream(archivo))) {
+            return (HashMap<String, HashMap<Integer, LearningPath>>) ois.readObject();
+        } catch (IOException | ClassNotFoundException e) {
+            e.printStackTrace();
+            return new HashMap<>(); 
+        }
+    }
+	
+    private void guardarLpInscritosEnArchivo() {
         try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(ARCHIVO_ESTUDIANTES))) {
             oos.writeObject(mapaEstudiantes);
             System.out.println("Datos guardados correctamente en " + ARCHIVO_ESTUDIANTES);
@@ -72,11 +54,24 @@ package Persistencias;
             e.printStackTrace();
         }
     }
+
+
+    public void guardarLpInscritos(Estudiante estudiante) {
+    	
+    	mapaEstudiantes = cargarLpInscritos();
+       
+        String nombreUsuario = estudiante.getNombreUsuario();
+        HashMap<Integer, LearningPath> learningPathsInscritos = estudiante.getLpInscritos();
+
+       
+        mapaEstudiantes.put(nombreUsuario, learningPathsInscritos);
+        guardarLpInscritosEnArchivo();
+        
+    }
     
     public void mostrarLpInscritos(Estudiante estudiante) {
         String nombreUsuario = estudiante.getNombreUsuario();
         
-        cargarLpInscritos();
 
             if (mapaEstudiantes.containsKey(nombreUsuario)) {
                 HashMap<Integer, LearningPath> learningPathsInscritos = mapaEstudiantes.get(nombreUsuario);

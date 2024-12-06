@@ -19,3 +19,5 @@ kdm,a,a1,Estudiante
 ad,fin,final,Profesor
 dsjh,ult,ult1,Estudiante
 pjnd,pult,pult1,Profesor
+jska,fed,05,Estudiante
+,falcao,9,Profesor

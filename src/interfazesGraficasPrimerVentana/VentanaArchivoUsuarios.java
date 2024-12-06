@@ -38,4 +38,9 @@ public class VentanaArchivoUsuarios extends JFrame {
 	    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 	    setVisible(true);
 	}
+
+	public GestorUsuarios getUsuariosControl() {
+		return usuariosControl;
+	}
+	
 }

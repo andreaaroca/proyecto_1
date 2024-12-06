@@ -5,6 +5,7 @@ import java.awt.event.*;
 
 
 import javax.swing.*;
+import co.edu.andes.sistema.*;
 
 public class VentanaLoginEstudiante extends JFrame implements ActionListener {
 
@@ -17,19 +18,21 @@ public class VentanaLoginEstudiante extends JFrame implements ActionListener {
     private JButton butIniciar;
     private JButton butMostrar;
     private JButton butSalir;
-    private PrimerVentana primerVentana;
+    
+    private GestorUsuarios sistema;
     private JPanel panelBut;
     private VentanaRegistrarE ventanaRegistrarE;
     private VentanaIniciarE ventanaIniciarE;
     private VentanaArchivoUsuarios ventanaArchivoUsuarios;
     
 
-    public  VentanaLoginEstudiante(PrimerVentana primerVentana)
+    public  VentanaLoginEstudiante()
     {
-        this.primerVentana = primerVentana;
+        
         
         
         setLayout( new BorderLayout() );
+        
         
         panelBut=new JPanel();
         panelBut.setLayout(new GridLayout(4,1));
@@ -58,10 +61,11 @@ public class VentanaLoginEstudiante extends JFrame implements ActionListener {
         
         add(panelBut,BorderLayout.CENTER);
         
-        pack( );
+        setTitle( "Grupo 2 Proyecto Learning Paths" );
+        setDefaultCloseOperation( EXIT_ON_CLOSE );
+        setSize( 400, 600 );
         setLocationRelativeTo( null );
-        setDefaultCloseOperation( DISPOSE_ON_CLOSE );
-        setResizable( false );
+        setVisible( true );
     }
 
     @Override
@@ -117,6 +121,14 @@ public class VentanaLoginEstudiante extends JFrame implements ActionListener {
         }
     }
     
+    
+    
+   
+
+	public static void main( String[] args )
+    {
+        new VentanaLoginEstudiante();
+}
 }
 	
 

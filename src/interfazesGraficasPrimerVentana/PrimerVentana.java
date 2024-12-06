@@ -1,4 +1,4 @@
-package interfazesGraficasPrimerVentana;
+/*package interfazesGraficasPrimerVentana;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -51,5 +51,5 @@ public class PrimerVentana extends JFrame{
         new PrimerVentana();
     }
 
-}
+} */
 	

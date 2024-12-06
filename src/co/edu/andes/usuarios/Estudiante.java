@@ -207,28 +207,25 @@ public class Estudiante extends Usuario {
 		this.lpInscritosTiempoF = lpInscritosTiempoF;
 	}
 
-	public static void inscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, Scanner scanner) {
-	        System.out.print("Ingrese el código del Learning Path que desea inscribir: ");
-	        int idLP = scanner.nextInt();
-
-	        LearningPath lp = lpControl.obtenerLearningPath(idLP); 
-	        if (lp != null) {
-	            if (estudiante.getLpInscritos().containsKey(idLP)) {
-	                System.out.println("Ya estás inscrito en este Learning Path.");
-	            } else {
-	                estudiante.getLpInscritos().put(idLP, lp);
-	                persistenciaEstudiante persistenciaEstudiante = new persistenciaEstudiante();
-	                persistenciaEstudiante.guardarLpInscritos(estudiante);
-	                System.out.println("Learning Path inscrito exitosamente: " + lp.getTitulo());
-	                LocalDateTime tiempo=LocalDateTime.now();
-	                estudiante.getLpInscritosTiempoI().put(idLP,tiempo);
-	                
-	                
-	            }
-	        } else {
-	            System.out.println("No se encontró un Learning Path con el código proporcionado.");
-	        }
-	    }
+	public static void inscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, int idLP) {
+	       
+        LearningPath lp = lpControl.obtenerLearningPath(idLP); 
+        if (lp != null) {
+            if (estudiante.getLpInscritos().containsKey(idLP)) {
+                System.out.println("Ya estás inscrito en este Learning Path.");
+            } else {
+                estudiante.getLpInscritos().put(idLP, lp);
+                persistenciaEstudiante.guardarLpInscritos(estudiante);
+                System.out.println("Learning Path inscrito exitosamente: " + lp.getTitulo());
+                LocalDateTime tiempo=LocalDateTime.now();
+                estudiante.getLpInscritosTiempoI().put(idLP,tiempo);
+                
+                
+            }
+        } else {
+            System.out.println("No se encontró un Learning Path con el código proporcionado.");
+        }
+    }
 	
 	 public void FinalizarLP(int idLp) {
 		 if (lpInscritos.containsKey(idLp)) {

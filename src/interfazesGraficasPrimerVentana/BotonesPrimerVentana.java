@@ -1,4 +1,4 @@
-package interfazesGraficasPrimerVentana;
+/*package interfazesGraficasPrimerVentana;
 
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -50,5 +50,5 @@ public class BotonesPrimerVentana extends JPanel implements ActionListener{
             primerVentana.mostrarVetanaLoginEstudiante( );
         }
         
-    }
-}
+    } 
+} */

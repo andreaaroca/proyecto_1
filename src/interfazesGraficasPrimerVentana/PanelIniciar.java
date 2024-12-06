@@ -22,8 +22,12 @@ public class PanelIniciar extends JPanel {
         nombreUsuarioL.setOpaque(true);
         JLabel contrasenaL= new JLabel("Ingrese su Contraseña");
         contrasenaL.setOpaque(true);
-        JTextField nombreUsuario = new JTextField("");
-        JTextField contrasena = new JTextField("");
+        this.nombreUsuario = new JTextField("");
+        this.contrasena = new JTextField("");
+        add(nombreUsuarioL);
+        add(nombreUsuario);
+        add(contrasenaL);
+        add(contrasena);
 	}
 	
 	public String getNombreUsuario() {

@@ -11,21 +11,41 @@ public class VentanaRegistrarE extends JFrame implements ActionListener {
 	
 	private PanelRegistrar pRegistrar;
 	private JButton butRegistrarE;
+	private JButton butRegistrarPC;
+	private JButton butRegistrarPE;
+	private JPanel butSur;
 	
 	private static final String REGISTRARE = "Registrar Estudiante";
-
+	private static final String REGISTRARPC = "Registrar Profesor Creador";
+	private static final String REGISTRARPE = "Registrar Profesor Evaluador";
+	
 	public VentanaRegistrarE() {
 		
 		this.pRegistrar=new PanelRegistrar();
 		setLayout(new BorderLayout());
 		add(pRegistrar,BorderLayout.CENTER);
 		
-		butRegistrarE = new JButton("Registrar Estudiante en la plataforma");
+		JPanel butSur=new JPanel();
+		butSur.setLayout(new FlowLayout());
+		
+		butRegistrarE = new JButton("Registrar Estudiante");
         butRegistrarE.addActionListener(this);
         butRegistrarE.setActionCommand(REGISTRARE);
-        add(butRegistrarE,BorderLayout.SOUTH);
+        butSur.add(butRegistrarE);
+        
+        butRegistrarPC = new JButton("Registrar Profesor Creador");
+        butRegistrarPC.addActionListener(this);
+        butRegistrarPC.setActionCommand(REGISTRARPC);
+        butSur.add(butRegistrarPC);
+        
+        butRegistrarPE = new JButton("Registrar Profesor Evaluador");
+        butRegistrarPE.addActionListener(this);
+        butRegistrarPE.setActionCommand(REGISTRARPE);
+        butSur.add(butRegistrarPE);
+        
+        add(butSur,BorderLayout.SOUTH);
 		
-        setTitle("Registrar Estudiante");
+        setTitle("Registrar Usuario");
         pack();
         setLocationRelativeTo(null);
 	    setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -43,6 +63,16 @@ public class VentanaRegistrarE extends JFrame implements ActionListener {
 	            String nombreU=pRegistrar.getNombreUsuario();
 	            String contrasena=pRegistrar.getContrasena();
 	            Controlador.crearEstudiante(nombre, nombreU, contrasena, sistema);
+	            this.dispose();
+	        }
+	       
+	        if( comando.equals( REGISTRARPC )||comando.equals( REGISTRARPE ))
+	        {
+	        	GestorUsuarios sistema = new GestorUsuarios();
+	            String nombre=pRegistrar.getNombre();
+	            String nombreU=pRegistrar.getNombreUsuario();
+	            String contrasena=pRegistrar.getContrasena();
+	            Controlador.crearProfesor(nombre, nombreU, contrasena, sistema);
 	            this.dispose();
 	        }
 	}

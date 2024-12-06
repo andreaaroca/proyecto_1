@@ -132,13 +132,15 @@ public class Controlador {
        
     }
 	
-	public static void mostrarLearningPathsDesdeArchivo(persistenciaLP lpControl) {
-		lpControl.mostrarLearningPathsDesdeArchivo();
+	public static String mostrarLearningPathsDesdeArchivo(persistenciaLP lpControl) {
+		return lpControl.obtenerLearningPathsComoTexto();
 		
 	}
+		
 	
-	public static void estudianteInscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, Scanner scanner) {
-		Estudiante.inscribirLearningPath(lpControl, estudiante, scanner);
+	
+	public static void estudianteInscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, int idLp) {
+		Estudiante.inscribirLearningPath(lpControl, estudiante,idLp);
 	}
 		
 	public static void estudianteCrearResenaLearningPath(int idLp, String opinionActividad, int rating, int idActividad, Estudiante estudiante) {
@@ -157,26 +159,13 @@ public class Controlador {
         return stringRta.toString(); 
 	
 }
-	/*private static void iniciarSesion(GestorUsuarios gestorUsuarios, String nombreUsuario, String password ) {
-        
-        String tipoUsuario = gestorUsuarios.iniciarSesion(nombreUsuario, password);
-        
-        if (tipoUsuario != null) {
-            System.out.println("Inicio de sesión exitoso como: " + tipoUsuario);
-            
-            Object usuario = gestorUsuarios.obtenerUsuario(nombreUsuario);
-            
-            if (tipoUsuario.equals("Estudiante") && usuario instanceof Estudiante) {
-                System.out.println("Opciones para estudiante:");
-                Estudiante estudiante = (Estudiante) usuario; 
-                mostrarMenuEstudiante(scanner, estudiante);
-            } else {
-                System.out.println("Error: el tipo de usuario no coincide con " + tipoUsuario + ".");
-            }
-        } else {
-            System.out.println("Credenciales incorrectas. Inténtalo de nuevo.");
-        }
-    }*/
+	
+	public static String obtenerLearningPathsInscritosComoTexto(persistenciaEstudiante persistencia, Estudiante estudiante) {
+	    return persistencia.obtenerLearningPathsInscritosTexto(estudiante);
+	
+	
+}
+	
 	
 }
 	

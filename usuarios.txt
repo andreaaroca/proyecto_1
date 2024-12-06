@@ -25,3 +25,16 @@ seb3,123,12345,Profesor
 Andrea,A1,andrea,Profesor
 dsjfk,jdjd,jdjd,Profesor
 js,jdc,www,Estudiante
+jdsa,JDC,33,Estudiante
+ksd,LP,123,Profesor
+sakjn,p12345,90,Profesor
+est,estud,10,Estudiante
+nueva,nuevaprueba,100,Estudiante
+jkdsf,prueba10,100,Estudiante
+kjsn,prueba11,11,Estudiante
+sah,jdcg,jd,Estudiante
+kjd,lm10,cr7,Estudiante
+kjdf,p20,cp20,Estudiante
+,p10,cp20,Estudiante
+kd,sc30,23,Estudiante
+sljd,nadal,123,Estudiante

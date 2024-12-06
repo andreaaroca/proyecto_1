@@ -5,6 +5,7 @@ import co.edu.andes.usuarios.*;
 
 import co.edu.andes.sistema.GestorUsuarios;
 
+import java.util.List;
 import java.util.Map;
 
 import Actividades.*;
@@ -122,35 +123,51 @@ public class Controlador {
 		
 	}
 		
-	public static void estudianteInscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, int idLp) {
-		Estudiante.inscribirLearningPath(lpControl, estudiante, idLp);
 		
-	}	
 	
 	
 	public static void imprimirLearningPathsInscritos(persistenciaEstudiante persistencia, Estudiante estudiante) {
-		persistencia.guardarLpInscritos(estudiante);
+    	persistencia.guardarLpInscritos(estudiante);
     	persistencia.mostrarLpInscritos(estudiante);
        
     }
-	
-	public static String obtenerLearningPathsInscritosComoTexto(persistenciaEstudiante persistencia, Estudiante estudiante) {
-	    return persistencia.obtenerLearningPathsInscritosTexto(estudiante);
-	}
 	
 	public static String mostrarLearningPathsDesdeArchivo(persistenciaLP lpControl) {
 		return lpControl.obtenerLearningPathsComoTexto();
 		
 	}
+		
 	
 	
+	public static void estudianteInscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, int idLp) {
+		Estudiante.inscribirLearningPath(lpControl, estudiante,idLp);
+	}
 		
 	public static void estudianteCrearResenaLearningPath(int idLp, String opinionActividad, int rating, int idActividad, Estudiante estudiante) {
 		estudiante.crearReseñaLearningPath(idLp, opinionActividad, rating, idActividad);
 	}
 		
+	public static String mostrarUsuariosDesdeArchivoGrafica(GestorUsuarios sistema) {
+		sistema.cargarUsuariosDesdeArchivo();
+		List<String> usuarios = sistema.mostrarUsuariosDesdeArchivo();
+        StringBuilder stringRta = new StringBuilder();
+        
+        for (String usuario: usuarios) {
+            stringRta.append(usuario);
+            stringRta.append("\n"); }
+
+        return stringRta.toString(); 
 	
-}	
+}
+	
+	public static String obtenerLearningPathsInscritosComoTexto(persistenciaEstudiante persistencia, Estudiante estudiante) {
+	    return persistencia.obtenerLearningPathsInscritosTexto(estudiante);
+	
+	
+}
+	
+	
+}
 	
 	
 	

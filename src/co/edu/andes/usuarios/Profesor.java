@@ -64,7 +64,9 @@ public class Profesor extends Usuario implements Serializable {
     	if(learningPathsCreados.containsKey(idLp)){
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.getActividades().put(idActividad,nuevaTarea);
+    		persistenciaLP.actualizarActividades(idLp, idActividad, nuevaTarea);
     		System.out.println("Tarea creada y agregada exitosamente a Learning Path");	
+    		
     			
     		} 
     		else {
@@ -82,6 +84,7 @@ public class Profesor extends Usuario implements Serializable {
     	if(learningPathsCreados.containsKey(idLp)){
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.agregarActividades(nuevaEncuesta);
+    		persistenciaLP.actualizarActividades(idLp, idActividad, nuevaEncuesta);
     		System.out.println("Encuesta creada y agregada exitosamente a Learning Path");	
     			
     		} 
@@ -100,6 +103,7 @@ public class Profesor extends Usuario implements Serializable {
     	if(learningPathsCreados.containsKey(idLp)){
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.agregarActividades(nuevoRevisarRecurso);
+    		persistenciaLP.actualizarActividades(idLp, idActividad, nuevoRevisarRecurso);
     		System.out.println("Recurso a revisar creado y agregado exitosamente a Learning Path");	
     			
     		} 
@@ -116,6 +120,7 @@ public class Profesor extends Usuario implements Serializable {
     	if(learningPathsCreados.containsKey(idLp)){
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.agregarActividades(nuevoQuiz);
+    		persistenciaLP.actualizarActividades(idLp, idActividad, nuevoQuiz);
     		System.out.println("Quiz creado y agregado exitosamente a Learning Path");
     			
     			
@@ -133,6 +138,7 @@ public class Profesor extends Usuario implements Serializable {
     	if(learningPathsCreados.containsKey(idLp)){
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.agregarActividades(nuevoExamen);
+    		persistenciaLP.actualizarActividades(idLp, idActividad, nuevoExamen);
     		System.out.println("Examen creado y agregado exitosamente a Learning Path");	
     			
     		} 

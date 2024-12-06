@@ -6,12 +6,10 @@ import LearningPath.Resena;
 import Persistencias.persistenciaEstudiante;
 import Persistencias.persistenciaLP;
 import Actividades.*;
-
-import java.io.Serializable;
 import java.time.*;
 
 
-public class Estudiante extends Usuario implements Serializable{
+public class Estudiante extends Usuario {
 	
 	private HashMap<Integer, LearningPath> lpInscritos;
 	private HashMap<Integer, Actividad> actividadesIniciadas;
@@ -22,6 +20,8 @@ public class Estudiante extends Usuario implements Serializable{
 	private HashMap<Integer, LocalDateTime> actividadesEnviadasTiempo;
 	private HashMap<Integer, Actividad> actividadesCompletadas;
 	private HashMap<Integer, Float> actividadesCalificadas;
+	private HashMap<String,HashMap<Integer, LocalDateTime>>actIniciadasGuardar;
+	private HashMap<String,HashMap<Integer, LocalDateTime>>actFinGuardar;
 	
 
 	private static persistenciaEstudiante persistenciaEstudiante;
@@ -36,6 +36,8 @@ public class Estudiante extends Usuario implements Serializable{
         this.actividadesEnviadas = new HashMap<Integer, Actividad>();
         this.actividadesEnviadasTiempo = new HashMap<Integer, LocalDateTime>();
         this.actividadesCompletadas= new HashMap<Integer, Actividad>();
+        this.actIniciadasGuardar=new HashMap<String,HashMap<Integer, LocalDateTime>>();
+        this.actFinGuardar=new HashMap<String,HashMap<Integer, LocalDateTime>>();
         Estudiante.persistenciaEstudiante = new persistenciaEstudiante();
     }
 
@@ -76,6 +78,12 @@ public class Estudiante extends Usuario implements Serializable{
 				actividadesIniciadas.put(idActividad,actividadIniciar);
 				LocalDateTime tiempo=LocalDateTime.now();
 				actividadesIniciadasTiempo.put(idActividad,tiempo);
+				actIniciadasGuardar.put(getNombreUsuario(), actividadesIniciadasTiempo);
+				persistenciaEstudiante.guardarIniciadosAct(actIniciadasGuardar);
+				persistenciaEstudiante.iniciarActividad(this,idLp,idActividad,tiempo);
+				System.out.println("Actividad Iniciada");
+				
+				
 				
 				
 			}
@@ -96,6 +104,10 @@ public class Estudiante extends Usuario implements Serializable{
 				actividadesEnviadas.put(idActividad,actividadEnviar);
 				LocalDateTime tiempo=LocalDateTime.now();
 				actividadesEnviadasTiempo.put(idActividad,tiempo);
+				actFinGuardar.put(getNombreUsuario(), actividadesEnviadasTiempo);
+				persistenciaEstudiante.guardarFinAct(actFinGuardar);
+				persistenciaEstudiante.finActividad(this,idLp,idActividad,tiempo);
+				System.out.println("Actividad Finalizada");
 				
 				
 			}
@@ -197,23 +209,23 @@ public class Estudiante extends Usuario implements Serializable{
 
 	public static void inscribirLearningPath(persistenciaLP lpControl, Estudiante estudiante, int idLP) {
 	       
-	        LearningPath lp = lpControl.obtenerLearningPath(idLP); 
-	        if (lp != null) {
-	            if (estudiante.getLpInscritos().containsKey(idLP)) {
-	                System.out.println("Ya estás inscrito en este Learning Path.");
-	            } else {
-	                estudiante.getLpInscritos().put(idLP, lp);
-	                persistenciaEstudiante.guardarLpInscritos(estudiante);
-	                System.out.println("Learning Path inscrito exitosamente: " + lp.getTitulo());
-	                LocalDateTime tiempo=LocalDateTime.now();
-	                estudiante.getLpInscritosTiempoI().put(idLP,tiempo);
-	                
-	                
-	            }
-	        } else {
-	            System.out.println("No se encontró un Learning Path con el código proporcionado.");
-	        }
-	    }
+        LearningPath lp = lpControl.obtenerLearningPath(idLP); 
+        if (lp != null) {
+            if (estudiante.getLpInscritos().containsKey(idLP)) {
+                System.out.println("Ya estás inscrito en este Learning Path.");
+            } else {
+                estudiante.getLpInscritos().put(idLP, lp);
+                persistenciaEstudiante.guardarLpInscritos(estudiante);
+                System.out.println("Learning Path inscrito exitosamente: " + lp.getTitulo());
+                LocalDateTime tiempo=LocalDateTime.now();
+                estudiante.getLpInscritosTiempoI().put(idLP,tiempo);
+                
+                
+            }
+        } else {
+            System.out.println("No se encontró un Learning Path con el código proporcionado.");
+        }
+    }
 	
 	 public void FinalizarLP(int idLp) {
 		 if (lpInscritos.containsKey(idLp)) {
@@ -260,4 +272,4 @@ public class Estudiante extends Usuario implements Serializable{
 	
 
 
-		
+				

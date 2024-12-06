@@ -9,6 +9,10 @@ import javax.swing.JPanel;
 
 import Persistencias.persistenciaLP;
 import co.edu.andes.usuarios.Estudiante;
+import co.edu.andes.usuarios.Profesor;
+import interfaz.ProfesorCreador.PanelBotonesMenuProfesorCreador;
+import interfaz.ProfesorCreador.VentanaPrincipalMenuEstudiante;
+import interfaz.ProfesorCreador.VentanaPrincipalMenuProfesorCreador;
 
 
 @SuppressWarnings("serial")
@@ -22,11 +26,10 @@ public class VentanaPrincipalMenuEstudiante extends JFrame{
 	    {
 		 
 		 	this.lpControl = lpControl;
-	        this.estudiante = estudiante;
+		 	this.estudiante = estudiante;
+	      
 	        
-	    
-	        
-		 	setTitle("Menú Estudiante");
+		 	setTitle("Menú Profesor Creador");
 	        setLayout(new BorderLayout());
 
 	    
@@ -50,9 +53,10 @@ public class VentanaPrincipalMenuEstudiante extends JFrame{
 		    return lpControl;
 		}
 
-		public Estudiante getEstudiante() {
+	 public Estudiante getEstudiante() {
 		    return estudiante;
 		}
+	
 	
 	 public static void main(String[] args) {
 		 persistenciaLP lpControl = new persistenciaLP(); 

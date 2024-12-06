@@ -13,6 +13,7 @@ import java.awt.event.ActionListener;
 @SuppressWarnings("serial")
 public class VentanaInscribirLp  extends JFrame implements ActionListener {
 	
+	
 	private JTextField txtIdLp; // Campo para ingresar ID
     private JButton btnInscribir;
 	
@@ -22,19 +23,21 @@ public class VentanaInscribirLp  extends JFrame implements ActionListener {
 	public VentanaInscribirLp(persistenciaLP lpControl, Estudiante estudiante)
 	
 	{
+		this.lpControl = lpControl;
+	    this.estudiante = estudiante;
 		setTitle("Inscribir Learning Path");
 	    setSize(400, 300);
 	    setLayout(new BorderLayout());
 	    
 	    JPanel panelEntrada = new JPanel(new FlowLayout());
         JLabel lblIdLp = new JLabel("Ingrese ID del LearningPath a inscribir:");
-        txtIdLp = new JTextField(10); // Campo de entrada
+        txtIdLp = new JTextField(10); 
         panelEntrada.add(lblIdLp);
         panelEntrada.add(txtIdLp);
 		
         
         btnInscribir = new JButton("Inscribir Learning Path");
-        btnInscribir.addActionListener(this); // Asignar acción al botón
+        btnInscribir.addActionListener(this); 
         add(panelEntrada, BorderLayout.CENTER);
         add(btnInscribir, BorderLayout.SOUTH);
  
@@ -48,20 +51,19 @@ public class VentanaInscribirLp  extends JFrame implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		 if (e.getSource() == btnInscribir) {
-	            try {
-	               
-	                int idLp = Integer.parseInt(txtIdLp.getText());
+		
+		if (e.getSource() == btnInscribir) {
+	        try {
+	            int idLp = Integer.parseInt(txtIdLp.getText());
 
-	                Controlador.estudianteInscribirLearningPath(lpControl, estudiante, idLp);
-	                JOptionPane.showMessageDialog(this, "Learning Path inscrito correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
-	            } catch (NumberFormatException ex) {
-	                JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.", "Error", JOptionPane.ERROR_MESSAGE);
-	            
+	            Controlador.estudianteInscribirLearningPath(lpControl, estudiante, idLp);
+	            JOptionPane.showMessageDialog(this, "Learning Path inscrito correctamente.", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+	        } catch (NumberFormatException ex) {
+	            JOptionPane.showMessageDialog(this, "Por favor, ingrese un ID válido.", "Error", JOptionPane.ERROR_MESSAGE);
 	        }
 	    }
-		
 	}
 }
+
 
 

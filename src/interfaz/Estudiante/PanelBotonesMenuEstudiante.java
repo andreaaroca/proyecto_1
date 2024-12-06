@@ -57,21 +57,20 @@ public class PanelBotonesMenuEstudiante extends JPanel implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		persistenciaLP lpControl = new persistenciaLP();
-		persistenciaEstudiante persistenciaE = new persistenciaEstudiante();
+		
         String comando = e.getActionCommand( );
      // Lógica para cada botón
         if (comando.equals(VERLEARNINGPATHSDISPONIBLES)) {
-        	new VentanaLpDisponibles(lpControl);
+        	new VentanaLpDisponibles(ventanaPrincipalMenuEstudiante.getLpControl());
             System.out.println("Ver LearningPaths disponibles");
         } else if (comando.equals(INSCRIBIRLEARNINGPATH)) {
         	 new VentanaInscribirLp(ventanaPrincipalMenuEstudiante.getLpControl(), ventanaPrincipalMenuEstudiante.getEstudiante());
             System.out.println("Inscribir LearningPath");
         } else if (comando.equals(VERLEARNINGPATHSINSCRITOS)) {
-        	new VentanaLpInscritos(persistenciaE, ventanaPrincipalMenuEstudiante.getEstudiante());
+        	new VentanaLpInscritos(new persistenciaEstudiante(), ventanaPrincipalMenuEstudiante.getEstudiante());
             System.out.println("Ver LearningPaths inscritos");
         } else if (comando.equals(CREARRESEÑA)) {
-        	new VentanaEscribirReseña(ventanaPrincipalMenuEstudiante.getLpControl(), ventanaPrincipalMenuEstudiante.getEstudiante());
+        	new VentanaEscribirReseña(ventanaPrincipalMenuEstudiante.getLpControl(),ventanaPrincipalMenuEstudiante.getEstudiante());
             System.out.println("Crear reseña");
         }
     }

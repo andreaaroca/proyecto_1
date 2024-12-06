@@ -24,6 +24,8 @@ public class VentanaPrincipalMenuEstudiante extends JFrame{
 		 	this.lpControl = lpControl;
 	        this.estudiante = estudiante;
 	        
+	    
+	        
 		 	setTitle("Menú Estudiante");
 	        setLayout(new BorderLayout());
 
@@ -53,9 +55,9 @@ public class VentanaPrincipalMenuEstudiante extends JFrame{
 		}
 	
 	 public static void main(String[] args) {
-		 persistenciaLP lpControl = new persistenciaLP(); // Asegúrate de inicializar correctamente
+		 persistenciaLP lpControl = new persistenciaLP(); 
 		 Estudiante estudiante = new Estudiante("Andrea", "Andrea123", "password123", "Estudiante"); // Ejemplo de inicialización
-
+		 
 	        new VentanaPrincipalMenuEstudiante(lpControl, estudiante);
 	    }
 	}

@@ -7,7 +7,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import co.edu.andes.sistema.*;
 
-public class VentanaLoginEstudiante extends JFrame implements ActionListener {
+public class VentanaLogin extends JFrame implements ActionListener {
 
 	private static final String REGISTRAR ="Resgistrar";
     private static final String INICIAR = "Iniciar";
@@ -21,12 +21,12 @@ public class VentanaLoginEstudiante extends JFrame implements ActionListener {
     
     private GestorUsuarios sistema;
     private JPanel panelBut;
-    private VentanaRegistrarE ventanaRegistrarE;
-    private VentanaIniciarE ventanaIniciarE;
+    private VentanaRegistrar ventanaRegistrarE;
+    private VentanaIniciar ventanaIniciarE;
     private VentanaArchivoUsuarios ventanaArchivoUsuarios;
     
 
-    public  VentanaLoginEstudiante()
+    public  VentanaLogin()
     {
         
         
@@ -98,7 +98,7 @@ public class VentanaLoginEstudiante extends JFrame implements ActionListener {
     {
         if( ventanaRegistrarE == null || !ventanaRegistrarE.isVisible( ) )
         {
-            ventanaRegistrarE = new VentanaRegistrarE();
+            ventanaRegistrarE = new VentanaRegistrar();
             ventanaRegistrarE.setVisible( true );
         }
     }
@@ -107,7 +107,7 @@ public class VentanaLoginEstudiante extends JFrame implements ActionListener {
     {
         if( ventanaIniciarE == null || !ventanaIniciarE.isVisible( ) )
         {
-            ventanaIniciarE = new VentanaIniciarE();
+            ventanaIniciarE = new VentanaIniciar();
             ventanaIniciarE.setVisible( true );
         }
     }
@@ -127,7 +127,7 @@ public class VentanaLoginEstudiante extends JFrame implements ActionListener {
 
 	public static void main( String[] args )
     {
-        new VentanaLoginEstudiante();
+        new VentanaLogin();
 }
 }
 	

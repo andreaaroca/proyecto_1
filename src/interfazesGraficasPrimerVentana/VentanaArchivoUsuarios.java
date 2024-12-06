@@ -13,9 +13,9 @@ public class VentanaArchivoUsuarios extends JFrame {
 	
 	private JTextArea areaUsuarios;
 	private GestorUsuarios usuariosControl;
-	private VentanaLoginEstudiante ventanaLoginE;
+	private VentanaLogin ventanaLoginE;
 	
-	public VentanaArchivoUsuarios(VentanaLoginEstudiante ventanaLoginE) {
+	public VentanaArchivoUsuarios(VentanaLogin ventanaLoginE) {
 	
 		this.usuariosControl=new GestorUsuarios();
 		this.ventanaLoginE=ventanaLoginE;

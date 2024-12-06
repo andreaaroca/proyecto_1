@@ -9,7 +9,7 @@ import co.edu.andes.usuarios.Estudiante;
 import interfaz.Estudiante.*;
 import Persistencias.*;
 
-public class VentanaIniciarE extends JFrame implements ActionListener{
+public class VentanaIniciar extends JFrame implements ActionListener{
 
 	private PanelIniciar pIniciar;
 	private JButton butIniciarE;
@@ -24,7 +24,7 @@ public class VentanaIniciarE extends JFrame implements ActionListener{
 	private static final String INICIARPE = "Iniciar Sesion Profesro Evaluador";
 
 	
-	public VentanaIniciarE() {
+	public VentanaIniciar() {
 		this.pIniciar=new PanelIniciar();
 		setLayout(new BorderLayout());
 		JPanel butSur=new JPanel();

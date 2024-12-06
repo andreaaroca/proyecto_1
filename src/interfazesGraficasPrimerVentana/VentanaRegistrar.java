@@ -6,7 +6,7 @@ import javax.swing.*;
 import Controlador.Controlador;
 import co.edu.andes.sistema.*;
 
-public class VentanaRegistrarE extends JFrame implements ActionListener {
+public class VentanaRegistrar extends JFrame implements ActionListener {
 	
 	
 	private PanelRegistrar pRegistrar;
@@ -19,7 +19,7 @@ public class VentanaRegistrarE extends JFrame implements ActionListener {
 	private static final String REGISTRARPC = "Registrar Profesor Creador";
 	private static final String REGISTRARPE = "Registrar Profesor Evaluador";
 	
-	public VentanaRegistrarE() {
+	public VentanaRegistrar() {
 		
 		this.pRegistrar=new PanelRegistrar();
 		setLayout(new BorderLayout());

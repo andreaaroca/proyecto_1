@@ -27,7 +27,7 @@ public class VentanaPrincipalMenuProfesorCreador extends JFrame{
 	        
 		 	setTitle("Menú Estudiante");
 	        setLayout(new BorderLayout());
-
+//commit
 
 	        panelBotonesMenuProfesorCreador = new PanelBotonesMenuProfesorCreador(this); 
 	        add(panelBotonesMenuProfesorCreador, BorderLayout.CENTER);

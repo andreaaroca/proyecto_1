@@ -12,6 +12,7 @@ import java.util.Map;
 
 import LearningPath.LearningPath;
 import Actividades.*;
+import co.edu.andes.usuarios.*;
 
 public class persistenciaLP implements Serializable {
 	
@@ -136,6 +137,36 @@ public class persistenciaLP implements Serializable {
 
 	        return sb.toString();
 	    }
+	    
+	    public String obtenerLearningPathsCreadosPCComoTexto(String nombre) {
+	        StringBuilder sb = new StringBuilder();
+	        Map<Integer, LearningPath> learningPaths = cargarLearningPaths(); 
+	        
+	        if (learningPaths.isEmpty()) {
+	            sb.append("No hay Learning Paths registrados en el archivo.\n");
+	        } else {
+	            sb.append("Learning Paths creados:\n");
+	            for (LearningPath lp : learningPaths.values()) {
+	            	
+		                sb.append("Profesor Creador: ").append(lp.getProfesorCreador().getNombre()).append("\n");
+		                sb.append("Código: ").append(lp.getIdLP()).append("\n");
+		                sb.append("Título: ").append(lp.getTitulo()).append("\n");
+		                sb.append("Descripción: ").append(lp.getDescripcion()).append("\n");
+		                sb.append("Objetivos: ").append(lp.getObjetivos()).append("\n");
+		                sb.append("Dificultad: ").append(lp.getDificultad()).append("\n");
+		                sb.append("Duración: ").append(lp.getDuracion()).append("\n");
+		                sb.append("Rating: ").append(lp.getPromedioCalificaciones()).append("\n");
+		                sb.append("Actividades: ").append(lp.getListaActividades().keySet()).append("\n");
+		                sb.append("------------------------------------\n");
+	            
+	            	
+	            	}
+	        }
+
+	        return sb.toString();
+	    }
+	    
+	    
 	    
 	    public  Map<Integer, LearningPath> obtenerLearningPaths() {
 	        return learningPathsCreados;

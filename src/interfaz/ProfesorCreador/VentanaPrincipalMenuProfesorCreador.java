@@ -53,13 +53,13 @@ public class VentanaPrincipalMenuProfesorCreador extends JFrame{
 		}
 
 		
-	 public static void main(String[] args) {
+	 /*public static void main(String[] args) {
 		 persistenciaLP lpControl = new persistenciaLP(); 
 		 Profesor profesorCreador = new Profesor("Andrea", "AndreaProfesor", "password123", "Profesor"); 
 		 
 	        new VentanaPrincipalMenuProfesorCreador(lpControl, profesorCreador);
 		
-	    }
+	    }*/
 	}
 
 

@@ -27,6 +27,7 @@ public class PanelBotonesMenuProfesorCreador extends JPanel implements ActionLis
 		    private VentanaPrincipalMenuProfesorCreador ventanaPrincipalMenuProfesorCreador;
 		    
 		    
+		    
 		    public PanelBotonesMenuProfesorCreador( VentanaPrincipalMenuProfesorCreador ventanaPrincipalMenuProfesorCreador )
 		    {
 		    	this.ventanaPrincipalMenuProfesorCreador = ventanaPrincipalMenuProfesorCreador;
@@ -75,12 +76,12 @@ public class PanelBotonesMenuProfesorCreador extends JPanel implements ActionLis
 	            
 	            System.out.println("CREAR LP");
 	        } else if (comando.equals(CREARACTIVIDAD)) {
-	            // Abrir ventana para crear Actividad
-	        	System.out.println("XXX");
+	        	VentanaBotonesCrearTiposActividades ventanaEscogerActividad = new VentanaBotonesCrearTiposActividades(ventanaPrincipalMenuProfesorCreador.getLpControl(), ventanaPrincipalMenuProfesorCreador.getProfesorCreador());
+	        	ventanaEscogerActividad.setVisible(true);
 	           
 	        } else if (comando.equals(VERLEARNINGPATHSCREADOS)) {
-	            // Abrir ventana para ver los LearningPaths creados
-	        	System.out.println("XXX");
+	        	VentanaVerLpCreados ventanaVerCreados = new VentanaVerLpCreados(ventanaPrincipalMenuProfesorCreador,ventanaPrincipalMenuProfesorCreador.getLpControl());
+	        	ventanaVerCreados.setVisible(true);
 	        } else if (comando.equals(ELIMINARLEARNINGPATH)) {
 	            // Abrir ventana para eliminar un LearningPath
 	        	System.out.println("XXX");

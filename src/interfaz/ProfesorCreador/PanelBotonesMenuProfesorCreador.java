@@ -76,8 +76,8 @@ public class PanelBotonesMenuProfesorCreador extends JPanel implements ActionLis
 	            
 	            System.out.println("CREAR LP");
 	        } else if (comando.equals(CREARACTIVIDAD)) {
-	        	//VentanaBotonesCrearTiposActividades ventanaEscogerActividad = new VentanaBotonesCrearTiposActividades(ventanaPrincipalMenuProfesorCreador.getLpControl(), ventanaPrincipalMenuProfesorCreador.getProfesorCreador());
-	        	//ventanaEscogerActividad.setVisible(true);
+	        	VentanaBotonesCrearTiposActividades ventanaEscogerActividad = new VentanaBotonesCrearTiposActividades(ventanaPrincipalMenuProfesorCreador.getLpControl(), ventanaPrincipalMenuProfesorCreador.getProfesorCreador());
+	        	ventanaEscogerActividad.setVisible(true);
 	           
 	        } else if (comando.equals(VERLEARNINGPATHSCREADOS)) {
 	        	VentanaVerLpCreados ventanaVerCreados = new VentanaVerLpCreados(ventanaPrincipalMenuProfesorCreador,ventanaPrincipalMenuProfesorCreador.getLpControl());

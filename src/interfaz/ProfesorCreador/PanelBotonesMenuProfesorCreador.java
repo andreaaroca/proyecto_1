@@ -83,8 +83,8 @@ public class PanelBotonesMenuProfesorCreador extends JPanel implements ActionLis
 	        	VentanaVerLpCreados ventanaVerCreados = new VentanaVerLpCreados(ventanaPrincipalMenuProfesorCreador,ventanaPrincipalMenuProfesorCreador.getLpControl());
 	        	ventanaVerCreados.setVisible(true);
 	        } else if (comando.equals(ELIMINARLEARNINGPATH)) {
-	            // Abrir ventana para eliminar un LearningPath
-	        	System.out.println("XXX");
+	        	VentanaEliminarLp ventanaElimLp = new VentanaEliminarLp(ventanaPrincipalMenuProfesorCreador.getLpControl(), ventanaPrincipalMenuProfesorCreador.getProfesorCreador());
+	        	ventanaElimLp.setVisible(true);
 	        } else if (comando.equals(SALIRMENUPC)) {
 	            ventanaPrincipalMenuProfesorCreador.dispose();
 	        }

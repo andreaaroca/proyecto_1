@@ -62,6 +62,7 @@ public class VentanaEliminarLp extends JFrame implements ActionListener {
 
         add(panelC, BorderLayout.CENTER);
         add(panelS, BorderLayout.SOUTH);
+        //commit2
     }
 
     @Override

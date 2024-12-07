@@ -1,11 +1,12 @@
 package interfazesGraficasPrimerVentana;
 
 import java.awt.*;
+import interfaz.ProfesorCreador.*;
 import java.awt.event.*;
 import javax.swing.*;
 import Controlador.Controlador;
 import co.edu.andes.sistema.*;
-import co.edu.andes.usuarios.Estudiante;
+import co.edu.andes.usuarios.*;
 import interfaz.Estudiante.*;
 import Persistencias.*;
 
@@ -17,6 +18,7 @@ public class VentanaIniciar extends JFrame implements ActionListener{
 	private JButton butIniciarPE;
 	private JPanel butSur;
 	private VentanaPrincipalMenuEstudiante ventanaEstudiante;
+	private VentanaPrincipalMenuProfesorCreador ventanaPCreador;
 	
 	
 	private static final String INICIARE = "Iniciar Sesion Estudiante";
@@ -59,7 +61,7 @@ public class VentanaIniciar extends JFrame implements ActionListener{
 	
 	
        
-	    @Override
+	 @Override
 	    public void actionPerformed( ActionEvent e )
 	    {
 	        String comando = e.getActionCommand( );
@@ -90,6 +92,35 @@ public class VentanaIniciar extends JFrame implements ActionListener{
 	                System.out.println("Credenciales incorrectas. Inténtalo de nuevo.");
 	            }
 	        }
+	            
+	            
+         if( comando.equals( INICIARPC ))
+	        {
+	       
+	        	GestorUsuarios sistema=new GestorUsuarios();
+	        	sistema.cargarUsuariosDesdeArchivo();
+	        	persistenciaLP perLp= new persistenciaLP();
+	            String nombreU=pIniciar.getNombreUsuario();
+	            String contrasena=pIniciar.getContrasena();
+	            String tipoUsuario = sistema.iniciarSesion(nombreU, contrasena);
+	            System.out.println(tipoUsuario);
+	            
+	            if (tipoUsuario != null) {
+	                System.out.println("Inicio de sesión exitoso como: " + tipoUsuario);
+	                
+	                Object usuario = sistema.obtenerUsuario(nombreU);
+	                
+	                if (tipoUsuario.equals("Profesor") && usuario instanceof Profesor) {
+	                    System.out.println("Opciones para Profesor:");
+	                    Profesor profesor = (Profesor) usuario; 
+	                    mostrarVentanaProfesorCreador(profesor,perLp);
+	                } else {
+	                    System.out.println("Error: el tipo de usuario no coincide con " + tipoUsuario + ".");
+	                }
+	            } else {
+	                System.out.println("Credenciales incorrectas. Inténtalo de nuevo.");
+	            }
+	        }
 	            this.dispose();
 	        }
 	    
@@ -99,6 +130,15 @@ public class VentanaIniciar extends JFrame implements ActionListener{
 	        {
 	            ventanaEstudiante = new VentanaPrincipalMenuEstudiante (perLp,estudiante);
 	            ventanaEstudiante.setVisible( true );
+	        }
+	    }
+	    
+	    public void mostrarVentanaProfesorCreador(Profesor pCreador, persistenciaLP perLp  )
+	    {
+	        if( ventanaPCreador == null || !ventanaPCreador.isVisible( ) )
+	        {
+	            ventanaPCreador = new VentanaPrincipalMenuProfesorCreador (perLp,pCreador);
+	            ventanaPCreador.setVisible( true );
 	        }
 	    }
 	    

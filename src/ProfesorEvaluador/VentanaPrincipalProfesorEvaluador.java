@@ -9,21 +9,24 @@ import javax.swing.JPanel;
 
 import Persistencias.*;
 import co.edu.andes.usuarios.Profesor;
+import co.edu.andes.sistema.*;
 
 public class VentanaPrincipalProfesorEvaluador extends JFrame{
 	
 
 	private PanelBotonesMenuProfesorEvaluador panelBotonesMenuProfesorEvaluador;
 	private persistenciaLP lpControl;
-	persistenciaEstudiante estControl;
+	private persistenciaEstudiante estControl;
 	private Profesor profesorEvaluador;
+	private GestorUsuarios sistema;
 
-	 public VentanaPrincipalProfesorEvaluador( persistenciaLP lpControl, Profesor profesorEvaluador, persistenciaEstudiante estControl)
+	 public VentanaPrincipalProfesorEvaluador( persistenciaLP lpControl, Profesor profesorEvaluador, persistenciaEstudiante estControl, GestorUsuarios sistema)
 	    {
 		 
 		 	this.lpControl = lpControl;
 		 	this.estControl = estControl;
 		 	this.profesorEvaluador = profesorEvaluador;
+		 	this.sistema=sistema;
 	        
 	        
 	    
@@ -53,6 +56,13 @@ public class VentanaPrincipalProfesorEvaluador extends JFrame{
 		}
 	 public Profesor getProfesorEvaluador() {
 		    return profesorEvaluador;
+		}
+	 
+	 public persistenciaEstudiante getEstControl() {
+		    return estControl;
+		}
+	 public GestorUsuarios getSistema() {
+		    return sistema;
 		}
 	 
 }

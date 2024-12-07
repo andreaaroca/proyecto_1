@@ -8,6 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 
+
+
 @SuppressWarnings("serial")
 public class PanelBotonesMenuProfesorEvaluador extends JPanel implements ActionListener{
 	
@@ -92,6 +94,8 @@ public class PanelBotonesMenuProfesorEvaluador extends JPanel implements ActionL
 
 	        if (comando.equals(CALIFICARACT)) {
 	            
+	        	VentanaCalificarActividad ventanaCalificarAct = new VentanaCalificarActividad(ventanaPrincipalMenuProfesorEvalauador);
+	        	ventanaCalificarAct.setVisible(true);
 	            System.out.println("Calificar Actividad"); }
 	            
 	        /* else if (comando.equals(PROGRESOLP)) {

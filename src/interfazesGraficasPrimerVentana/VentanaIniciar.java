@@ -144,7 +144,7 @@ public class VentanaIniciar extends JFrame implements ActionListener{
 	                if (tipoUsuario.equals("Profesor") && usuario instanceof Profesor) {
 	                    System.out.println("Opciones para Profesor:");
 	                    Profesor profesor = (Profesor) usuario; 
-	                    mostrarVentanaProfesorEvaluador(profesor,perLp,perEst);
+	                    mostrarVentanaProfesorEvaluador(profesor,perLp,perEst, sistema);
 	                } else {
 	                    System.out.println("Error: el tipo de usuario no coincide con " + tipoUsuario + ".");
 	                }
@@ -173,11 +173,11 @@ public class VentanaIniciar extends JFrame implements ActionListener{
 	        }
 	    }
 	    
-	    public void mostrarVentanaProfesorEvaluador(Profesor pEvaluador, persistenciaLP perLp, persistenciaEstudiante perEst  )
+	    public void mostrarVentanaProfesorEvaluador(Profesor pEvaluador, persistenciaLP perLp, persistenciaEstudiante perEst, GestorUsuarios sistema  )
 	    {
 	        if( ventanaPEvaluador == null || !ventanaPEvaluador.isVisible( ) )
 	        {
-	            ventanaPEvaluador = new VentanaPrincipalProfesorEvaluador (perLp,pEvaluador,perEst);
+	            ventanaPEvaluador = new VentanaPrincipalProfesorEvaluador (perLp,pEvaluador,perEst,sistema);
 	            ventanaPEvaluador.setVisible( true );
 	        }
 	    }

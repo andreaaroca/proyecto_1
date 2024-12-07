@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 public class PanelBotonesMenuProfesorCreador extends JPanel implements ActionListener{
 	
 		
-	//comit123
+	//comit12393748
 		    private static final String CREARLEARNINGPATH = "CREAR LEARNINGPATH";
 		    private static final String CREARACTIVIDAD = "CREAR ACTIVIDAD";
 		    private static final String VERLEARNINGPATHSCREADOS = "VER LEARNINGPATHS CREADOS";

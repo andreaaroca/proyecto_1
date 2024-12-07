@@ -11,7 +11,7 @@ import Persistencias.persistenciaLP;
 import co.edu.andes.usuarios.Estudiante;
 import co.edu.andes.usuarios.Profesor;
 import interfaz.ProfesorCreador.PanelBotonesMenuProfesorCreador;
-import interfaz.ProfesorCreador.VentanaPrincipalMenuEstudiante;
+import interfaz.Estudiante.VentanaPrincipalMenuEstudiante;
 import interfaz.ProfesorCreador.VentanaPrincipalMenuProfesorCreador;
 
 
@@ -58,12 +58,7 @@ public class VentanaPrincipalMenuEstudiante extends JFrame{
 		}
 	
 	
-	 public static void main(String[] args) {
-		 persistenciaLP lpControl = new persistenciaLP(); 
-		 Estudiante estudiante = new Estudiante("Andrea", "Andrea123", "password123", "Estudiante"); // Ejemplo de inicialización
-		 
-	        new VentanaPrincipalMenuEstudiante(lpControl, estudiante);
-	    }
+	 
 	}
 
 

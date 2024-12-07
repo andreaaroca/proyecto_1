@@ -6,6 +6,7 @@ public class Examen extends Evaluacion
 	private List<String> preguntasAbiertas;
 	private Map<String, String> respuestasEstudiante;
 	private boolean calificado;
+	private static final long serialVersionUID = 1L;
 	
 	public Examen(int idActividad, String descripcion, String objetivo, String dificultad, String duracion, String tipo,
 			Double notaAprovacion) 
@@ -14,6 +15,7 @@ public class Examen extends Evaluacion
 		this.preguntasAbiertas = new ArrayList<String>();
 		this.respuestasEstudiante = new HashMap <String,String>();
 		this.calificado = false;
+		
 		
 	}
 

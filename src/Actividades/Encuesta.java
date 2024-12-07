@@ -1,10 +1,12 @@
 package Actividades;
 
+
 import java.util.*;
+
 
 public class Encuesta extends Actividad 
 {
-	
+	private static final long serialVersionUID = 1L;
 	private List<String> preguntas;
 	private Map<String, String> respuestasEstudiante;
 
@@ -33,13 +35,12 @@ public class Encuesta extends Actividad
 		respuestasEstudiante.put(idEstudiante, respuesta);
 	}
 
-	
+	public Map<String, String> getRespuestasEstudiantes()
+	{
+		return respuestasEstudiante;
+	}
 }
 	
 	
 	
 	
-	
-
-
-

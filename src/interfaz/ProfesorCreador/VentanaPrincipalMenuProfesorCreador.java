@@ -25,10 +25,10 @@ public class VentanaPrincipalMenuProfesorCreador extends JFrame{
 	        
 	    
 	        
-		 	setTitle("Menú Estudiante");
+		 	setTitle("Menú Profesor Creador");
 	        setLayout(new BorderLayout());
 
-	    
+
 	        panelBotonesMenuProfesorCreador = new PanelBotonesMenuProfesorCreador(this); 
 	        add(panelBotonesMenuProfesorCreador, BorderLayout.CENTER);
 
@@ -53,16 +53,11 @@ public class VentanaPrincipalMenuProfesorCreador extends JFrame{
 		}
 
 		
-	 public static void main(String[] args) {
+	 /*public static void main(String[] args) {
 		 persistenciaLP lpControl = new persistenciaLP(); 
 		 Profesor profesorCreador = new Profesor("Andrea", "AndreaProfesor", "password123", "Profesor"); 
 		 
 	        new VentanaPrincipalMenuProfesorCreador(lpControl, profesorCreador);
 		
-	    }
+	    }*/
 	}
-
-
-
-
-

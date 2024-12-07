@@ -165,6 +165,10 @@ public class Controlador {
 	
 	
 }
+	public static String obtenerLearningPathsCreadosComoTexto(persistenciaLP persistencia, Profesor profesor) {
+	    String nombre=profesor.getNombre();
+		return persistencia.obtenerLearningPathsCreadosPCComoTexto(nombre);
+	}
 	
 	
 }

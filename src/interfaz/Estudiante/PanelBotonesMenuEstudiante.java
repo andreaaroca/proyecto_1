@@ -19,11 +19,14 @@ public class PanelBotonesMenuEstudiante extends JPanel implements ActionListener
 	    private static final String VERLEARNINGPATHSINSCRITOS = "VER LEARNINGPATHS INSCRITOS";
 	    private static final String CREARRESEÑA = "CREAR RESEÑA";
 	    private static final String INICIARACTIVIDAD = "INICIARACTIVIDAD";
+	    private static final String ENVIARACTIVIDAD = "ENVIARACTIVIDAD";
 
 	    private JButton butVerLpDisponibles;
 	    private JButton butInscribirLp;
 	    private JButton butVerLpInscritos;
 	    private JButton butCrearReseña;
+	    private JButton butIniciarActividad;
+	    private JButton butEnviarActividad;
 	    
 	    private VentanaPrincipalMenuEstudiante ventanaPrincipalMenuEstudiante;
 	    
@@ -44,10 +47,15 @@ public class PanelBotonesMenuEstudiante extends JPanel implements ActionListener
 	        butInscribirLp.addActionListener(this);
 	        add(butInscribirLp);
 	        
-	        butInscribirLp = new JButton("INICIAR ACTIVIDAD");
-	        butInscribirLp.setActionCommand(INICIARACTIVIDAD);
-	        butInscribirLp.addActionListener(this);
-	        add(butInscribirLp);
+	        butIniciarActividad = new JButton("INICIAR ACTIVIDAD");
+	        butIniciarActividad.setActionCommand(INICIARACTIVIDAD);
+	        butIniciarActividad.addActionListener(this);
+	        add(butIniciarActividad);
+	        
+	        butEnviarActividad = new JButton("ENVIAR ACTIVIDAD");
+	        butEnviarActividad.setActionCommand(ENVIARACTIVIDAD);
+	        butEnviarActividad.addActionListener(this);
+	        add(butEnviarActividad);
 
 	        butVerLpInscritos = new JButton("VER LEARNINGPATHS INSCRITOS");
 	        butVerLpInscritos.setActionCommand(VERLEARNINGPATHSINSCRITOS);
@@ -81,10 +89,14 @@ public class PanelBotonesMenuEstudiante extends JPanel implements ActionListener
         } else if (comando.equals(INICIARACTIVIDAD)) {
         	new VentanaIniciarActividad(ventanaPrincipalMenuEstudiante);
             System.out.println("Iniciar Actividad");
-        }
+        } else if (comando.equals(ENVIARACTIVIDAD)) {
+        	new VentanaEnviarActividad(ventanaPrincipalMenuEstudiante);
+            System.out.println("Enviar Actividad"); 
+        
     }
 		
 	}
+}
 
 
 

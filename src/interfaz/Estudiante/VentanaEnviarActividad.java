@@ -20,20 +20,20 @@ import co.edu.andes.usuarios.*;
 
 
 
-public class VentanaIniciarActividad extends JFrame implements ActionListener {
+public class VentanaEnviarActividad extends JFrame implements ActionListener {
 
 	private static final long serialVersionUID = 1L;
 	private static final String CANCELAR = "CANCELAR";
-    private static final String INICIAR = "INICIAR";
+    private static final String ENVIAR = "ENVIAR";
     
 	private JTextField txtCodigoAct;
 	private JTextField txtCodigoLp;
 	private JPanel panel;
-	private JButton btnIniciar;
+	private JButton btnEnviar;
 	private JButton btnCancelar;
 	private VentanaPrincipalMenuEstudiante vPrincipalEst;
 	
-    public VentanaIniciarActividad(VentanaPrincipalMenuEstudiante vPrincipalEst) {
+    public VentanaEnviarActividad(VentanaPrincipalMenuEstudiante vPrincipalEst) {
     
 
 		this.vPrincipalEst=vPrincipalEst;
@@ -64,10 +64,10 @@ public class VentanaIniciarActividad extends JFrame implements ActionListener {
         btnCancelar.addActionListener(this);
         this.panel.add(btnCancelar);
         
-        btnIniciar = new JButton("Iniciar");
-        btnIniciar.setActionCommand(INICIAR);
-        btnIniciar.addActionListener(this);
-        this.panel.add(btnIniciar);
+        btnEnviar = new JButton("Enviar");
+        btnEnviar.setActionCommand(ENVIAR);
+        btnEnviar.addActionListener(this);
+        this.panel.add(btnEnviar);
         
         add(panel,BorderLayout.CENTER);
     }
@@ -78,12 +78,12 @@ public class VentanaIniciarActividad extends JFrame implements ActionListener {
 			
 	        String comando = e.getActionCommand( );
 
-	        if (comando.equals(INICIAR)) {
+	        if (comando.equals(ENVIAR)) {
 	            
 	        	int idLp=Integer.parseInt(txtCodigoLp.getText());
 	        	int idActividad=Integer.parseInt(txtCodigoAct.getText());
 	        	Estudiante estudiante= vPrincipalEst.getEstudiante();
-	        	estudiante.iniciarActividad(idLp, idActividad);
+	        	estudiante.enviarActividad(idLp, idActividad);
 	            
 	            }
 	        
@@ -95,3 +95,4 @@ public class VentanaIniciarActividad extends JFrame implements ActionListener {
 }
 
 }
+

@@ -131,6 +131,7 @@ public class persistenciaLP implements Serializable {
 	                sb.append("Dificultad: ").append(lp.getDificultad()).append("\n");
 	                sb.append("Duración: ").append(lp.getDuracion()).append("\n");
 	                sb.append("Rating: ").append(lp.getPromedioCalificaciones()).append("\n");
+	                sb.append("Actividades: ").append(lp.getListaActividades().keySet()).append("\n");
 	                sb.append("------------------------------------\n");
 	            }
 	        }

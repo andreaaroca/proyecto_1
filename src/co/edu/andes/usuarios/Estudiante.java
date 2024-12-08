@@ -82,6 +82,7 @@ public class Estudiante extends Usuario {
 				persistenciaEstudiante.guardarIniciadosAct(actIniciadasGuardar);
 				persistenciaEstudiante.iniciarActividad(this,idLp,idActividad,tiempo);
 				System.out.println("Actividad Iniciada");
+				System.out.println(tiempo);
 				
 				
 				
@@ -108,6 +109,7 @@ public class Estudiante extends Usuario {
 				persistenciaEstudiante.guardarFinAct(actFinGuardar);
 				persistenciaEstudiante.finActividad(this,idLp,idActividad,tiempo);
 				System.out.println("Actividad Finalizada");
+				System.out.println(tiempo);
 				
 				
 			}

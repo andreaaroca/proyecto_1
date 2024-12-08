@@ -18,6 +18,7 @@ public class PanelBotonesMenuEstudiante extends JPanel implements ActionListener
 	    private static final String INSCRIBIRLEARNINGPATH = "INSCRIBIR LEARNINGPATH";
 	    private static final String VERLEARNINGPATHSINSCRITOS = "VER LEARNINGPATHS INSCRITOS";
 	    private static final String CREARRESEÑA = "CREAR RESEÑA";
+	    private static final String INICIARACTIVIDAD = "INICIARACTIVIDAD";
 
 	    private JButton butVerLpDisponibles;
 	    private JButton butInscribirLp;
@@ -40,6 +41,11 @@ public class PanelBotonesMenuEstudiante extends JPanel implements ActionListener
 
 	        butInscribirLp = new JButton("INSCRIBIR LEARNINGPATH");
 	        butInscribirLp.setActionCommand(INSCRIBIRLEARNINGPATH);
+	        butInscribirLp.addActionListener(this);
+	        add(butInscribirLp);
+	        
+	        butInscribirLp = new JButton("INICIAR ACTIVIDAD");
+	        butInscribirLp.setActionCommand(INICIARACTIVIDAD);
 	        butInscribirLp.addActionListener(this);
 	        add(butInscribirLp);
 
@@ -72,6 +78,9 @@ public class PanelBotonesMenuEstudiante extends JPanel implements ActionListener
         } else if (comando.equals(CREARRESEÑA)) {
         	new VentanaEscribirReseña(ventanaPrincipalMenuEstudiante.getLpControl(),ventanaPrincipalMenuEstudiante.getEstudiante());
             System.out.println("Crear reseña");
+        } else if (comando.equals(INICIARACTIVIDAD)) {
+        	new VentanaIniciarActividad(ventanaPrincipalMenuEstudiante);
+            System.out.println("Iniciar Actividad");
         }
     }
 		

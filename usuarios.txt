@@ -22,3 +22,4 @@ pjnd,pult,pult1,Profesor
 jdkf,ney,10,Profesor
 evaluador,eval,1,Profesor
 pE,pruebaE,1,Estudiante
+pru,pr2,2,Estudiante

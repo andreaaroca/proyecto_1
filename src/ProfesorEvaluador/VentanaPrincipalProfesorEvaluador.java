@@ -7,6 +7,8 @@ import java.awt.Dimension;
 
 import javax.swing.JPanel;
 
+import LearningPath.LearningPath;
+import LearningPath.MonitoreoLearningPath;
 import Persistencias.*;
 import co.edu.andes.usuarios.Profesor;
 import co.edu.andes.sistema.*;
@@ -19,7 +21,7 @@ public class VentanaPrincipalProfesorEvaluador extends JFrame{
 	private persistenciaEstudiante estControl;
 	private Profesor profesorEvaluador;
 	private GestorUsuarios sistema;
-
+	
 	 public VentanaPrincipalProfesorEvaluador( persistenciaLP lpControl, Profesor profesorEvaluador, persistenciaEstudiante estControl, GestorUsuarios sistema)
 	    {
 		 
@@ -27,7 +29,6 @@ public class VentanaPrincipalProfesorEvaluador extends JFrame{
 		 	this.estControl = estControl;
 		 	this.profesorEvaluador = profesorEvaluador;
 		 	this.sistema=sistema;
-	        
 	        
 	    
 	        
@@ -64,5 +65,7 @@ public class VentanaPrincipalProfesorEvaluador extends JFrame{
 	 public GestorUsuarios getSistema() {
 		    return sistema;
 		}
-	 
 }
+	 
+	 
+	

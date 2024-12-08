@@ -21,7 +21,7 @@ public class PanelBotonesMenuProfesorEvaluador extends JPanel implements ActionL
 		    private static final String TASAACT = "TASA DE EXITO ACTIVIDAD";
 		    private static final String REVISARCOMPLETADO = "REVISARCOMPLETADO";
 		    private static final String GRAFICA = "GRAFICA";
-		    private static final String SALIRMENUPC = "SALIR";
+		    private static final String SALIRMENUPE = "SALIR";
 
 		    private JButton butCalificarAct;
 		    private JButton butProgresoLp;
@@ -30,7 +30,7 @@ public class PanelBotonesMenuProfesorEvaluador extends JPanel implements ActionL
 		    private JButton butTasaAct;
 		    private JButton butRevisarCompletado;
 		    private JButton butGrafica;
-		    private JButton butSalirMenuPc;
+		    private JButton butSalirMenuPe;
 		    
 		    private VentanaPrincipalProfesorEvaluador ventanaPrincipalMenuProfesorEvalauador;
 		    
@@ -62,7 +62,7 @@ public class PanelBotonesMenuProfesorEvaluador extends JPanel implements ActionL
 		        butTiempoLp.addActionListener(this);
 		        add(butTiempoLp);
 		        
-		        butTasaAct = new JButton("Tasa de eito de una actividad");
+		        butTasaAct = new JButton("Tasa de exito de una actividad");
 		        butTasaAct.setActionCommand(TASAACT);
 		        butTasaAct.addActionListener(this);
 		        add(butTasaAct);
@@ -75,13 +75,13 @@ public class PanelBotonesMenuProfesorEvaluador extends JPanel implements ActionL
 		        butGrafica = new JButton("Grafica actividades durante el año");
 		        butRevisarCompletado.setActionCommand(GRAFICA);
 		        butRevisarCompletado.addActionListener(this);
-		        add(butTiempoAct);
+		        add(butGrafica);
 		        
 		  
-		        butSalirMenuPc = new JButton("SALIR");
-		        butSalirMenuPc.setActionCommand(SALIRMENUPC);
-		        butSalirMenuPc.addActionListener(this);
-		        add(butSalirMenuPc);
+		        butSalirMenuPe = new JButton("SALIR");
+		        butSalirMenuPe.setActionCommand(SALIRMENUPE);
+		        butSalirMenuPe.addActionListener(this);
+		        add(butSalirMenuPe);
 		        
 		    }
 
@@ -98,30 +98,36 @@ public class PanelBotonesMenuProfesorEvaluador extends JPanel implements ActionL
 	        	ventanaCalificarAct.setVisible(true);
 	            System.out.println("Calificar Actividad"); }
 	            
-	        /* else if (comando.equals(PROGRESOLP)) {
-	        	//VentanaBotonesCrearTiposActividades ventanaEscogerActividad = new VentanaBotonesCrearTiposActividades(ventanaPrincipalMenuProfesorCreador.getLpControl(), ventanaPrincipalMenuProfesorCreador.getProfesorCreador());
-	        	//ventanaEscogerActividad.setVisible(true);
-	        	System.out.println("Calificar Actividad");
-	        	
-	        } else if (comando.equals(VERLEARNINGPATHSCREADOS)) {
-	        	//VentanaVerLpCreados ventanaVerCreados = new VentanaVerLpCreados(ventanaPrincipalMenuProfesorCreador,ventanaPrincipalMenuProfesorCreador.getLpControl());
-	        	//ventanaVerCreados.setVisible(true);
-	        	System.out.println("Calificar Actividad");
-	        	
-	        } else if (comando.equals(ELIMINARLEARNINGPATH)) {
-	        	//VentanaEliminarLp ventanaElimLp = new VentanaEliminarLp(ventanaPrincipalMenuProfesorCreador.getLpControl(), ventanaPrincipalMenuProfesorCreador.getProfesorCreador());
-	        	//ventanaElimLp.setVisible(true);
-	        	System.out.println("Calificar Actividad");
-	        	
-	        } else if (comando.equals(SALIRMENUPC)) {
-	        	ventanaPrincipalMenuProfesorEvalauador.dispose();
+	        else if (comando.equals(PROGRESOLP)) {
+	        	 VentanaRevisarProgresoLP ventanaProgresoLP = new VentanaRevisarProgresoLP(ventanaPrincipalMenuProfesorEvalauador);
+	             ventanaProgresoLP.setVisible(true);
+	             System.out.println("Revisar Progreso Learning Path");
 	        }
-	  */
-			
-		} 
-
-
-
-
-
+	             
+	       else if (comando.equals(TASAACT)) {
+	    	
+	            VentanaTasaExitoActividad ventanaTasaExito = new VentanaTasaExitoActividad(ventanaPrincipalMenuProfesorEvalauador);
+	                ventanaTasaExito.setVisible(true);
+	                 	 
+			} else if (comando.equals(TIEMPOACT)) {
+			    VentanaTiempoActividad ventanaTiempoActividad = new VentanaTiempoActividad(ventanaPrincipalMenuProfesorEvalauador);
+			    ventanaTiempoActividad.setVisible(true);
+			    System.out.println("Tiempo Dedicado a Actividad");
+			} else if (comando.equals(TIEMPOLP)) {
+			    VentanaTiempoLearningPath ventanaTiempoLP = new VentanaTiempoLearningPath(ventanaPrincipalMenuProfesorEvalauador);
+			    ventanaTiempoLP.setVisible(true);
+			    System.out.println("Tiempo Dedicado a Learning Path");
+			}
+	        
+		else if (comando.equals(SALIRMENUPE)) {
+			 ventanaPrincipalMenuProfesorEvalauador.dispose();
+		}
+		}
 }
+				
+	        	
+			
+		
+
+
+

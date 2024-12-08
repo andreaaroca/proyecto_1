@@ -25,3 +25,4 @@ pE,pruebaE,1,Estudiante
 pru,pr2,2,Estudiante
 enviar,enviar,3,Estudiante
 leo,estudenviar,10,Estudiante
+ult,prof8,8,Profesor

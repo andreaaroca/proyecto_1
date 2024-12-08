@@ -35,6 +35,7 @@ public class VentanaPrincipalMenuEstudiante extends JFrame{
 	    
 	        panelBotonesMenuEstudiante = new PanelBotonesMenuEstudiante(this); 
 	        add(panelBotonesMenuEstudiante, BorderLayout.CENTER);
+	        
 
 	        pack( );
 	        setLocationRelativeTo( null );
@@ -43,11 +44,7 @@ public class VentanaPrincipalMenuEstudiante extends JFrame{
 	        setVisible(true);
 	 
 	        setSize(500, 300); 
-	       
-	        setLocationRelativeTo(null); 
-	        setDefaultCloseOperation(EXIT_ON_CLOSE); 
-	        setResizable(false);
-	        setVisible(true);
+	      
 	    }
 	 public persistenciaLP getLpControl() {
 		    return lpControl;

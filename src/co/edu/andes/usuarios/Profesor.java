@@ -1,6 +1,7 @@
 package co.edu.andes.usuarios;
 
 import java.io.FileWriter;
+import co.edu.andes.sistema.*;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.io.Serializable;
@@ -20,11 +21,12 @@ public class Profesor extends Usuario implements Serializable {
 	 private List <Actividad> actividadesCreadas;
 	 private Map<Integer, LearningPath> learningPathsCreados  = new HashMap<>();
 	 private persistenciaLP persistenciaLP;
+	 
 	
     public Profesor(String nombre, String nombreUsuario, String password, String tipoUsuario) {
         super(nombre, nombreUsuario, password, "Profesor");
         this.persistenciaLP = new persistenciaLP();
-        this.actividadesCreadas = new ArrayList<>();
+        this.actividadesCreadas = new ArrayList<Actividad>();
     }
     
 
@@ -65,6 +67,7 @@ public class Profesor extends Usuario implements Serializable {
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.getActividades().put(idActividad,nuevaTarea);
     		persistenciaLP.actualizarActividades(idLp, idActividad, nuevaTarea);
+    		this.actividadesCreadas.add(nuevaTarea);
     		System.out.println("Tarea creada y agregada exitosamente a Learning Path");	
     		
     			
@@ -85,6 +88,7 @@ public class Profesor extends Usuario implements Serializable {
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.agregarActividades(nuevaEncuesta);
     		persistenciaLP.actualizarActividades(idLp, idActividad, nuevaEncuesta);
+    		this.actividadesCreadas.add(nuevaEncuesta);
     		System.out.println("Encuesta creada y agregada exitosamente a Learning Path");	
     			
     		} 
@@ -104,6 +108,7 @@ public class Profesor extends Usuario implements Serializable {
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.agregarActividades(nuevoRevisarRecurso);
     		persistenciaLP.actualizarActividades(idLp, idActividad, nuevoRevisarRecurso);
+    		this.actividadesCreadas.add(nuevoRevisarRecurso);
     		System.out.println("Recurso a revisar creado y agregado exitosamente a Learning Path");	
     			
     		} 
@@ -121,6 +126,7 @@ public class Profesor extends Usuario implements Serializable {
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.agregarActividades(nuevoQuiz);
     		persistenciaLP.actualizarActividades(idLp, idActividad, nuevoQuiz);
+    		this.actividadesCreadas.add(nuevoQuiz);
     		System.out.println("Quiz creado y agregado exitosamente a Learning Path");
     			
     			
@@ -139,6 +145,7 @@ public class Profesor extends Usuario implements Serializable {
     		LearningPath lp=learningPathsCreados.get(idLp);
     		lp.agregarActividades(nuevoExamen);
     		persistenciaLP.actualizarActividades(idLp, idActividad, nuevoExamen);
+    		this.actividadesCreadas.add(nuevoExamen);
     		System.out.println("Examen creado y agregado exitosamente a Learning Path");	
     			
     		} 
@@ -149,7 +156,7 @@ public class Profesor extends Usuario implements Serializable {
     
     
     public void calificarActividad (Estudiante estudiante, int idActividad, float nota) {
-    	for (Actividad actividad:actividadesCreadas) {
+    	for (Actividad actividad:this.actividadesCreadas) {
     		if ((actividad.getIdActividad()==idActividad) && (estudiante.getActividadesEnviadas().containsKey(idActividad))) {
     			if(actividad instanceof Evaluacion) {
     				estudiante.anadirMapaCalificadas(idActividad,nota);
@@ -162,7 +169,7 @@ public class Profesor extends Usuario implements Serializable {
     		else { 
     			System.out.println("el estudiante no ha enviado la actividad");
     		}}
-    	System.out.println("No hay actividades creadas por este profesor");
+    	System.out.println("...");
     		}
     		
     		

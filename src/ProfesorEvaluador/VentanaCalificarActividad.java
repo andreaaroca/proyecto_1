@@ -72,7 +72,7 @@ public class VentanaCalificarActividad extends JFrame implements ActionListener 
         btnCalificar = new JButton("Calificar");
         btnCalificar.setActionCommand(CALIFICAR);
         btnCalificar.addActionListener(this);
-        this.panel.add(btnCancelar);
+        this.panel.add(btnCalificar);
         
         add(panel,BorderLayout.CENTER);
 	}

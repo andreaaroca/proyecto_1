@@ -26,6 +26,7 @@ public class VentanaPrincipalMenuProfesorCreador extends JFrame{
 	    
 	        
 		 	setTitle("Menú Profesor Creador");
+		 	
 	        setLayout(new BorderLayout());
 
 
@@ -37,13 +38,17 @@ public class VentanaPrincipalMenuProfesorCreador extends JFrame{
 	        setDefaultCloseOperation( DISPOSE_ON_CLOSE );
 	        setResizable( false );
 	        setVisible(true);
-	 
-	        setSize(500, 300); 
-	       
+	        
+	        setSize(500, 300);
+	        
 	        setLocationRelativeTo(null); 
 	        setDefaultCloseOperation(EXIT_ON_CLOSE); 
 	        setResizable(false);
 	        setVisible(true);
+	 
+	        
+	       
+	        
 	    }
 	 public persistenciaLP getLpControl() {
 		    return lpControl;
@@ -53,11 +58,10 @@ public class VentanaPrincipalMenuProfesorCreador extends JFrame{
 		}
 
 		
-	 /*public static void main(String[] args) {
+	 public static void main(String[] args) {
 		 persistenciaLP lpControl = new persistenciaLP(); 
 		 Profesor profesorCreador = new Profesor("Andrea", "AndreaProfesor", "password123", "Profesor"); 
-		 
-	        new VentanaPrincipalMenuProfesorCreador(lpControl, profesorCreador);
-		
-	    }*/
+		 new VentanaPrincipalMenuProfesorCreador(lpControl, profesorCreador);
+	        
+	    }
 	}

@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JPanel;
+import interfaz.Estudiante.*;
 
 
 
@@ -73,8 +74,8 @@ public class PanelBotonesMenuProfesorEvaluador extends JPanel implements ActionL
 		        add(butTiempoAct);
 		        
 		        butGrafica = new JButton("Grafica actividades durante el año");
-		        butRevisarCompletado.setActionCommand(GRAFICA);
-		        butRevisarCompletado.addActionListener(this);
+		        butGrafica.setActionCommand(GRAFICA);
+		        butGrafica.addActionListener(this);
 		        add(butGrafica);
 		        
 		  
@@ -118,9 +119,13 @@ public class PanelBotonesMenuProfesorEvaluador extends JPanel implements ActionL
 			    ventanaTiempoLP.setVisible(true);
 			    System.out.println("Tiempo Dedicado a Learning Path");
 			}
-	        
-		else if (comando.equals(SALIRMENUPE)) {
-			 ventanaPrincipalMenuProfesorEvalauador.dispose();
+			else if (comando.equals(GRAFICA)) {
+			    VentanaCasoPruebaGrafica ventanaG = new VentanaCasoPruebaGrafica();
+			    ventanaG.setVisible(true);
+			    System.out.println("Grafica");
+			}
+			else if (comando.equals(SALIRMENUPE)) {
+				 ventanaPrincipalMenuProfesorEvalauador.dispose();
 		}
 		}
 }

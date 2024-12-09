@@ -9,6 +9,7 @@ public class VentanaRevisarProgresoLP extends JFrame {
 	private JTextField tfCodigoLearningPath;
     private JTextField tfUsuarioEstudiante;
     private JButton btnRevisarProgreso;
+    
 
     public VentanaRevisarProgresoLP(JFrame ventanaPrincipal) {
         

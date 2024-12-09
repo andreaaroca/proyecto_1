@@ -169,7 +169,7 @@ public class Profesor extends Usuario implements Serializable {
     		else { 
     			System.out.println("el estudiante no ha enviado la actividad");
     		}}
-    	System.out.println("...");
+    	System.out.println("La actividad no fue creada por el profesor o la actividad no ha sido creada");
     		}
     		
     		

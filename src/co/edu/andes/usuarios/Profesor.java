@@ -179,6 +179,7 @@ public class Profesor extends Usuario implements Serializable {
     		if (learningPathsCreados.containsKey(idLp)) {
     			learningPathsCreados.remove(idLp);
     			persistenciaLP.guardarLearningPaths(learningPathsCreados);
+    			System.out.println("LP Eliminado");
     			 
     			}
     		else { System.out.println("No se encontro el learning path a eliminar"); }

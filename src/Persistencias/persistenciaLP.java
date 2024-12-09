@@ -9,6 +9,7 @@ import java.io.ObjectOutputStream;
 import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.*;
 
 import LearningPath.LearningPath;
 import Actividades.*;
@@ -56,6 +57,27 @@ public class persistenciaLP implements Serializable {
 		        }
 		    } catch (IOException e) {
 		        e.printStackTrace();
+		    }
+		}
+	 
+	 public void EliminarLearningPaths(int idLp) {
+		    
+		    Map<Integer, LearningPath> learningPathsExistentes = cargarLearningPaths();
+		    if (learningPathsExistentes.keySet().contains(idLp)){
+			    learningPathsExistentes.remove(idLp); 
+			    File archivo = new File(ARCHIVO_LP);
+	
+			    try {
+			        if (!archivo.exists()) {
+			            archivo.createNewFile(); 
+			        }
+			
+			        try (ObjectOutputStream oos = new ObjectOutputStream(new FileOutputStream(archivo))) {
+			            oos.writeObject(learningPathsExistentes); 
+			        }
+			    } catch (IOException e) {
+			        e.printStackTrace();
+			    }
 		    }
 		}
 	 

@@ -60,7 +60,7 @@ public class persistenciaLP implements Serializable {
 		    }
 		}
 	 
-	 public void EliminarLearningPaths(int idLp) {
+	 public void eliminarLearningPaths(int idLp) {
 		    
 		    Map<Integer, LearningPath> learningPathsExistentes = cargarLearningPaths();
 		    if (learningPathsExistentes.keySet().contains(idLp)){
